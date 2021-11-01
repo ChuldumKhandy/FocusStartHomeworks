@@ -7,89 +7,63 @@
 
 import Foundation
 
-func addCar() -> Car {
+func getCarFromConsole() -> Car {
     print("Поля обязательные к заполнению отмечены звездочкой")
     print("* Производитель: ")
-    let newManufacturer = isValidString(readLine())
+    let newManufacturer = isNilOrEmptyString(readLine())
     print("* Модель: ")
-    let newModel = isValidString(readLine())
-    print("* Выберите тип кузова:\n1.Седан\n2.Хэтчбек\n3.Универсал\n4.Лимузин\n5.Пикап\nВведите соответствующий номер: ")
-    let newBody = choiceBody(readLine())
+    let newModel = isNilOrEmptyString(readLine())
+    print("* Выберите тип кузова:")
+    Body.allCases.forEach { print($0) }
+    let newBody = Body(bodyNumber: readLine())
     print("Год выпуска: ")
-    let newYearOfIssue = Int(isValidString(readLine()))
+    let newYearOfIssue = Int(isNilOrEmptyString(readLine()))
     print("Гос. номер: ")
     let newCarNumber = readLine()
     return Car(manufacturer: newManufacturer, model: newModel, body: newBody, yearOfIssue: newYearOfIssue, carNumber: newCarNumber)
 }
 
-func isNilOrEmpty(_ str: String?) -> Bool {
-    guard let myStr = str,
-          !myStr.isEmpty
+func isNilOrEmptyString(_ rawString: String?) -> String {
+    guard let validString = rawString,
+          validString.isEmpty == false
     else {
-        return false
+        return "Вы не ввели значение"
     }
-    return true
-}
-
-func isValidString(_ rawString: String?) -> String {
-    return isNilOrEmpty(rawString)
-        ? rawString!
-        : "Вы не ввели значение"
-}
-
-func choiceBody(_ bodyNumber: String?) -> EnumBody {
-    switch bodyNumber {
-        case "1":
-            return .sedan
-        case "2":
-            return .hatchback
-        case "3":
-            return.universal
-        case "4":
-            return .limousine
-        case "5":
-            return .pickup
-        default:
-            return .notValid
-    }
+    return validString
 }
 
 func printCar(_ car: Car) {
     print("Производитель: \(car.manufacturer)")
     print("Модель: \(car.model)")
     print("Тип кузова: \(car.body.rawValue)")
-    if car.yearOfIssue != nil {
-        print("Год выпуска: \(car.yearOfIssue!)")
+    if let yaer = car.yearOfIssue {
+        print("Год выпуска: \(yaer)")
     }
     else {
         print("Год выпуска: -")
     }
-    if !isNilOrEmpty(car.carNumber) {
-        print("Гос. номер: \(car.carNumber!)")
+    if let number = car.carNumber,
+       number.isEmpty == false {
+        print("Гос. номер: \(number)")
     }
 }
 
 func printCars(_ arrayCar: [Car]){
-    print("Список автомобилей;")
-    for car in arrayCar {
-        printCar(car)
-    }
+    print("Список автомобилей:")
+    arrayCar.forEach({printCar($0)})
 }
 
 func printFilteredCars(_ cars: [Car]) {
-    print("Выберите тип кузова:\n1.Седан\n2.Хэтчбек\n3.Универсал\n4.Лимузин\n5.Пикап\nВведите соответствующий номер:")
-    let filteredBody = choiceBody(readLine())
-    let filteredCars = getCarsByBody(cars: cars, body: filteredBody)
+    print("Выберите тип кузова:")
+    Body.allCases.forEach { print($0) }
+    let filteredBody = Body(bodyNumber: readLine())
+    let filteredCars = cars.filter({ $0.body == filteredBody })
     print("Список автомобилей по фильтру \(filteredBody.rawValue)")
-    if filteredCars.count != 0 {
+    if filteredCars.isEmpty == false {
         printCars(filteredCars)
     }
     else {
         print("Ничего не найдено")
     }
-}
-
-func getCarsByBody(cars: [Car], body: EnumBody) -> [Car] {
-    return cars.filter({ $0.body == body })
 }
 

@@ -8,20 +8,26 @@
 import Foundation
 
 var cars = [Car]()
-var interrupt = false
+var interruption = true
 
-while !interrupt {
-    print("Меню\n1. Добавление нового автомобиля\n2. Вывод списка добавленных автомобилей\n3. Вывод списка автомобилей с использованием фильтра по типу кузова автомобиля\nВыберите действие...")
+while interruption {
+    print("""
+Меню
+1. Добавление нового автомобиля
+2. Вывод списка добавленных автомобилей
+3. Вывод списка автомобилей с использованием фильтра по типу кузова автомобиля
+Выберите действие...
+""")
     switch readLine() {
         case "1":
-            cars.append(addCar())
+            cars.append(getCarFromConsole())
         case "2":
             printCars(cars)
         case "3":
             printFilteredCars(cars)
         default:
-            interrupt = true
             print("До свидания")
+            interruption = false
     }
 }
 

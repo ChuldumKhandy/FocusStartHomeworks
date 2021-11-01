@@ -10,7 +10,7 @@ import Foundation
 struct Car {
     let manufacturer: String
     let model: String
-    let body: EnumBody
+    let body: Body
     let yearOfIssue: Int?
     let carNumber: String?
 }
