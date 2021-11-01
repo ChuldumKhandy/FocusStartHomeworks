@@ -48,22 +48,4 @@ enum Body: String, CustomStringConvertible, CaseIterable {
             self = .notValid
         }
     }
-    
-    
-//    func choiceBody(bodyNumber: String?) -> Body {
-//        switch bodyNumber {
-//            case "1":
-//                return .sedan
-//            case "2":
-//                return .hatchback
-//            case "3":
-//                return.universal
-//            case "4":
-//                return .limousine
-//            case "5":
-//                return .pickup
-//            default:
-//                return .notValid
-//        }
-//    }
 }
