@@ -35,7 +35,9 @@ public class ThreadSafeArray <Element> {
     
     public func remove(at index: Int) {
         arrayQueue.async(flags: .barrier) {
-            self.array.remove(at: index)
+            if index >= 0 && index < self.array.count {
+                self.array.remove(at: index)
+            }
         }
     }
     
