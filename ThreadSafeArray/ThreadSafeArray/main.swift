@@ -7,19 +7,24 @@
 
 import Foundation
 
-var array = SafeArray<Int>()
+var array = ThreadSafeArray<Int>()
 let queue = DispatchQueue(label: "ArrayQueue", attributes: .concurrent)
+let group =  DispatchGroup()
 
+group.enter()
 queue.async {
     for number in 0...1000 {
         array.append(number)
     }
+    group.leave()
 }
+group.enter()
 queue.async {
     for number in 0...1000 {
         array.append(number)
     }
+    group.leave()
 }
 
-sleep(1)
+group.wait()
 print("количество элементов: \(array.count)")

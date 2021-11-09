@@ -7,11 +7,11 @@
 
 import Foundation
 
-class SafeArray <Element> {
-    var array: [Element] = []
-    let arrayQueue = DispatchQueue(label: "ThreadSafeArrayQueue", attributes: .concurrent)
+public class ThreadSafeArray <Element> {
+    private var array: [Element] = []
+    private let arrayQueue = DispatchQueue(label: "ThreadSafeArrayQueue", attributes: .concurrent)
     
-    var count: Int {
+    public var count: Int {
         var result = 0
         arrayQueue.sync {
             result = self.array.count
@@ -19,7 +19,7 @@ class SafeArray <Element> {
         return result
     }
     
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         var result = false
         arrayQueue.sync {
             result = self.array.isEmpty
@@ -27,19 +27,19 @@ class SafeArray <Element> {
         return result
     }
     
-    func append( _ item: Element) {
+    public func append( _ item: Element) {
         arrayQueue.async(flags: .barrier) {
             self.array.append(item)
         }
     }
     
-    func remove(at index: Int) {
+    public func remove(at index: Int) {
         arrayQueue.async(flags: .barrier) {
             self.array.remove(at: index)
         }
     }
     
-    subscript(index: Int) -> Element? {
+    public subscript(index: Int) -> Element {
         get {
             var element: Element!
             arrayQueue.sync {
@@ -50,7 +50,7 @@ class SafeArray <Element> {
     }
 }
 
-extension SafeArray where Element: Equatable {
+public extension ThreadSafeArray where Element: Equatable {
 
     func contains(_ element: Element) -> Bool {
         var result = false
