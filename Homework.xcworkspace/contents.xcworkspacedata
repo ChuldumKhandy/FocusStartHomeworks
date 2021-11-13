@@ -5,6 +5,9 @@
       location = "group:ThreadSafeArray/ThreadSafeArray.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:BusinessCard">
+   </FileRef>
+   <FileRef
       location = "group:AccountingOfCars/AccountingOfCars.xcodeproj">
    </FileRef>
 </Workspace>
