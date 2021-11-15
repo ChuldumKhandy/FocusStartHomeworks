@@ -7,12 +7,12 @@
 
 import UIKit
 
-class HobbyViewController: UIViewController {
+final class HobbyViewController: UIViewController {
 
-    let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-    let titleLabel = UILabel()
-    let textMyHobbyLabel = UILabel()
-    let iconImageView = UIImageView()
+    private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+    private let titleLabel = UILabel()
+    private let textMyHobbyLabel = UILabel()
+    private let iconImageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class HobbyViewController: UIViewController {
 }
 
 extension HobbyViewController {
-    func configureVC() {
+    private func configureVC() {
         backgroundImage.image = UIImage(named: "backgroundImage")
         self.view.insertSubview(backgroundImage, at: 0)
         
@@ -35,23 +35,23 @@ extension HobbyViewController {
         self.configureLayout()
     }
     
-    func configureLabel() {
-        titleLabel.text = Hobby.title
+    private func configureLabel() {
+        titleLabel.text = Hobby.title.rawValue
         titleLabel.font = UIFont.italicSystemFont(ofSize: 30)
         titleLabel.textColor = UIColor.darkGray
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        textMyHobbyLabel.text = Hobby.myHobby
+        textMyHobbyLabel.text = Hobby.myHobby.rawValue
         textMyHobbyLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func configureIcon() {
+    private func configureIcon() {
         iconImageView.contentMode = UIView.ContentMode.scaleAspectFit
         iconImageView.image = UIImage(named: "hamster")
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         self.titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         self.titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         

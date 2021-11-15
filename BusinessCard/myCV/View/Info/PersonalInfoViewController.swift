@@ -7,16 +7,16 @@
 
 import UIKit
 
-class PersonalInfoViewController: UIViewController {
+final class PersonalInfoViewController: UIViewController {
 
-    let screenSize = UIScreen.main.bounds
-    let backgroundImage = UIImageView()
-    let avatarImageView = UIImageView()
-    let textDefault = UILabel.appearance()
-    let titleLabel = UILabel()
-    let aboutMeLabel = UILabel()
-    let educationInfoLabel = UILabel()
-    let homeInfoLabel = UILabel()
+    private let screenSize = UIScreen.main.bounds
+    private let backgroundImage = UIImageView()
+    private let avatarImageView = UIImageView()
+    private let textDefault = UILabel.appearance()
+    private let titleLabel = UILabel()
+    private let aboutMeLabel = UILabel()
+    private let educationInfoLabel = UILabel()
+    private let homeInfoLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class PersonalInfoViewController: UIViewController {
 }
 
 extension PersonalInfoViewController {
-    func configureVC() {
+    private func configureVC() {
         backgroundImage.frame = screenSize
         backgroundImage.image = UIImage(named: "backgroundImage")
         self.view.insertSubview(backgroundImage, at: 0)
@@ -33,7 +33,7 @@ extension PersonalInfoViewController {
         self.confifureAvatar()
         self.view.addSubview(self.avatarImageView)
         
-        self.configureLabel()
+        self.configureLabels()
         self.view.addSubview(self.titleLabel)
         self.view.addSubview(self.aboutMeLabel)
         self.view.addSubview(self.educationInfoLabel)
@@ -42,7 +42,7 @@ extension PersonalInfoViewController {
         self.configureLayout()
     }
     
-    func confifureAvatar() {
+    private func confifureAvatar() {
         avatarImageView.contentMode = UIView.ContentMode.scaleAspectFill
         avatarImageView.layer.cornerRadius = screenSize.height * 0.1
         avatarImageView.clipsToBounds = true
@@ -50,32 +50,30 @@ extension PersonalInfoViewController {
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func configureLabel() {
+    private func configureLabels() {
         textDefault.textAlignment = .center
+        textDefault.textColor = UIColor.black
+        textDefault.adjustsFontSizeToFitWidth = true
         textDefault.lineBreakMode = .byWordWrapping
         textDefault.numberOfLines = 0
         
-        titleLabel.text = PersonalInformation.title
+        titleLabel.text = PersonalInformation.title.rawValue
         titleLabel.font = UIFont.italicSystemFont(ofSize: 30)
         titleLabel.textColor = UIColor.darkGray
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        aboutMeLabel.text = PersonalInformation.aboutMe
-        aboutMeLabel.adjustsFontSizeToFitWidth = true
+        aboutMeLabel.text = PersonalInformation.aboutMe.rawValue
         aboutMeLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        educationInfoLabel.text = PersonalInformation.educationInfo
-        educationInfoLabel.adjustsFontSizeToFitWidth = true
+        educationInfoLabel.text = PersonalInformation.educationInfo.rawValue
         educationInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        homeInfoLabel.text = PersonalInformation.homeInfo
-        homeInfoLabel.sizeToFit()
-        homeInfoLabel.adjustsFontSizeToFitWidth = true
+        homeInfoLabel.text = PersonalInformation.homeInfo.rawValue
         homeInfoLabel.translatesAutoresizingMaskIntoConstraints = false
         
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         self.titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         self.titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         

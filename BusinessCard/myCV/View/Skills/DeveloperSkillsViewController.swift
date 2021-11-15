@@ -7,13 +7,13 @@
 
 import UIKit
 
-class DeveloperSkillsViewController: UIViewController {
+final class DeveloperSkillsViewController: UIViewController {
 
-    let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-    let titleLabel = UILabel()
-    let developerSkillsLabel = UILabel()
-    let myGoalLabel = UILabel()
-    let vStack = UIStackView()
+    private let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+    private let titleLabel = UILabel()
+    private let developerSkillsLabel = UILabel()
+    private let myGoalLabel = UILabel()
+    private let vStack = UIStackView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class DeveloperSkillsViewController: UIViewController {
 }
 
 extension DeveloperSkillsViewController {
-    func configureVC() {
+    private func configureVC() {
         backgroundImage.image = UIImage(named: "backgroundImage")
         self.view.insertSubview(backgroundImage, at: 0)
         
@@ -37,20 +37,20 @@ extension DeveloperSkillsViewController {
         self.configureLayout()
     }
     
-    func configureLabel() {
-        titleLabel.text = DeveloperSkills.title
+    private func configureLabel() {
+        titleLabel.text = DeveloperSkills.title.rawValue
         titleLabel.font = UIFont.italicSystemFont(ofSize: 30)
         titleLabel.textColor = UIColor.darkGray
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        developerSkillsLabel.text = DeveloperSkills.devSkills
+        developerSkillsLabel.text = DeveloperSkills.devSkills.rawValue
         developerSkillsLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        myGoalLabel.text = DeveloperSkills.myGoal
+        myGoalLabel.text = DeveloperSkills.myGoal.rawValue
         myGoalLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func configureStack() {
+    private func configureStack() {
         vStack.addArrangedSubview(developerSkillsLabel)
         vStack.addArrangedSubview(myGoalLabel)
         vStack.axis = .vertical
@@ -58,7 +58,7 @@ extension DeveloperSkillsViewController {
         vStack.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    func configureLayout() {
+    private func configureLayout() {
         self.titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         self.titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         
