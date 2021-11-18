@@ -8,12 +8,13 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var collectionView: UICollectionView?
-    private var itemCatArray = [Cat]()
+    private let layout = UICollectionViewFlowLayout()
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    private var itemCatArray: itemCat?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fillArray()
+        parseJSON()
         configureVC()
     }
 }
@@ -21,19 +22,22 @@ class ViewController: UIViewController {
 extension ViewController {
     func configureVC() {
         configureCollectionView()
+        view.addSubview(collectionView)
+        configureCollectionViewLayout()
     }
     
-    func fillArray() {
-        itemCatArray.append(Cat(name: "Cat and home", iconName: "Cat and home"))
-        itemCatArray.append(Cat(name: "Lion cat", iconName: "Lion cat"))
-        itemCatArray.append(Cat(name: "Shark cat", iconName: "Shark cat"))
-        itemCatArray.append(Cat(name: "Cat chef", iconName: "Cat chef"))
-        itemCatArray.append(Cat(name: "Cat and breakfast", iconName: "Cat and breakfast"))
-        itemCatArray.append(Cat(name: "Cat and training", iconName: "Cat and training"))
-        itemCatArray.append(Cat(name: "Cat and pizza", iconName: "Cat and pizza"))
-        itemCatArray.append(Cat(name: "Cat and hide-and-seek", iconName: "Cat and hide-and-seek"))
-        itemCatArray.append(Cat(name: "Cat and shrimp", iconName: "Cat and shrimp"))
-        itemCatArray.append(Cat(name: "Cat and seal", iconName: "Cat and seal"))
+    func parseJSON() {
+        guard let path = Bundle.main.path(forResource: "Cat", ofType: "json")
+        else {
+            return
+        }
+        let url = URL(fileURLWithPath: path)
+        do {
+            let jsonData = try Data(contentsOf: url)
+            itemCatArray = try JSONDecoder().decode(itemCat.self, from: jsonData)
+        } catch {
+            print("Error: \(error)")
+        }
     }
 }
 
@@ -42,31 +46,41 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         let lineSpacing: CGFloat = 10
         let interitemSpacing: CGFloat = 5
         let cellSize = self.view.frame.width * 0.5 - interitemSpacing
-        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = lineSpacing
         layout.minimumInteritemSpacing = interitemSpacing
         layout.itemSize = CGSize(width: cellSize, height: cellSize)
-        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        guard let collectionView = collectionView else { return }
         collectionView.backgroundColor = .white
         collectionView.frame = view.bounds
         collectionView.register(ItemCollectionViewCell.self,
                                 forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
-        view.addSubview(collectionView)
+    }
+    
+    func configureCollectionViewLayout() {
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemCatArray.count
+        return itemCatArray?.Cat.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewCell.identifier, for: indexPath) as? ItemCollectionViewCell
-        else { return UICollectionViewCell() }
-        
-        cell.configureCell(name: itemCatArray[indexPath.row].name)
+        else {
+            return UICollectionViewCell()
+        }
+        guard let name = itemCatArray?.Cat[indexPath.row].name,
+              let iconName = itemCatArray?.Cat[indexPath.row].iconName
+        else {
+            return UICollectionViewCell()
+        }
+        cell.configureCell(name: name, iconName: iconName)
         return cell
     }
 }

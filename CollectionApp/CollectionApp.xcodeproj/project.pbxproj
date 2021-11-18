@@ -14,6 +14,7 @@
 		CE335A962744E0920032DB88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE335A942744E0920032DB88 /* LaunchScreen.storyboard */; };
 		CE335AA2274545720032DB88 /* ItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE335AA1274545720032DB88 /* ItemCollectionViewCell.swift */; };
 		CE335AA82745461C0032DB88 /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE335AA72745461C0032DB88 /* Cat.swift */; };
+		CEFB22AC27468C9B003DD26A /* Cat.json in Resources */ = {isa = PBXBuildFile; fileRef = CEFB22AB27468C9B003DD26A /* Cat.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		CE335A972744E0920032DB88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE335AA1274545720032DB88 /* ItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE335AA72745461C0032DB88 /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
+		CEFB22AB27468C9B003DD26A /* Cat.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = Cat.json; path = ../../../../../Pictures/Cat/Cat.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				CE335AAA2745462E0032DB88 /* Model */,
 				CE335AA6274545FC0032DB88 /* Controller */,
 				CE335AA5274545F20032DB88 /* View */,
+				CEFB22A627468C51003DD26A /* Resources */,
 				CE335A922744E0920032DB88 /* Assets.xcassets */,
 				CE335A942744E0920032DB88 /* LaunchScreen.storyboard */,
 				CE335A972744E0920032DB88 /* Info.plist */,
@@ -100,6 +103,14 @@
 				CE335AA72745461C0032DB88 /* Cat.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CEFB22A627468C51003DD26A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CEFB22AB27468C9B003DD26A /* Cat.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +170,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEFB22AC27468C9B003DD26A /* Cat.json in Resources */,
 				CE335A962744E0920032DB88 /* LaunchScreen.storyboard in Resources */,
 				CE335A932744E0920032DB88 /* Assets.xcassets in Resources */,
 			);

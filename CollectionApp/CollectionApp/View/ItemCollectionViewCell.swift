@@ -27,19 +27,19 @@ class ItemCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         let widthCell = contentView.frame.size.width
-        let heightCell = contentView.frame.size.height * 0.8
+        let heightCell = contentView.frame.size.height
         icon.frame = CGRect(x: 0,
                             y: 0,
                             width: widthCell,
-                            height: heightCell)
+                            height: heightCell * 0.8)
         title.frame = CGRect(x: 0,
-                             y: heightCell,
+                             y: heightCell * 0.8,
                              width: widthCell,
-                             height: 1 - heightCell)
+                             height: heightCell * 0.2)
     }
     
-    func configureCell(name: String) {
-        icon.image = UIImage(named: name)
+    func configureCell(name: String, iconName: String) {
+        icon.image = UIImage(named: iconName)
         icon.contentMode = .scaleAspectFit
         
         title.text = name
