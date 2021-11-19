@@ -14,7 +14,7 @@ class ItemCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = UIColor.white
+        contentView.backgroundColor = .white
         contentView.addSubview(icon)
         contentView.addSubview(title)
         contentView.clipsToBounds = true
