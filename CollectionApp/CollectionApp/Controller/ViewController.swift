@@ -83,4 +83,14 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         cell.configureCell(name: name, iconName: iconName)
         return cell
     }
+    
+//    func didTapCell(cell: UICollectionViewCell, controller: UIViewController) {
+//        navigationController?.pushViewController(DetailViewController(), animated: true)
+//    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = DetailViewController()
+        controller.detailCat = self.itemCatArray?.Cat[indexPath.row]
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
