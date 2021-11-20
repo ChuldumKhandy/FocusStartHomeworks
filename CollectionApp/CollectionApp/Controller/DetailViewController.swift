@@ -12,25 +12,19 @@ class DetailViewController: UIViewController {
     private let decriptionLabel = UILabel()
     private let iconImageView = UIImageView()
     private let pawButton = UIButton()
-    private let screenSize = UIScreen.main.bounds
+    private var screenSize = UIScreen.main.bounds
+    private var vrConstraint = [NSLayoutConstraint]()
+    private var hrConstraint = [NSLayoutConstraint]()
     var detailCat: Cat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVC()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(rotateLayout),
+                                               selector: #selector(DetailViewController.configureLayout),
                                                name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
     }
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
 }
 
 extension DetailViewController {
@@ -75,65 +69,68 @@ extension DetailViewController {
         self.pawButton.setBackgroundImage(UIImage(named: "paw cat"), for: .normal)
         self.pawButton.contentMode = .scaleAspectFit
         self.pawButton.clipsToBounds = true
-        self.pawButton.setTitle("Дай пять!", for: .normal)
-        self.pawButton.setTitleColor(.black, for: .normal)
+        self.pawButton.addTarget(self, action: #selector(tapButton(sender:)), for: .touchUpInside)
         self.pawButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    @objc func tapButton(sender: UIButton) {
+        self.present(ModallyViewController(), animated: true, completion: nil)
+    }
+    
     func configureVerticalLayout() {
-        self.titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: screenSize.height / 8).isActive = true
-        self.titleLabel.heightAnchor.constraint(equalToConstant: screenSize.height / 8).isActive = true
-        self.titleLabel.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
+        NSLayoutConstraint.deactivate(hrConstraint)
+        self.vrConstraint = [
+            self.titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: screenSize.height / 8),
+            self.titleLabel.heightAnchor.constraint(equalToConstant: screenSize.height / 8),
+            self.titleLabel.widthAnchor.constraint(equalToConstant: screenSize.width),
+    
+            self.iconImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.iconImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0),
+            self.iconImageView.heightAnchor.constraint(equalToConstant: screenSize.height / 3),
+            self.iconImageView.widthAnchor.constraint(equalToConstant: screenSize.width),
         
-        self.iconImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.iconImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
-        self.iconImageView.heightAnchor.constraint(equalToConstant: screenSize.height / 3).isActive = true
-        self.iconImageView.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
+            self.decriptionLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.decriptionLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 0),
+            self.decriptionLabel.heightAnchor.constraint(equalToConstant: screenSize.height / 6),
+            self.decriptionLabel.widthAnchor.constraint(equalToConstant: screenSize.width),
         
-        self.decriptionLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.decriptionLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 0).isActive = true
-        self.decriptionLabel.heightAnchor.constraint(equalToConstant: screenSize.height / 6).isActive = true
-        self.decriptionLabel.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
-        
-        self.pawButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.pawButton.topAnchor.constraint(equalTo: decriptionLabel.bottomAnchor, constant: 0).isActive = true
-        self.pawButton.heightAnchor.constraint(equalToConstant: screenSize.height / 8).isActive = true
-        self.pawButton.widthAnchor.constraint(equalToConstant: screenSize.height / 8).isActive = true
+            self.pawButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.pawButton.topAnchor.constraint(equalTo: decriptionLabel.bottomAnchor, constant: 0),
+            self.pawButton.heightAnchor.constraint(equalToConstant: screenSize.height / 8),
+            self.pawButton.widthAnchor.constraint(equalToConstant: screenSize.height / 8)
+        ]
+        NSLayoutConstraint.activate(vrConstraint)
     }
     
     func configureHorizontalLayout() {
-        self.iconImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: screenSize.height / 8).isActive = true
-        self.iconImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-        self.iconImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        self.iconImageView.heightAnchor.constraint(equalToConstant: screenSize.width * 0.5).isActive = true
-        self.iconImageView.widthAnchor.constraint(equalToConstant: screenSize.width * 0.5).isActive = true
+        NSLayoutConstraint.deactivate(vrConstraint)
+        self.hrConstraint = [
+            self.iconImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: screenSize.height / 8),
+            self.iconImageView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 5),
+            self.iconImageView.heightAnchor.constraint(equalToConstant: screenSize.height * 0.75),
+            self.iconImageView.widthAnchor.constraint(equalToConstant: screenSize.height * 0.75),
         
-        self.titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: screenSize.height / 8).isActive = true
-        self.titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 0).isActive = true
-        self.titleLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-        self.titleLabel.heightAnchor.constraint(equalToConstant: screenSize.height / 8).isActive = true
-        
-        self.decriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
-        self.decriptionLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 0).isActive = true
-        self.decriptionLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-        self.decriptionLabel.heightAnchor.constraint(equalToConstant: screenSize.height / 4).isActive = true
-        
-        self.pawButton.topAnchor.constraint(equalTo: decriptionLabel.bottomAnchor, constant: 0).isActive = true
-        self.pawButton.centerXAnchor.constraint(equalTo: decriptionLabel.centerXAnchor).isActive = true
-        self.pawButton.heightAnchor.constraint(equalToConstant: screenSize.height * 0.375).isActive = true
-        self.pawButton.widthAnchor.constraint(equalToConstant: screenSize.height * 0.375).isActive = true
+            self.titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: screenSize.height / 8),
+            self.titleLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 0),
+            self.titleLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            self.titleLabel.heightAnchor.constraint(equalToConstant: screenSize.height / 8),
+            
+            self.decriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0),
+            self.decriptionLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 0),
+            self.decriptionLabel.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
+            self.decriptionLabel.heightAnchor.constraint(equalToConstant: screenSize.height / 4),
+            
+            self.pawButton.topAnchor.constraint(equalTo: decriptionLabel.bottomAnchor, constant: 0),
+            self.pawButton.centerXAnchor.constraint(equalTo: decriptionLabel.centerXAnchor),
+            self.pawButton.heightAnchor.constraint(equalToConstant: screenSize.height * 0.375),
+            self.pawButton.widthAnchor.constraint(equalToConstant: screenSize.height * 0.375)
+        ]
+        NSLayoutConstraint.activate(hrConstraint)
     }
     
-    func configureLayout() {
-        if UIDevice.current.orientation.isLandscape {
-            configureHorizontalLayout()
-        } else {
-            configureVerticalLayout()
-        }
-    }
-    
-    @objc func rotateLayout() {
+    @objc func configureLayout() {
+        screenSize = UIScreen.main.bounds
         if UIDevice.current.orientation.isLandscape {
             configureHorizontalLayout()
         } else {
