@@ -1,0 +1,54 @@
+{
+  "cat": [
+    {
+      "name" : "Котик дома",
+      "iconName" : "Cat at home",
+      "description" : "Вот так котики проводят время дома"
+    },
+    {
+      "name" : "Котик-лев",
+      "iconName" : "Lion cat",
+      "description" : "Котик решил переодеться в льва"
+    },
+    {
+      "name" : "Котик-акула",
+      "iconName" : "Shark cat",
+      "description" : "Котик решил переодеться в акулу"
+    },
+    {
+      "name" : "Котик-повар",
+      "iconName" : "Cat chef",
+      "description" : "Котик готовит кушать"
+    },
+    {
+      "name" : "Котик и завтрак",
+      "iconName" : "Cat and breakfast",
+      "description" : "Котик приготовил слишком большой завтрак"
+    },
+    {
+      "name" : "Котик и тренировки",
+      "iconName" : "Cat and training",
+      "description" : "Котики тренируются, чтобы ночью устроить тыгыдык-тыгыдык"
+    },
+    {
+      "name" : "Котик и пицца",
+      "iconName" : "Cat and pizza",
+      "description" : "Котик не удержался от кусочка пиццы"
+    },
+    {
+      "name" : "Котик и прятки",
+      "iconName" : "Cat and hide-and-seek",
+      "description" : "Котик и выдра - если мы их не видим, то и они нас"
+    },
+    {
+      "name" : "Котик и креветка",
+      "iconName" : "Cat and shrimp",
+      "description" : "Котик лакомится креветкой в темпуре"
+    },
+    {
+      "name" : "Котик и тюлень",
+      "iconName" : "Cat and seal",
+      "description" : "Котик и тюлень принимают ванну"
+    }
+  ]
+}
