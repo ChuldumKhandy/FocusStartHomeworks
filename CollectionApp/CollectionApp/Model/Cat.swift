@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct itemCat: Decodable {
-    var Cat: [Cat]
+struct CatsArray: Decodable {
+    var cat: [Cat]
 }
 struct Cat: Decodable {
     var name: String

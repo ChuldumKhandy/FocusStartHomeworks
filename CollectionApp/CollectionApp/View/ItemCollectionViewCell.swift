@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ItemCollectionViewCell: UICollectionViewCell {
+final class ItemCollectionViewCell: UICollectionViewCell {
     static let identifier = "ItemCollectionViewCell"
     private let icon = UIImageView()
     private let title = UILabel()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ModallyViewController: UIViewController {
+final class ModallyViewController: UIViewController {
     private let titleLabel = UILabel()
     private let iconImageView = UIImageView()
     private let catImageView = UIImageView()
@@ -25,7 +25,7 @@ class ModallyViewController: UIViewController {
     }
 }
 
-extension ModallyViewController {
+private extension ModallyViewController {
     func configureVC() {
         self.view.backgroundColor = .white
         self.configureLabels()

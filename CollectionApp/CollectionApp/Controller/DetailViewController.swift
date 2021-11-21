@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     private let titleLabel = UILabel()
     private let decriptionLabel = UILabel()
     private let iconImageView = UIImageView()
@@ -27,7 +27,7 @@ class DetailViewController: UIViewController {
     }
 }
 
-extension DetailViewController {
+private extension DetailViewController {
     func configureVC() {
         self.view.backgroundColor = .white
         self.configureLabels()
