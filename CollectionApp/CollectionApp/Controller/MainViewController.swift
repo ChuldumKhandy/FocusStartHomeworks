@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class MainViewController: UIViewController {
     private let layout = UICollectionViewFlowLayout()
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     private var catsArray: CatsArray?
@@ -19,7 +19,7 @@ final class ViewController: UIViewController {
     }
 }
 
-private extension ViewController {
+private extension MainViewController {
     func configureVC() {
         configureCollectionView()
         view.addSubview(collectionView)
@@ -39,9 +39,7 @@ private extension ViewController {
             print("Error: \(error)")
         }
     }
-}
-
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func configureCollectionView() {
         let lineSpacing: CGFloat = 10
         let interitemSpacing: CGFloat = 5
@@ -65,7 +63,17 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     }
-    
+}
+
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = DetailViewController()
+        controller.detailCat = self.catsArray?.cat[indexPath.row]
+        navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return catsArray?.cat.count ?? 0
     }
@@ -82,11 +90,5 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         }
         cell.configureCell(name: name, iconName: iconName)
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = DetailViewController()
-        controller.detailCat = self.catsArray?.cat[indexPath.row]
-        navigationController?.pushViewController(controller, animated: true)
     }
 }
