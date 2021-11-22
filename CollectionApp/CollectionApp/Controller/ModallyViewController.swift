@@ -13,6 +13,7 @@ final class ModallyViewController: UIViewController {
     private let catImageView = UIImageView()
     private let twButton = UIButton()
     private let instButton = UIButton()
+    private let backButton = UIButton()
     private var screenSize = UIScreen.main.bounds
 
     override func viewDidLoad() {
@@ -38,6 +39,7 @@ private extension ModallyViewController {
         self.configureButtons()
         self.view.addSubview(twButton)
         self.view.addSubview(instButton)
+        self.view.addSubview(backButton)
         
         configureLayout()
     }
@@ -77,6 +79,14 @@ private extension ModallyViewController {
         self.instButton.clipsToBounds = true
         self.instButton.addTarget(self, action: #selector(urlInst(sender:)), for: .touchUpInside)
         self.instButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.backButton.setTitle(" Назад в описание ", for: .normal)
+        self.backButton.setTitleColor(.black, for: .normal)
+        self.backButton.backgroundColor = .systemGray5
+        self.backButton.layer.cornerRadius = 10
+        self.backButton.clipsToBounds = true
+        self.backButton.addTarget(self, action: #selector(dismiss(sender:)), for: .touchUpInside)
+        self.backButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
     @objc func urlInst(sender: Any){
@@ -93,6 +103,10 @@ private extension ModallyViewController {
                 UIApplication.shared.open(url, options: [:])
             }
         }
+    }
+    
+    @objc func dismiss(sender: Any){
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func configureLayout() {
@@ -121,5 +135,9 @@ private extension ModallyViewController {
         self.catImageView.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 0).isActive = true
         self.catImageView.heightAnchor.constraint(equalToConstant: screenSize.height / 4).isActive = true
         self.catImageView.widthAnchor.constraint(equalToConstant: screenSize.height / 4).isActive = true
+        
+        self.backButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -screenSize.height / 32).isActive = true
+        self.backButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.backButton.heightAnchor.constraint(equalTo: iconImageView.heightAnchor).isActive = true
     }
 }
