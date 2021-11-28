@@ -7,17 +7,18 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
-    private var detailView: DetailView?
+protocol IDetailViewController: AnyObject {
     
-    init(presenter: DetailPresenter){
-        super.init(nibName: nil, bundle: nil)
+}
+
+class DetailViewController: UIViewController {
+    private var detailView: IDetailView
+    private var presenter: IDetailPresenter
+    
+    init(presenter: IDetailPresenter){
         self.detailView = DetailView(frame: UIScreen.main.bounds)
-        if let detailView = detailView {
-            self.view.addSubview(detailView)
-        }
-        self.detailView?.loadView(controller: self, presenter: presenter)
-        self.detailView?.configureView()
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -26,10 +27,12 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(detailView)
+        self.presenter.loadPresenter(controller: self, view: self.detailView)
+        self.presenter.sendContent()
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
+}
+
+extension DetailViewController: IDetailViewController {
     
 }

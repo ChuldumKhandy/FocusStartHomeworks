@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol IDetailView: UIView {
+    var onTouchedHandler: (() -> Void)? { get set }
+    
+    func getTitle(title: String)
+    func getDescription(decription: String)
+    func getIconName(iconName: String)
+}
+
 class DetailView: UIView {
     var onTouchedHandler: (() -> Void)?
-    private var presenter: DetailPresenter?
     
     private let titleLabel = UILabel()
     private let decriptionLabel = UILabel()
@@ -19,11 +26,15 @@ class DetailView: UIView {
     private var vrConstraint = [NSLayoutConstraint]()
     private var hrConstraint = [NSLayoutConstraint]()
     
-    func loadView(controller: DetailViewController, presenter: DetailPresenter) {
-        self.presenter = presenter
-        self.presenter?.loadPresenter(controller: controller, view: self)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.configureView()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     func configureView() {
         self.backgroundColor = .white
         self.configureLabels()
@@ -47,6 +58,20 @@ class DetailView: UIView {
 
 }
 
+extension DetailView: IDetailView {
+    func getTitle(title: String) {
+        self.titleLabel.text = title
+    }
+    
+    func getDescription(decription: String) {
+        self.decriptionLabel.text = decription
+    }
+    
+    func getIconName(iconName: String) {
+        self.iconImageView.image = UIImage(named: iconName)
+    }
+}
+
 private extension DetailView {
     func configureLabels() {
         let textDefault = UILabel.appearance()
@@ -56,19 +81,14 @@ private extension DetailView {
         textDefault.lineBreakMode = .byWordWrapping
         textDefault.numberOfLines = 0
         
-        self.titleLabel.text = presenter?.getTitle()
         self.titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        self.decriptionLabel.text = presenter?.getDescription()
         self.decriptionLabel.font = .italicSystemFont(ofSize: 15)
         self.decriptionLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func configureIcon() {
-        if let iconName = presenter?.getIconName() {
-            self.iconImageView.image = UIImage(named: iconName)
-        }
         self.iconImageView.contentMode = .scaleAspectFit
         self.iconImageView.clipsToBounds = true
         self.iconImageView.translatesAutoresizingMaskIntoConstraints = false

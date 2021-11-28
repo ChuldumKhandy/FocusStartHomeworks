@@ -7,12 +7,27 @@
 
 import Foundation
 
+protocol IDetailPresenter {
+    func loadPresenter(controller: DetailViewController, view: IDetailView)
+    func sendContent()
+}
+
 class DetailPresenter {
-    var cat: Cat?
-    private var controller: DetailViewController?
-    private var view: DetailView?
+    var cat: IDetailCat
+    private weak var controller: IDetailViewController?
+    private weak var view: IDetailView?
     
-    func loadPresenter(controller: DetailViewController, view: DetailView) {
+    init(cat: IDetailCat) {
+        self.cat = cat
+    }
+
+    func onTouched() {
+//        self.present(ModallyViewController(), animated: true, completion: nil)
+    }
+}
+
+extension DetailPresenter: IDetailPresenter {
+    func loadPresenter(controller: DetailViewController, view: IDetailView) {
         self.controller = controller
         self.view = view
         self.view?.onTouchedHandler = { [weak self] in
@@ -20,21 +35,14 @@ class DetailPresenter {
         }
     }
     
-    func getTitle() -> String {
-        guard let name = cat?.name else { return "нет значения" }
-        return name
-    }
-    
-    func getDescription() -> String {
-        guard let description = cat?.description else { return "нет значения" }
-        return description
-    }
-    
-    func getIconName() -> String {
-        guard let iconName = cat?.iconName else { return "нет значения" }
-        return iconName
-    }
-    func onTouched() {
-//        self.present(ModallyViewController(), animated: true, completion: nil)
+    func sendContent() {
+        let name = cat.getTitle()
+        self.view?.getTitle(title: name)
+        
+        let description = cat.getDescription()
+        self.view?.getDescription(decription: description)
+        
+        let iconName = cat.getIconName()
+        self.view?.getIconName(iconName: iconName)
     }
 }

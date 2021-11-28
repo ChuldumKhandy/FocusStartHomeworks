@@ -9,7 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
     var mainView: MainView?
-    private var cats: [Cat]?
+    private var cats: PresentCatsData?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +17,7 @@ class MainViewController: UIViewController {
         if let mainView = mainView {
             self.view.addSubview(mainView)
         }
-        self.cats = Cat.getCatsFromJson()
+        self.cats = PresentCatsData()
         self.mainView?.loadView(controller: self)
         self.mainView?.collectionView.delegate = self
         self.mainView?.collectionView.dataSource = self
@@ -31,7 +31,7 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.cats?.count ?? 0
+        return cats?.getCount() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -39,12 +39,11 @@ extension MainViewController: UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-        guard let name = self.cats?[indexPath.row].name,
-              let iconName = self.cats?[indexPath.row].iconName
+        guard let content = cats?.getContentCell(indexPath: indexPath)
         else {
             return UICollectionViewCell()
         }
-        cell.configureCell(name: name, iconName: iconName)
+        cell.configureCell(name: content.0, iconName: content.1)
         return cell
     }
     
@@ -52,9 +51,13 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: UICollectionViewDelegate {
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let presenter = DetailPresenter()
-            presenter.cat = self.cats?[indexPath.row]
-            let controller = DetailViewController(presenter: presenter)
+            if let cat = cats?.getContent(indexPath: indexPath) {
+            let controller = AssemblySecondScene.build(cat: cat)
+            
+//            let presenter = DetailPresenter()
+//            presenter.cat = cats?.getContent(indexPath: indexPath)
+//            let controller = DetailViewController(presenter: presenter)
             navigationController?.pushViewController(controller, animated: true)
+            }
         }
 }
