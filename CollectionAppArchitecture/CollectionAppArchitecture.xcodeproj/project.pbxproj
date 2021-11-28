@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE00707927533F3A0053842C /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00707827533F3A0053842C /* DetailPresenter.swift */; };
+		CE00708027535E230053842C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00707F27535E230053842C /* DetailView.swift */; };
 		CE15ACD427529E46003255A4 /* kitties.json in Resources */ = {isa = PBXBuildFile; fileRef = CE15ACD327529E46003255A4 /* kitties.json */; };
 		CEA867C6275104BA004ADBEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA867C5275104BA004ADBEC /* AppDelegate.swift */; };
 		CEA867C8275104BA004ADBEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA867C7275104BA004ADBEC /* SceneDelegate.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE00707827533F3A0053842C /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		CE00707F27535E230053842C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		CE15ACD327529E46003255A4 /* kitties.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = kitties.json; sourceTree = "<group>"; };
 		CEA867C2275104BA004ADBEC /* CollectionAppArchitecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionAppArchitecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA867C5275104BA004ADBEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +51,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE00707B27533F690053842C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEA867E527512A58004ADBEC /* DetailViewController.swift */,
+				CE00707F27535E230053842C /* DetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE00707C27533F7A0053842C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				CE00707827533F3A0053842C /* DetailPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		CE15ACC92752466D003255A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				CEA867E827512A69004ADBEC /* Application */,
+				CE15ACC92752466D003255A4 /* Model */,
 				CEA867E3275129C9004ADBEC /* FirstScene - MVC */,
 				CEA867ED27512AA5004ADBEC /* SecondScene - MVP */,
 				CEA867EE27512AD3004ADBEC /* ThirdScene - MVVM */,
@@ -98,7 +120,6 @@
 			isa = PBXGroup;
 			children = (
 				CE15ACCA2752467F003255A4 /* Controller */,
-				CE15ACC92752466D003255A4 /* Model */,
 				CEA867F92751348C004ADBEC /* Views */,
 			);
 			path = "FirstScene - MVC";
@@ -116,7 +137,8 @@
 		CEA867ED27512AA5004ADBEC /* SecondScene - MVP */ = {
 			isa = PBXGroup;
 			children = (
-				CEA867E527512A58004ADBEC /* DetailViewController.swift */,
+				CE00707C27533F7A0053842C /* Presenter */,
+				CE00707B27533F690053842C /* View */,
 			);
 			path = "SecondScene - MVP";
 			sourceTree = "<group>";
@@ -216,8 +238,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE00707927533F3A0053842C /* DetailPresenter.swift in Sources */,
 				CEA867DE27512853004ADBEC /* CatsData.swift in Sources */,
 				CEA867E1275129B6004ADBEC /* MainView.swift in Sources */,
+				CE00708027535E230053842C /* DetailView.swift in Sources */,
 				CEA867CA275104BA004ADBEC /* MainViewController.swift in Sources */,
 				CEA867E627512A58004ADBEC /* DetailViewController.swift in Sources */,
 				CEA867EA27512A88004ADBEC /* ModallyViewController.swift in Sources */,

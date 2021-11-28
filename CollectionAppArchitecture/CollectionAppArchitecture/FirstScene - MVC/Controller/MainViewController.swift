@@ -18,7 +18,7 @@ class MainViewController: UIViewController {
             self.view.addSubview(mainView)
         }
         self.cats = Cat.getCatsFromJson()
-        self.mainView?.load(controller: self)
+        self.mainView?.loadView(controller: self)
         self.mainView?.collectionView.delegate = self
         self.mainView?.collectionView.dataSource = self
     }
@@ -39,7 +39,6 @@ extension MainViewController: UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-
         guard let name = self.cats?[indexPath.row].name,
               let iconName = self.cats?[indexPath.row].iconName
         else {
@@ -52,9 +51,10 @@ extension MainViewController: UICollectionViewDataSource {
 }
 
 extension MainViewController: UICollectionViewDelegate {
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //        let controller = DetailViewController()
-    //        controller.detailCat = self.catsArray?.cat[indexPath.row]
-    //        navigationController?.pushViewController(controller, animated: true)
-    //    }
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let presenter = DetailPresenter()
+            presenter.cat = self.cats?[indexPath.row]
+            let controller = DetailViewController(presenter: presenter)
+            navigationController?.pushViewController(controller, animated: true)
+        }
 }

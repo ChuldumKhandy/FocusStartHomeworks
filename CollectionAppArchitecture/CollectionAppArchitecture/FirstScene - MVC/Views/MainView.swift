@@ -12,7 +12,7 @@ class MainView: UIView {
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     private weak var controller: MainViewController?
 
-    func load(controller: MainViewController) {
+    func loadView(controller: MainViewController) {
         self.controller = controller
     }
     
