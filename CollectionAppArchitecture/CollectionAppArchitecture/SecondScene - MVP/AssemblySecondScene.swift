@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class AssemblySecondScene {
+final class AssemblySecondScene {
     static func build(cat: Cat) -> UIViewController {
         let catData = DetailCat(cat: cat)
         let presenter = DetailPresenter(cat: catData)

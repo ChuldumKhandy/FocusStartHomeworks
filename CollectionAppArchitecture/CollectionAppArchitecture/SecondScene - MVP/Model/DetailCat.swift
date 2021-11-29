@@ -8,12 +8,12 @@
 import Foundation
 
 protocol IDetailCat {
-    func getTitle() -> String
+    func getName() -> String
     func getIconName() -> String
     func getDescription() -> String
 }
 
-class DetailCat {
+final class DetailCat{
     var name: String
     var iconName: String
     var description: String
@@ -26,18 +26,15 @@ class DetailCat {
 }
 
 extension DetailCat: IDetailCat {
-    func getTitle() -> String {
-        let title = self.name
-        return title
+    func getName() -> String {
+        return self.name
     }
     
     func getIconName() -> String {
-        let iconName = self.iconName
-        return iconName
+        return self.iconName
     }
     
     func getDescription() -> String {
-        let description = self.description
-        return description
+        return self.description
     }
 }

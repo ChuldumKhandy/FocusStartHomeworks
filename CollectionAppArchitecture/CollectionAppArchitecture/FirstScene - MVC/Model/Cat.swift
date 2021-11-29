@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Cat: Decodable {
+final class Cat: Decodable {
     var name: String
     var iconName: String
     var description: String

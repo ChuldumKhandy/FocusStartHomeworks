@@ -9,11 +9,9 @@
 /* Begin PBXBuildFile section */
 		CE00707927533F3A0053842C /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00707827533F3A0053842C /* DetailPresenter.swift */; };
 		CE00708027535E230053842C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00707F27535E230053842C /* DetailView.swift */; };
-		CE0070842753B73B0053842C /* ViewModelModally.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0070832753B73B0053842C /* ViewModelModally.swift */; };
+		CE0070842753B73B0053842C /* ModallyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0070832753B73B0053842C /* ModallyViewModel.swift */; };
 		CE0070872753B9060053842C /* ModallyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0070862753B9060053842C /* ModallyView.swift */; };
-		CE00708A2753B95D0053842C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0070892753B95D0053842C /* Model.swift */; };
-		CE00708D2753CA330053842C /* AssemblyFirstScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE00708C2753CA330053842C /* AssemblyFirstScene.swift */; };
-		CE0070922753CEFF0053842C /* PresentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0070912753CEFF0053842C /* PresentData.swift */; };
+		CE00708A2753B95D0053842C /* CatImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0070892753B95D0053842C /* CatImage.swift */; };
 		CE1397802753DA5200769E82 /* DetailCat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13977F2753DA5200769E82 /* DetailCat.swift */; };
 		CE1397832753DA7C00769E82 /* AssemblySecondScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1397822753DA7C00769E82 /* AssemblySecondScene.swift */; };
 		CE15ACD427529E46003255A4 /* kitties.json in Resources */ = {isa = PBXBuildFile; fileRef = CE15ACD327529E46003255A4 /* kitties.json */; };
@@ -22,7 +20,7 @@
 		CEA867CA275104BA004ADBEC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA867C9275104BA004ADBEC /* MainViewController.swift */; };
 		CEA867CF275104C8004ADBEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA867CE275104C8004ADBEC /* Assets.xcassets */; };
 		CEA867D2275104C8004ADBEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA867D0275104C8004ADBEC /* LaunchScreen.storyboard */; };
-		CEA867DE27512853004ADBEC /* CatsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA867DD27512853004ADBEC /* CatsData.swift */; };
+		CEA867DE27512853004ADBEC /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA867DD27512853004ADBEC /* Cat.swift */; };
 		CEA867E1275129B6004ADBEC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA867E0275129B6004ADBEC /* MainView.swift */; };
 		CEA867E627512A58004ADBEC /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA867E527512A58004ADBEC /* DetailViewController.swift */; };
 		CEA867EA27512A88004ADBEC /* ModallyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA867E927512A88004ADBEC /* ModallyViewController.swift */; };
@@ -32,11 +30,9 @@
 /* Begin PBXFileReference section */
 		CE00707827533F3A0053842C /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		CE00707F27535E230053842C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
-		CE0070832753B73B0053842C /* ViewModelModally.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelModally.swift; sourceTree = "<group>"; };
+		CE0070832753B73B0053842C /* ModallyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModallyViewModel.swift; sourceTree = "<group>"; };
 		CE0070862753B9060053842C /* ModallyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModallyView.swift; sourceTree = "<group>"; };
-		CE0070892753B95D0053842C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		CE00708C2753CA330053842C /* AssemblyFirstScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyFirstScene.swift; sourceTree = "<group>"; };
-		CE0070912753CEFF0053842C /* PresentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentData.swift; sourceTree = "<group>"; };
+		CE0070892753B95D0053842C /* CatImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatImage.swift; sourceTree = "<group>"; };
 		CE13977F2753DA5200769E82 /* DetailCat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCat.swift; sourceTree = "<group>"; };
 		CE1397822753DA7C00769E82 /* AssemblySecondScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblySecondScene.swift; sourceTree = "<group>"; };
 		CE15ACD327529E46003255A4 /* kitties.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = kitties.json; sourceTree = "<group>"; };
@@ -47,7 +43,7 @@
 		CEA867CE275104C8004ADBEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEA867D1275104C8004ADBEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEA867D3275104C8004ADBEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEA867DD27512853004ADBEC /* CatsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsData.swift; sourceTree = "<group>"; };
+		CEA867DD27512853004ADBEC /* Cat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cat.swift; sourceTree = "<group>"; };
 		CEA867E0275129B6004ADBEC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CEA867E527512A58004ADBEC /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		CEA867E927512A88004ADBEC /* ModallyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModallyViewController.swift; sourceTree = "<group>"; };
@@ -90,11 +86,35 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		CE13979027542B8300769E82 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEA867E927512A88004ADBEC /* ModallyViewController.swift */,
+				CE0070862753B9060053842C /* ModallyView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE13979127542B9600769E82 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CE0070832753B73B0053842C /* ModallyViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		CE13979227542BAD00769E82 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE0070892753B95D0053842C /* CatImage.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		CE15ACC92752466D003255A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CEA867DD27512853004ADBEC /* CatsData.swift */,
-				CE0070912753CEFF0053842C /* PresentData.swift */,
+				CEA867DD27512853004ADBEC /* Cat.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -141,10 +161,9 @@
 		CEA867E3275129C9004ADBEC /* FirstScene - MVC */ = {
 			isa = PBXGroup;
 			children = (
-				CE00708C2753CA330053842C /* AssemblyFirstScene.swift */,
-				CE15ACC92752466D003255A4 /* Model */,
 				CE15ACCA2752467F003255A4 /* Controller */,
 				CEA867F92751348C004ADBEC /* Views */,
+				CE15ACC92752466D003255A4 /* Model */,
 			);
 			path = "FirstScene - MVC";
 			sourceTree = "<group>";
@@ -172,10 +191,9 @@
 		CEA867EE27512AD3004ADBEC /* ThirdScene - MVVM */ = {
 			isa = PBXGroup;
 			children = (
-				CE0070862753B9060053842C /* ModallyView.swift */,
-				CE0070832753B73B0053842C /* ViewModelModally.swift */,
-				CEA867E927512A88004ADBEC /* ModallyViewController.swift */,
-				CE0070892753B95D0053842C /* Model.swift */,
+				CE13979127542B9600769E82 /* ViewModel */,
+				CE13979027542B8300769E82 /* View */,
+				CE13979227542BAD00769E82 /* Model */,
 			);
 			path = "ThirdScene - MVVM";
 			sourceTree = "<group>";
@@ -268,22 +286,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE00707927533F3A0053842C /* DetailPresenter.swift in Sources */,
-				CEA867DE27512853004ADBEC /* CatsData.swift in Sources */,
+				CEA867DE27512853004ADBEC /* Cat.swift in Sources */,
 				CEA867E1275129B6004ADBEC /* MainView.swift in Sources */,
 				CE00708027535E230053842C /* DetailView.swift in Sources */,
 				CEA867CA275104BA004ADBEC /* MainViewController.swift in Sources */,
 				CE0070872753B9060053842C /* ModallyView.swift in Sources */,
 				CE1397832753DA7C00769E82 /* AssemblySecondScene.swift in Sources */,
-				CE00708A2753B95D0053842C /* Model.swift in Sources */,
+				CE00708A2753B95D0053842C /* CatImage.swift in Sources */,
 				CEA867E627512A58004ADBEC /* DetailViewController.swift in Sources */,
 				CEA867EA27512A88004ADBEC /* ModallyViewController.swift in Sources */,
 				CEA867FB275134C6004ADBEC /* ItemCollectionViewCell.swift in Sources */,
 				CE1397802753DA5200769E82 /* DetailCat.swift in Sources */,
 				CEA867C6275104BA004ADBEC /* AppDelegate.swift in Sources */,
-				CE00708D2753CA330053842C /* AssemblyFirstScene.swift in Sources */,
-				CE0070842753B73B0053842C /* ViewModelModally.swift in Sources */,
+				CE0070842753B73B0053842C /* ModallyViewModel.swift in Sources */,
 				CEA867C8275104BA004ADBEC /* SceneDelegate.swift in Sources */,
-				CE0070922753CEFF0053842C /* PresentData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,7 +12,7 @@ protocol IDetailPresenter {
     func sendContent()
 }
 
-class DetailPresenter {
+final class DetailPresenter {
     var cat: IDetailCat
     private weak var controller: IDetailViewController?
     private weak var view: IDetailView?
@@ -22,7 +22,7 @@ class DetailPresenter {
     }
 
     func onTouched() {
-//        self.present(ModallyViewController(), animated: true, completion: nil)
+        self.controller?.presentNextVC(nextVC: ModallyViewController())
     }
 }
 
@@ -36,13 +36,13 @@ extension DetailPresenter: IDetailPresenter {
     }
     
     func sendContent() {
-        let name = cat.getTitle()
-        self.view?.getTitle(title: name)
+        let name = cat.getName()
+        self.view?.setTitle(title: name)
         
         let description = cat.getDescription()
-        self.view?.getDescription(decription: description)
+        self.view?.setDescription(decription: description)
         
         let iconName = cat.getIconName()
-        self.view?.getIconName(iconName: iconName)
+        self.view?.setIconName(iconName: iconName)
     }
 }

@@ -8,10 +8,10 @@
 import UIKit
 
 protocol IDetailViewController: AnyObject {
-    
+    func presentNextVC(nextVC: UIViewController)
 }
 
-class DetailViewController: UIViewController {
+final class DetailViewController: UIViewController {
     private var detailView: IDetailView
     private var presenter: IDetailPresenter
     
@@ -34,5 +34,7 @@ class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: IDetailViewController {
-    
+    func presentNextVC(nextVC: UIViewController) {
+        self.present(nextVC, animated: true, completion: nil)
+    }
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainView: UIView {
+final class MainView: UIView {
     private let layout = UICollectionViewFlowLayout()
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
     private weak var controller: MainViewController?
@@ -21,8 +21,10 @@ class MainView: UIView {
         self.addSubview(collectionView)
         configureCollectionViewLayout()
     }
-    
-    private func configureCollectionView() {
+}
+
+private extension MainView {
+    func configureCollectionView() {
         let lineSpacing: CGFloat = 10
         let interitemSpacing: CGFloat = 5
         let cellSize = self.frame.width * 0.5 - interitemSpacing
@@ -36,7 +38,7 @@ class MainView: UIView {
                                 forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
     }
     
-    private func configureCollectionViewLayout() {
+    func configureCollectionViewLayout() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
