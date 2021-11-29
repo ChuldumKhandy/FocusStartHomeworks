@@ -17,7 +17,8 @@ final class ModallyViewModel {
     }
     
     func updateModel() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) { [weak self] in
+        let timeLoad = Int.random(in: 1..<5)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(timeLoad)) { [weak self] in
             self?.modelModally.set(catImageName: "cat2")
             DispatchQueue.main.async { [weak self] in
                 if let data = self?.modelModally.getData() {
