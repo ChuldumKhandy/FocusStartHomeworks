@@ -1,0 +1,107 @@
+{
+    {
+        "brand" : "Audi",
+        "image" : {
+            "sedan" : "audi_sedan",
+            "hatchback" : "audi_hatchback",
+            "coupe" : "audi_coupe",
+            "cabrio" : "audi_cabrio"
+        },
+        "body" : {
+            "sedan" : "Седан",
+            "hatchback" : "Хэтчбек",
+            "coupe" : "Купе",
+            "cabrio" : "кабриолет"
+        },
+        "price" : {
+            "sedan" : "10К",
+            "hatchback" : "20К",
+            "coupe" : "15К",
+            "cabrio" : "30К"
+        }
+    },
+    {
+        "brand" : "BMW",
+        "image" : {
+            "sedan" : "bmw_sedan",
+            "hatchback" : "bmw_hatchback",
+            "coupe" : "bmw_coupe",
+            "cabrio" : "bmw_cabrio"
+        },
+        "body" : {
+            "sedan" : "Седан",
+            "hatchback" : "Хэтчбек",
+            "coupe" : "Купе",
+            "cabrio" : "кабриолет"
+        },
+        "price" : {
+            "sedan" : "10К",
+            "hatchback" : "20К",
+            "coupe" : "15К",
+            "cabrio" : "30К"
+        }
+    },
+    {
+        "brand" : "Ford",
+        "image" : {
+            "sedan" : "ford_sedan",
+            "hatchback" : "ford_hatchback",
+            "coupe" : "ford_coupe",
+            "cabrio" : "ford_cabrio"
+        },
+        "body" : {
+            "sedan" : "Седан",
+            "hatchback" : "Хэтчбек",
+            "coupe" : "Купе",
+            "cabrio" : "кабриолет"
+        },
+        "price" : {
+            "sedan" : "10К",
+            "hatchback" : "20К",
+            "coupe" : "15К",
+            "cabrio" : "30К"
+        }
+    },
+    {
+        "brand" : "Lexus",
+        "image" : {
+            "sedan" : "audi_sedan",
+            "hatchback" : "audi_hatchback",
+            "coupe" : "audi_coupe",
+            "cabrio" : "audi_cabrio"
+        },
+        "body" : {
+            "sedan" : "Седан",
+            "hatchback" : "Хэтчбек",
+            "coupe" : "Купе",
+            "cabrio" : "кабриолет"
+        },
+        "price" : {
+            "sedan" : "10К",
+            "hatchback" : "20К",
+            "coupe" : "15К",
+            "cabrio" : "30К"
+        }
+    },
+    {
+        "brand" : "Opel",
+        "image" : {
+            "sedan" : "audi_sedan",
+            "hatchback" : "audi_hatchback",
+            "coupe" : "audi_coupe",
+            "cabrio" : "audi_cabrio"
+        },
+        "body" : {
+            "sedan" : "Седан",
+            "hatchback" : "Хэтчбек",
+            "coupe" : "Купе",
+            "cabrio" : "кабриолет"
+        },
+        "price" : {
+            "sedan" : "10К",
+            "hatchback" : "20К",
+            "coupe" : "15К",
+            "cabrio" : "30К"
+        }
+    }
+}
