@@ -8,9 +8,7 @@
 import Foundation
 
 protocol IDetailCat {
-    func getName() -> String
-    func getIconName() -> String
-    func getDescription() -> String
+    func getDetailCat() -> DetailCat
 }
 
 final class DetailCat{
@@ -26,15 +24,7 @@ final class DetailCat{
 }
 
 extension DetailCat: IDetailCat {
-    func getName() -> String {
-        return self.name
-    }
-    
-    func getIconName() -> String {
-        return self.iconName
-    }
-    
-    func getDescription() -> String {
-        return self.description
+    func getDetailCat() -> DetailCat {
+        return self
     }
 }

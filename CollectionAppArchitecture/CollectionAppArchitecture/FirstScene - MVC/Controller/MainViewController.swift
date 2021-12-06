@@ -9,15 +9,15 @@ import UIKit
 
 final class MainViewController: UIViewController {
     private var mainView: MainView?
-    private var cats: [Cat]?
-
+    private var catModel: CatModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mainView = MainView(frame: UIScreen.main.bounds)
         if let mainView = mainView {
             self.view.addSubview(mainView)
         }
-        self.cats = Cat.getCatsFromJson()
+        self.catModel = CatModel()
         self.mainView?.loadView(controller: self)
         self.mainView?.collectionView.delegate = self
         self.mainView?.collectionView.dataSource = self
@@ -31,7 +31,7 @@ final class MainViewController: UIViewController {
 
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cats?.count ?? 0
+        return self.catModel?.cats?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -39,7 +39,7 @@ extension MainViewController: UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-        guard let cat = cats?[indexPath.row]
+        guard let cat = self.catModel?.cats?[indexPath.row]
         else {
             return UICollectionViewCell()
         }
@@ -51,7 +51,7 @@ extension MainViewController: UICollectionViewDataSource {
 
 extension MainViewController: UICollectionViewDelegate {
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            if let cat = cats?[indexPath.row] {
+            if let cat = self.catModel?.cats?[indexPath.row] {
                 let controller = AssemblySecondScene.build(cat: cat)
                 navigationController?.pushViewController(controller, animated: true)
             }

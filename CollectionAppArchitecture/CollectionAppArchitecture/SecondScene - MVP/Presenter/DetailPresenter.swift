@@ -8,13 +8,12 @@
 import Foundation
 
 protocol IDetailPresenter {
-    func loadPresenter(controller: DetailViewController, view: IDetailView)
-    func sendContent()
+    func loadView(controller: DetailViewController, view: IDetailView)
 }
 
 final class DetailPresenter {
     var cat: IDetailCat
-    private weak var controller: IDetailViewController?
+    private weak var controller: DetailViewController?
     private weak var view: IDetailView?
     
     init(cat: IDetailCat) {
@@ -22,27 +21,20 @@ final class DetailPresenter {
     }
 
     func onTouched() {
-        self.controller?.presentNextVC(nextVC: ModallyViewController())
+        self.controller?.present(ModallyViewController(), animated: true, completion: nil)
     }
 }
 
 extension DetailPresenter: IDetailPresenter {
-    func loadPresenter(controller: DetailViewController, view: IDetailView) {
+    func loadView(controller: DetailViewController, view: IDetailView) {
         self.controller = controller
         self.view = view
         self.view?.onTouchedHandler = { [weak self] in
             self?.onTouched()
         }
-    }
-    
-    func sendContent() {
-        let name = cat.getName()
-        self.view?.setTitle(title: name)
-        
-        let description = cat.getDescription()
-        self.view?.setDescription(decription: description)
-        
-        let iconName = cat.getIconName()
-        self.view?.setIconName(iconName: iconName)
+        let detailCat = cat.getDetailCat()
+        self.view?.setCatInformation(title: detailCat.name,
+                                     decription: detailCat.description,
+                                     iconName: detailCat.iconName)
     }
 }

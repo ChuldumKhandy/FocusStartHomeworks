@@ -10,9 +10,7 @@ import UIKit
 protocol IDetailView: UIView {
     var onTouchedHandler: (() -> Void)? { get set }
     
-    func setTitle(title: String)
-    func setDescription(decription: String)
-    func setIconName(iconName: String)
+    func setCatInformation(title: String, decription: String, iconName: String)
 }
 
 final class DetailView: UIView {
@@ -47,15 +45,9 @@ final class DetailView: UIView {
 }
 
 extension DetailView: IDetailView {
-    func setTitle(title: String) {
+    func setCatInformation(title: String, decription: String, iconName: String) {
         self.titleLabel.text = title
-    }
-    
-    func setDescription(decription: String) {
         self.decriptionLabel.text = decription
-    }
-    
-    func setIconName(iconName: String) {
         self.iconImageView.image = UIImage(named: iconName)
     }
 }

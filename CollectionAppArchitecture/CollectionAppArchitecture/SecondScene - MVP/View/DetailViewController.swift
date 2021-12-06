@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol IDetailViewController: AnyObject {
-    func presentNextVC(nextVC: UIViewController)
-}
-
 final class DetailViewController: UIViewController {
     private var detailView: IDetailView
     private var presenter: IDetailPresenter
@@ -28,13 +24,8 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(detailView)
-        self.presenter.loadPresenter(controller: self, view: self.detailView)
-        self.presenter.sendContent()
+        self.presenter.loadView(controller: self, view: self.detailView)
     }
 }
 
-extension DetailViewController: IDetailViewController {
-    func presentNextVC(nextVC: UIViewController) {
-        self.present(nextVC, animated: true, completion: nil)
-    }
-}
+
