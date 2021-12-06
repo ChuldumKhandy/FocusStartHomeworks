@@ -10,6 +10,8 @@ import UIKit
 final class ModallyView: UIView {
     private var modallyViewModel = ModallyViewModel()
     var onTouchedHandler: (() -> Void)?
+    var onTouchedUrlInstHandler: (() -> Void)?
+    var onTouchedUrlTwitHandler: (() -> Void)?
     
     private let titleLabel = UILabel()
     private let iconImageView = UIImageView()
@@ -96,19 +98,11 @@ private extension ModallyView {
     }
 
     @objc func urlInst(sender: Any){
-        if let url = URL(string: "https://www.instagram.com/mofu_sand/") {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:])
-            }
-        }
+        self.onTouchedUrlInstHandler?()
     }
 
     @objc func urlTwit(sender: Any){
-        if let url = URL(string: "https://twitter.com/mofu_sand") {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, options: [:])
-            }
-        }
+        self.onTouchedUrlTwitHandler?()
     }
 
     @objc func dismiss(sender: Any){
