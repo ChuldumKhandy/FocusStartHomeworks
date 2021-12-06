@@ -15,8 +15,14 @@ enum PageHeader: CGFloat {
     case left = 16
 }
 
-enum GraphResult: CGFloat {
+enum CellMetrics: CGFloat {
     case width = 343
     case height = 34
-    case iconSize = 16
+    case left = 16
+}
+
+enum IconMetrics: CGFloat {
+    case size = 16
+    case top = 2
+    case radius = 8
 }

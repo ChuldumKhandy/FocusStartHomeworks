@@ -50,7 +50,7 @@ extension ChooseSceneVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = self.viewScene?.tableView.dequeueReusableCell(withIdentifier: ChooseSceneTVCell.identifier, for: indexPath) as? ChooseSceneTVCell
+        guard let cell = self.viewScene?.tableView.dequeueReusableCell(withIdentifier: ChooseSceneCell.identifier, for: indexPath) as? ChooseSceneCell
         else {
             return UITableViewCell()
         }

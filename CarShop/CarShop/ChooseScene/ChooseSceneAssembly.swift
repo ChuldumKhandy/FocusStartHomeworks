@@ -6,3 +6,13 @@
 //
 
 import Foundation
+import UIKit
+
+class AssemblyChooseScene {
+    func build() -> UIViewController {
+        
+        let controller = ChooseSceneVC()
+        
+        return controller
+    }
+}

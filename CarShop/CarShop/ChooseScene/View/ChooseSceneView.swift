@@ -23,7 +23,7 @@ class ChooseSceneView: UIView {
 
 private extension ChooseSceneView {
     func customizeView() {
-        self.backgroundColor = .blue
+        self.backgroundColor = .white
         self.customizeTableView()
         self.addSubview(tableView)
         
@@ -31,6 +31,16 @@ private extension ChooseSceneView {
     
     func customizeTableView() {
         self.tableView = UITableView(frame: self.bounds)
-        self.tableView.register(ChooseSceneTVCell.self, forCellReuseIdentifier: ChooseSceneTVCell.identifier)
+        self.tableView.separatorColor = .clear
+        self.tableView.register(ChooseSceneCell.self, forCellReuseIdentifier: ChooseSceneCell.identifier)
+    }
+    
+    func setConstraints() {
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.tableView.widthAnchor.constraint(equalToConstant: CellMetrics.width.rawValue).isActive = true
+        self.tableView.heightAnchor.constraint(equalToConstant: CellMetrics.width.rawValue).isActive = true
+        self.tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: CellMetrics.left.rawValue).isActive = true
+        self.tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -CellMetrics.left.rawValue).isActive = true
     }
 }
