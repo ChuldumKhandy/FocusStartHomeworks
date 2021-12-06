@@ -14,10 +14,10 @@ final class ItemCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .white
-        contentView.addSubview(icon)
-        contentView.addSubview(title)
-        contentView.clipsToBounds = true
+        self.contentView.backgroundColor = .white
+        self.contentView.addSubview(icon)
+        self.contentView.addSubview(title)
+        self.contentView.clipsToBounds = true
     }
     
     required init?(coder: NSCoder) {
@@ -28,24 +28,24 @@ final class ItemCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         let widthCell = contentView.frame.size.width
         let heightCell = contentView.frame.size.height
-        icon.frame = CGRect(x: 0,
+        self.icon.frame = CGRect(x: 0,
                             y: 0,
                             width: widthCell,
                             height: heightCell * 0.8)
-        title.frame = CGRect(x: 0,
+        self.title.frame = CGRect(x: 0,
                              y: heightCell * 0.8,
                              width: widthCell,
                              height: heightCell * 0.2)
     }
     
     func configureCell(name: String, iconName: String) {
-        icon.image = UIImage(named: iconName)
-        icon.contentMode = .scaleAspectFit
+        self.icon.image = UIImage(named: iconName)
+        self.icon.contentMode = .scaleAspectFit
         
-        title.text = name
-        title.textColor = .black
-        title.textAlignment = .center
-        title.adjustsFontSizeToFitWidth = true
-        title.numberOfLines = 0
+        self.title.text = name
+        self.title.textColor = .black
+        self.title.textAlignment = .center
+        self.title.adjustsFontSizeToFitWidth = true
+        self.title.numberOfLines = 0
     }
 }

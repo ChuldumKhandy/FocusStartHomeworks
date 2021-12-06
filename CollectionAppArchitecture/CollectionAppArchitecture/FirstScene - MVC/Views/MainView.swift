@@ -17,9 +17,9 @@ final class MainView: UIView {
     }
     
     func configureMainView() {
-        configureCollectionView()
+        self.configureCollectionView()
         self.addSubview(collectionView)
-        configureCollectionViewLayout()
+        self.configureCollectionViewLayout()
     }
 }
 
@@ -28,21 +28,21 @@ private extension MainView {
         let lineSpacing: CGFloat = 10
         let interitemSpacing: CGFloat = 5
         let cellSize = self.frame.width * 0.5 - interitemSpacing
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = lineSpacing
-        layout.minimumInteritemSpacing = interitemSpacing
-        layout.itemSize = CGSize(width: cellSize, height: cellSize)
-        collectionView.backgroundColor = .white
-        collectionView.frame = self.bounds
-        collectionView.register(ItemCollectionViewCell.self,
+        self.layout.scrollDirection = .vertical
+        self.layout.minimumLineSpacing = lineSpacing
+        self.layout.minimumInteritemSpacing = interitemSpacing
+        self.layout.itemSize = CGSize(width: cellSize, height: cellSize)
+        self.collectionView.backgroundColor = .white
+        self.collectionView.frame = self.bounds
+        self.collectionView.register(ItemCollectionViewCell.self,
                                 forCellWithReuseIdentifier: ItemCollectionViewCell.identifier)
     }
     
     func configureCollectionViewLayout() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.collectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
 }
