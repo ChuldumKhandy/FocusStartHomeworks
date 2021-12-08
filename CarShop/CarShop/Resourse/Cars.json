@@ -1,4 +1,4 @@
-{
+[
     {
         "brand" : "Audi",
         "image" : {
@@ -65,10 +65,10 @@
     {
         "brand" : "Lexus",
         "image" : {
-            "sedan" : "audi_sedan",
-            "hatchback" : "audi_hatchback",
-            "coupe" : "audi_coupe",
-            "cabrio" : "audi_cabrio"
+            "sedan" : "lexus_sedan",
+            "hatchback" : "lexus_hatchback",
+            "coupe" : "lexus_coupe",
+            "cabrio" : "lexus_cabrio"
         },
         "body" : {
             "sedan" : "Седан",
@@ -84,12 +84,12 @@
         }
     },
     {
-        "brand" : "Opel",
+        "brand" : "Chevrolet",
         "image" : {
-            "sedan" : "audi_sedan",
-            "hatchback" : "audi_hatchback",
-            "coupe" : "audi_coupe",
-            "cabrio" : "audi_cabrio"
+            "sedan" : "chevrolet_sedan",
+            "hatchback" : "chevrolet_hatchback",
+            "coupe" : "chevrolet_coupe",
+            "cabrio" : "chevrolet_cabrio"
         },
         "body" : {
             "sedan" : "Седан",
@@ -104,4 +104,4 @@
             "cabrio" : "30К"
         }
     }
-}
+]

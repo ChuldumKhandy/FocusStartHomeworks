@@ -8,10 +8,12 @@
 import Foundation
 import UIKit
 
-class AssemblyChooseScene {
-    func build() -> UIViewController {
-        
+final class AssemblyChooseScene {
+    static func build() -> UIViewController {
+        let car = CarModel()
         let controller = ChooseSceneVC()
+        let presenter = ChooseScenePresenter(car: car, controller: controller)
+        controller.presenter = presenter
         
         return controller
     }

@@ -22,6 +22,20 @@ class PriceSceneView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func customizeHeader() -> UIView {
+        let headerView = UIView()
+        let titleLabel = UILabel()
+        titleLabel.frame.size.height = CellMetrics.height.rawValue
+        titleLabel.frame.size.width = CellMetrics.width.rawValue
+        titleLabel.text = "Выберите тип кузова"
+        titleLabel.font = UIFont(name: "Inter", size: 16)
+        titleLabel.font = titleLabel.font.withSize(24)
+        titleLabel.textColor = .black
+        headerView.backgroundColor = .white
+        headerView.addSubview(titleLabel)
+        return headerView
+    }
 }
 
 private extension PriceSceneView {
@@ -48,7 +62,8 @@ private extension PriceSceneView {
     func customizeLabels() {
         self.titleLabel.text = "Цена"
         self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Inter", size: 24)
+        self.titleLabel.font = UIFont(name: "Inter", size: 20)
+        self.titleLabel.font = titleLabel.font.withSize(24)
         
         self.priceLabel.text = "12121212$"
         self.priceLabel.textColor = .black
@@ -70,6 +85,7 @@ private extension PriceSceneView {
     
     func customizeTableView() {
         self.tableView.tableFooterView = UIView()
+        self.tableView.estimatedSectionHeaderHeight = CellMetrics.height.rawValue
         self.tableView.register(PriceSceneCell.self, forCellReuseIdentifier: PriceSceneCell.identifier)
     }
     

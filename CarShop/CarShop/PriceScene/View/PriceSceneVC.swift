@@ -40,8 +40,10 @@ class PriceSceneVC: UIViewController {
     }
 }
 
-extension PriceSceneVC: UITableViewDelegate {
-    
+extension PriceSceneVC: UITableViewDelegate {    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return self.viewScene?.customizeHeader()
+    }
 }
 
 extension PriceSceneVC: UITableViewDataSource {

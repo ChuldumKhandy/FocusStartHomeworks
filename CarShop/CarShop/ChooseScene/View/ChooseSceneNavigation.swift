@@ -18,8 +18,7 @@ class ChooseSceneNavigation: UIView {
 
 private extension ChooseSceneNavigation {
     func customizeNavigation() {
-        self.controller?.navigationItem.title = "Выберите"
-        self.controller?.navigationController?.navigationBar.prefersLargeTitles = true
+        self.controller?.navigationController?.isNavigationBarHidden = true
     }
 }
 

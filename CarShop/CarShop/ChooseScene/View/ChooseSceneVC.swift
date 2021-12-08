@@ -10,6 +10,7 @@ import UIKit
 class ChooseSceneVC: UIViewController {
     private var viewScene: ChooseSceneView?
     private var navigationScene: ChooseSceneNavigation?
+    var presenter: ChooseScenePresenter?
     
     init() {
         self.viewScene = ChooseSceneView(frame: UIScreen.main.bounds)
@@ -41,7 +42,9 @@ class ChooseSceneVC: UIViewController {
 }
 
 extension ChooseSceneVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return self.viewScene?.customizeHeader()
+    }
 }
 
 extension ChooseSceneVC: UITableViewDataSource {

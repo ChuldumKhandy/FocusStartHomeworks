@@ -38,18 +38,22 @@ private extension PriceSceneCell {
     
     func customizeButton() {
         self.radioButton.setImage(UIImage(systemName: "circle"), for: .normal)
-        self.radioButton.setImage(UIImage(systemName: "circle.inset.filled"), for: .selected)
-        //self.radioButton.backgroundColor = MainPalette.greenPrimary
-        //self.selectButton.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        self.radioButton.setImage(UIImage(systemName: "circle.inset.filled"), for: .highlighted)
+        self.radioButton.tintColor = MainPalette.greenPrimary
+        self.radioButton.addTarget(self, action: #selector(isPressed(sender:)), for: .touchDown)
+    }
+    
+    @objc func isPressed(sender: UIButton) {
+        
     }
     
     func setConstraints() {
         self.brandLable.translatesAutoresizingMaskIntoConstraints = false
         self.brandLable.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        self.brandLable.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: CellMetrics.left.rawValue).isActive = true
+        self.brandLable.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         
         self.radioButton.translatesAutoresizingMaskIntoConstraints = false
         self.radioButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        self.radioButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -CellMetrics.left.rawValue).isActive = true
+        self.radioButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
 }

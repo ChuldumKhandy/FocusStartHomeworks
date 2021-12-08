@@ -23,7 +23,7 @@
 		CE38180F275C83220038260E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE38180D275C83220038260E /* LaunchScreen.storyboard */; };
 		CE38181F275C862C0038260E /* MainPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38181E275C862C0038260E /* MainPalette.swift */; };
 		CE381823275C86430038260E /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE381822275C86420038260E /* Constraints.swift */; };
-		CE381826275C86760038260E /* Cars.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE381825275C86760038260E /* Cars.swift */; };
+		CE381826275C86760038260E /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE381825275C86760038260E /* Car.swift */; };
 		CE381829275C86980038260E /* ChooseSceneAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE381828275C86980038260E /* ChooseSceneAssembly.swift */; };
 		CE38182C275C870C0038260E /* ChooseSceneRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38182B275C870C0038260E /* ChooseSceneRouter.swift */; };
 		CE38182F275C874D0038260E /* ChooseScenePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38182E275C874D0038260E /* ChooseScenePresenter.swift */; };
@@ -31,6 +31,8 @@
 		CE381838275C9C2D0038260E /* ChooseSceneNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE381837275C9C2C0038260E /* ChooseSceneNavigation.swift */; };
 		CE38183F275CB1EA0038260E /* ChooseSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38183E275CB1EA0038260E /* ChooseSceneCell.swift */; };
 		CE381846275CC8E90038260E /* Cars.json in Resources */ = {isa = PBXBuildFile; fileRef = CE381845275CC8E90038260E /* Cars.json */; };
+		CEB564C92760E4980082F662 /* CarDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB564C82760E4980082F662 /* CarDto.swift */; };
+		CEB564CC2760E5100082F662 /* CarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB564CB2760E5100082F662 /* CarModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +54,7 @@
 		CE381810275C83220038260E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE38181E275C862C0038260E /* MainPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPalette.swift; sourceTree = "<group>"; };
 		CE381822275C86420038260E /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
-		CE381825275C86760038260E /* Cars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cars.swift; sourceTree = "<group>"; };
+		CE381825275C86760038260E /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 		CE381828275C86980038260E /* ChooseSceneAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSceneAssembly.swift; sourceTree = "<group>"; };
 		CE38182B275C870C0038260E /* ChooseSceneRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSceneRouter.swift; sourceTree = "<group>"; };
 		CE38182E275C874D0038260E /* ChooseScenePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseScenePresenter.swift; sourceTree = "<group>"; };
@@ -60,6 +62,8 @@
 		CE381837275C9C2C0038260E /* ChooseSceneNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSceneNavigation.swift; sourceTree = "<group>"; };
 		CE38183E275CB1EA0038260E /* ChooseSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSceneCell.swift; sourceTree = "<group>"; };
 		CE381845275CC8E90038260E /* Cars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Cars.json; sourceTree = "<group>"; };
+		CEB564C82760E4980082F662 /* CarDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDto.swift; sourceTree = "<group>"; };
+		CEB564CB2760E5100082F662 /* CarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,9 +145,9 @@
 			children = (
 				CE381828275C86980038260E /* ChooseSceneAssembly.swift */,
 				CE38182B275C870C0038260E /* ChooseSceneRouter.swift */,
-				CE381825275C86760038260E /* Cars.swift */,
-				CE38182E275C874D0038260E /* ChooseScenePresenter.swift */,
+				CEB564CE2760F51B0082F662 /* Presenter */,
 				CE38183A275C9E270038260E /* View */,
+				CEB564C52760E4210082F662 /* Model */,
 			);
 			path = ChooseScene;
 			sourceTree = "<group>";
@@ -175,6 +179,24 @@
 				CE381845275CC8E90038260E /* Cars.json */,
 			);
 			path = Resourse;
+			sourceTree = "<group>";
+		};
+		CEB564C52760E4210082F662 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CEB564CB2760E5100082F662 /* CarModel.swift */,
+				CE381825275C86760038260E /* Car.swift */,
+				CEB564C82760E4980082F662 /* CarDto.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CEB564CE2760F51B0082F662 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				CE38182E275C874D0038260E /* ChooseScenePresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,8 +271,10 @@
 			files = (
 				CE38182F275C874D0038260E /* ChooseScenePresenter.swift in Sources */,
 				CE141551275F801300B48750 /* PriceSceneCell.swift in Sources */,
+				CEB564C92760E4980082F662 /* CarDto.swift in Sources */,
 				CE38182C275C870C0038260E /* ChooseSceneRouter.swift in Sources */,
 				CE381829275C86980038260E /* ChooseSceneAssembly.swift in Sources */,
+				CEB564CC2760E5100082F662 /* CarModel.swift in Sources */,
 				CE141545275E631A00B48750 /* PriceSceneView.swift in Sources */,
 				CE14154A275E6E8D00B48750 /* MainFont.swift in Sources */,
 				CE381838275C9C2D0038260E /* ChooseSceneNavigation.swift in Sources */,
@@ -265,7 +289,7 @@
 				CE381803275C83150038260E /* AppDelegate.swift in Sources */,
 				CE14154D275F53DC00B48750 /* PriceSceneNavigation.swift in Sources */,
 				CE141536275E623900B48750 /* PriceSceneAssembly.swift in Sources */,
-				CE381826275C86760038260E /* Cars.swift in Sources */,
+				CE381826275C86760038260E /* Car.swift in Sources */,
 				CE14153C275E62CB00B48750 /* PriceScenePresenter.swift in Sources */,
 				CE381805275C83150038260E /* SceneDelegate.swift in Sources */,
 			);
