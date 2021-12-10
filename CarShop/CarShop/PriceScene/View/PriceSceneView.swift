@@ -54,7 +54,7 @@ private extension PriceSceneView {
     }
     
     func customizeIcon() {
-        self.iconImageView.image = UIImage(named: "")
+        self.iconImageView.image = UIImage(named: "audi_sedan")
         self.iconImageView.backgroundColor = .darkGray
         self.iconImageView.contentMode = .scaleAspectFit
     }

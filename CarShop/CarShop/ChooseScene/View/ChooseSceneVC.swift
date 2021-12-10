@@ -12,6 +12,11 @@ class ChooseSceneVC: UIViewController {
     private var navigationScene: ChooseSceneNavigation?
     var presenter: ChooseScenePresenter?
     
+    var countHandler: (() -> Int)?
+    var carHandler: (() -> [Car])?
+    var nextVCHandler: (() -> Void)?
+    var carGiveBackHandler: ((Car) -> Void)?
+    
     init() {
         self.viewScene = ChooseSceneView(frame: UIScreen.main.bounds)
         self.navigationScene = ChooseSceneNavigation()
@@ -24,7 +29,10 @@ class ChooseSceneVC: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.navigationScene?.loadNavigaition(controller: self)
+        self.navigationScene?.loadView(controller: self)
+        if let view = viewScene {
+            self.presenter?.loadView(view: view)
+        }
     }
     
     override func viewDidLoad() {
@@ -45,11 +53,19 @@ extension ChooseSceneVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return self.viewScene?.customizeHeader()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cars = self.carHandler?()
+        self.carGiveBackHandler?(cars![indexPath.row])        
+        self.nextVCHandler?()
+    }
 }
 
 extension ChooseSceneVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        guard let number = self.countHandler?()
+        else { return 0 }
+        return number
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,7 +73,12 @@ extension ChooseSceneVC: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        
+        let cars = self.carHandler?()
+        cell.brandCar(brand: cars![indexPath.row].brand)
+        if (indexPath.row % 2 != 0) {
+            cell.colorImage()
+        }
         return cell
     }
 }
+

@@ -11,22 +11,31 @@ class ChooseSceneCell: UITableViewCell {
     static let identifier = "ItemTableViewCell"
     private let iconImageView = UIImageView()
     private let brandLable = UILabel()
-    private let selectButton = UIButton()
+    private let selectLabel = UILabel()
+    var onTouchedHandler: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: self.bounds.size.width, right: 0)
+        self.selectionStyle = .none
         self.addSubview(iconImageView)
         self.addSubview(brandLable)
-        self.addSubview(selectButton)
+        self.addSubview(selectLabel)
         self.customizeIcon()
-        self.customizeLable()
-        self.customizeButton()
+        self.customizeLables()
         self.setConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func brandCar(brand: String) {
+        self.brandLable.text = brand
+    }
+    
+    func colorImage() {
+        self.iconImageView.backgroundColor = MainPalette.greenSecondary
     }
 }
 
@@ -38,23 +47,20 @@ private extension ChooseSceneCell {
         self.iconImageView.backgroundColor = MainPalette.greenPrimary
     }
     
-    func customizeLable() {
-        self.brandLable.text = "CARS"
+    func customizeLables() {
         self.brandLable.font = UIFont.init(name: "Inter", size: 16)
         self.brandLable.textColor = .black
         self.brandLable.numberOfLines = 0
         self.brandLable.adjustsFontSizeToFitWidth = true
+        
+        self.selectLabel.text = "Select"
+        self.selectLabel.font = UIFont.init(name: "Inter", size: 16)
+        self.selectLabel.font = self.selectLabel.font.withSize(14)
+        self.selectLabel.textColor = .black
+        self.selectLabel.numberOfLines = 0
+        self.selectLabel.adjustsFontSizeToFitWidth = true
     }
-    
-    func customizeButton() {
-        self.selectButton.setTitle("Select", for: .normal)
-        self.selectButton.setTitleColor(.black, for: .normal)
-        self.selectButton.titleLabel?.font = UIFont.init(name: "Inter", size: 14)
-        self.selectButton.titleLabel?.font = self.selectButton.titleLabel?.font.withSize(14)
-        self.selectButton.backgroundColor = .white
-        //self.selectButton.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
-    }
-    
+
     func setConstraints() {
         self.iconImageView.translatesAutoresizingMaskIntoConstraints = false
         self.iconImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: IconMetrics.top.rawValue).isActive = true
@@ -66,8 +72,8 @@ private extension ChooseSceneCell {
         self.brandLable.topAnchor.constraint(equalTo: self.iconImageView.topAnchor).isActive = true
         self.brandLable.leadingAnchor.constraint(equalTo: self.iconImageView.trailingAnchor, constant: CellMetrics.left.rawValue).isActive = true
         
-        self.selectButton.translatesAutoresizingMaskIntoConstraints = false
-        self.selectButton.topAnchor.constraint(equalTo: self.iconImageView.topAnchor).isActive = true
-        self.selectButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.selectLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.selectLabel.topAnchor.constraint(equalTo: self.iconImageView.topAnchor).isActive = true
+        self.selectLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
 }

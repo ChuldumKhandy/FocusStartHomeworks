@@ -166,8 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				CE381806275C83150038260E /* ChooseSceneVC.swift */,
-				CE381832275C882A0038260E /* ChooseSceneView.swift */,
 				CE381837275C9C2C0038260E /* ChooseSceneNavigation.swift */,
+				CE381832275C882A0038260E /* ChooseSceneView.swift */,
 				CE38183E275CB1EA0038260E /* ChooseSceneCell.swift */,
 			);
 			path = View;

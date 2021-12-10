@@ -37,12 +37,19 @@ class PriceSceneVC: UIViewController {
         if let view = viewScene {
             self.view.addSubview(view)
         }
+        viewScene?.tableView.reloadData()
     }
 }
 
 extension PriceSceneVC: UITableViewDelegate {    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return self.viewScene?.customizeHeader()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = self.viewScene?.tableView.cellForRow(at: indexPath) as? PriceSceneCell
+        else { return }
+        cell.changeImageViewCell()
     }
 }
 

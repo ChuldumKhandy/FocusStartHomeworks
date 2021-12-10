@@ -10,15 +10,8 @@ import UIKit
 class ChooseSceneNavigation: UIView {
     private weak var controller: ChooseSceneVC?
     
-    func loadNavigaition(controller: ChooseSceneVC) {
+    func loadView(controller: ChooseSceneVC) {
         self.controller = controller
-        self.customizeNavigation()
-    }
-}
-
-private extension ChooseSceneNavigation {
-    func customizeNavigation() {
         self.controller?.navigationController?.isNavigationBarHidden = true
     }
 }
-

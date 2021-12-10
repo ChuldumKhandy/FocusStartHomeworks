@@ -13,8 +13,10 @@ final class CarModel{
     init(){
         cars = getAndConvertFromJson()
     }
+}
 
-    private func getAndConvertFromJson() -> [Car] {
+private extension CarModel {
+    func getAndConvertFromJson() -> [Car] {
         var cars = [Car]()
         let dtos = CarDto.getDtosFromJson()
         for dto in dtos {

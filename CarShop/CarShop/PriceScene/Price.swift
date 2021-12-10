@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+class Price {
+    var car: Car
+    
+    init(car: Car) {
+        self.car = car
+    }
+}
