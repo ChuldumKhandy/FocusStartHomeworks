@@ -10,7 +10,7 @@ import UIKit
 class PriceSceneNavigation: UIView {
     private weak var controller: PriceSceneVC?
     
-    func loadNavigaition(controller: PriceSceneVC) {
+    func loadView(controller: PriceSceneVC) {
         self.controller = controller
         self.customizeNavigation()
     }

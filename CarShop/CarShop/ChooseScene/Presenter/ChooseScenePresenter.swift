@@ -10,7 +10,8 @@ import Foundation
 final class ChooseScenePresenter {
     private let router: ChooseSceneRouter?
     private let car: CarModel?
-    var carNextVC: Car?
+    var carsNextVC: [Car]?
+    
     private weak var controller: ChooseSceneVC?
     private weak var viewScene: ChooseSceneView?
     
@@ -24,20 +25,23 @@ final class ChooseScenePresenter {
         self.viewScene = view
         
         self.controller?.countHandler = { [weak self] in
-            return (self?.setCarsCount() ?? 0)
+            let brands = (self?.setBrands())!
+            return brands.count
         }
         
-        self.controller?.carHandler = { [weak self] in
-            return (self?.setCar())!
+        self.controller?.brandHandler = { [weak self] in
+            return (self?.setBrands())!
         }
         
-        self.controller?.carGiveBackHandler = { [weak self] car in
-            self?.carNextVC = car
+        self.controller?.carBrandGiveBackHandler = { [weak self] carBrand in
+           self?.carsNextVC = self?.car?.cars?.filter({ (Car) -> Bool in
+                Car.brand == carBrand
+            })
         }
         
         self.controller?.nextVCHandler = { [weak self] in
-            if let car = self?.carNextVC {
-                self?.router?.setTargerController(controller: PriceSceneAssembly.build(car: car))
+            if let cars = self?.carsNextVC {
+                self?.router?.setTargerController(controller: PriceSceneAssembly.build(cars: cars))
                 self?.router?.next()
             }
         }
@@ -46,14 +50,15 @@ final class ChooseScenePresenter {
 
 private extension ChooseScenePresenter {
     func setCarsCount() -> Int {
-        return self.car?.cars?.count ?? 0
-    }
-    
-    func setCar() -> [Car] {
-        return self.car!.cars!
+        return self.car?.uniqueBrand().count ?? 0
     }
     
     func nextVC() {
         self.controller?.navigationController?.pushViewController(PriceSceneVC(), animated: true)
     }
+    
+    func setBrands() -> [String] {
+        return self.car?.uniqueBrand() ?? ["sds"]
+    }
+    
 }

@@ -9,9 +9,9 @@ import Foundation
 
 final class Car {
     var brand: String
-    var image: BodyCar
-    var body: BodyCar
-    var price: BodyCar
+    var image: String
+    var body: String
+    var price: String
 
     init(dto: CarDto){
         self.brand = dto.brand

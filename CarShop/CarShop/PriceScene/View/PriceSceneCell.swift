@@ -9,15 +9,15 @@ import UIKit
 
 class PriceSceneCell: UITableViewCell {
     static let identifier = "ItemTableViewCell"
-    private let brandLable = UILabel()
-    private let iconImageView = UIImageView()
+    let bodyLabel = UILabel()
+    private let radioImageView = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: self.bounds.size.width, right: 0)
         self.selectionStyle = .none
-        self.addSubview(brandLable)
-        self.addSubview(iconImageView)
+        self.addSubview(bodyLabel)
+        self.addSubview(radioImageView)
         self.customizeLable()
         self.customizeIcon()
         self.setConstraints()
@@ -28,31 +28,35 @@ class PriceSceneCell: UITableViewCell {
     }
     
     func changeImageViewCell() {
-        self.iconImageView.image = UIImage(systemName: "circle.inset.filled")
+        self.radioImageView.image = UIImage(systemName: "circle.inset.filled")
+    }
+    
+    func setBody(body: String?) {
+        guard let body = body else { return }
+        self.bodyLabel.text = body
     }
 }
 
 private extension PriceSceneCell {
     func customizeLable() {
-        self.brandLable.text = "Кузов"
-        self.brandLable.font = UIFont.init(name: "Inter", size: 16)
-        self.brandLable.textColor = .black
-        self.brandLable.numberOfLines = 0
-        self.brandLable.adjustsFontSizeToFitWidth = true
+        self.bodyLabel.font = UIFont.init(name: "Inter", size: 16)
+        self.bodyLabel.textColor = .black
+        self.bodyLabel.numberOfLines = 0
+        self.bodyLabel.adjustsFontSizeToFitWidth = true
     }
     
     func customizeIcon() {
-        self.iconImageView.image = UIImage(systemName: "circle")
-        self.iconImageView.tintColor = MainPalette.greenPrimary
+        self.radioImageView.image = UIImage(systemName: "circle")
+        self.radioImageView.tintColor = MainPalette.greenPrimary
     }
     
     func setConstraints() {
-        self.brandLable.translatesAutoresizingMaskIntoConstraints = false
-        self.brandLable.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        self.brandLable.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.bodyLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.bodyLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.bodyLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         
-        self.iconImageView.translatesAutoresizingMaskIntoConstraints = false
-        self.iconImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        self.iconImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.radioImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.radioImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.radioImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
 }

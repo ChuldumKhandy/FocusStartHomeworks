@@ -12,6 +12,7 @@ class PriceSceneView: UIView {
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()
     private let calculateButton = UIButton()
+    var onCellTouchHandler: (() -> Void)?
     let tableView = UITableView()
     
     override init(frame: CGRect) {
@@ -36,6 +37,11 @@ class PriceSceneView: UIView {
         headerView.addSubview(titleLabel)
         return headerView
     }
+    
+    func setCarInfo(name: String, price: String) {
+        self.iconImageView.image = UIImage(named: name)
+        self.priceLabel.text = price
+    }
 }
 
 private extension PriceSceneView {
@@ -54,8 +60,6 @@ private extension PriceSceneView {
     }
     
     func customizeIcon() {
-        self.iconImageView.image = UIImage(named: "audi_sedan")
-        self.iconImageView.backgroundColor = .darkGray
         self.iconImageView.contentMode = .scaleAspectFit
     }
     
@@ -64,8 +68,7 @@ private extension PriceSceneView {
         self.titleLabel.textColor = .black
         self.titleLabel.font = UIFont(name: "Inter", size: 20)
         self.titleLabel.font = titleLabel.font.withSize(24)
-        
-        self.priceLabel.text = "12121212$"
+    
         self.priceLabel.textColor = .black
         self.priceLabel.font = UIFont.init(name: "Inter", size: 16)
     }
@@ -80,7 +83,7 @@ private extension PriceSceneView {
     }
     
     @objc func touchedDown() {
-        //self.controller?.onTouched()
+        self.onCellTouchHandler?()
     }
     
     func customizeTableView() {

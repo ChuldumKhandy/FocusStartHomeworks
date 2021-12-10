@@ -10,7 +10,6 @@
 		CE141536275E623900B48750 /* PriceSceneAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141535275E623900B48750 /* PriceSceneAssembly.swift */; };
 		CE141539275E62B600B48750 /* PriceSceneRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141538275E62B600B48750 /* PriceSceneRouter.swift */; };
 		CE14153C275E62CB00B48750 /* PriceScenePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14153B275E62CB00B48750 /* PriceScenePresenter.swift */; };
-		CE14153F275E62E600B48750 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14153E275E62E600B48750 /* Price.swift */; };
 		CE141542275E630500B48750 /* PriceSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141541275E630500B48750 /* PriceSceneVC.swift */; };
 		CE141545275E631A00B48750 /* PriceSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141544275E631A00B48750 /* PriceSceneView.swift */; };
 		CE14154A275E6E8D00B48750 /* MainFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141549275E6E8D00B48750 /* MainFont.swift */; };
@@ -39,7 +38,6 @@
 		CE141535275E623900B48750 /* PriceSceneAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSceneAssembly.swift; sourceTree = "<group>"; };
 		CE141538275E62B600B48750 /* PriceSceneRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSceneRouter.swift; sourceTree = "<group>"; };
 		CE14153B275E62CB00B48750 /* PriceScenePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceScenePresenter.swift; sourceTree = "<group>"; };
-		CE14153E275E62E600B48750 /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
 		CE141541275E630500B48750 /* PriceSceneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSceneVC.swift; sourceTree = "<group>"; };
 		CE141544275E631A00B48750 /* PriceSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSceneView.swift; sourceTree = "<group>"; };
 		CE141549275E6E8D00B48750 /* MainFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFont.swift; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 				CE141535275E623900B48750 /* PriceSceneAssembly.swift */,
 				CE141538275E62B600B48750 /* PriceSceneRouter.swift */,
 				CE14153B275E62CB00B48750 /* PriceScenePresenter.swift */,
-				CE14153E275E62E600B48750 /* Price.swift */,
 				CE141547275E633900B48750 /* View */,
 			);
 			path = PriceScene;
@@ -284,7 +281,6 @@
 				CE38183F275CB1EA0038260E /* ChooseSceneCell.swift in Sources */,
 				CE141542275E630500B48750 /* PriceSceneVC.swift in Sources */,
 				CE381833275C882A0038260E /* ChooseSceneView.swift in Sources */,
-				CE14153F275E62E600B48750 /* Price.swift in Sources */,
 				CE141539275E62B600B48750 /* PriceSceneRouter.swift in Sources */,
 				CE381803275C83150038260E /* AppDelegate.swift in Sources */,
 				CE14154D275F53DC00B48750 /* PriceSceneNavigation.swift in Sources */,

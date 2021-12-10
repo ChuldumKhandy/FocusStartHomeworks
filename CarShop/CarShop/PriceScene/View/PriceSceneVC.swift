@@ -10,6 +10,11 @@ import UIKit
 class PriceSceneVC: UIViewController {
     private var viewScene: PriceSceneView?
     private var navigationScene: PriceSceneNavigation?
+    var presenter: PriceScenePresenter?
+    
+    var countHandler: (() -> Int)?
+    var bodyHandler: (() -> [String])?
+    var selectedBodyHandler: ((String) -> Void)?
     
     init() {
         self.viewScene = PriceSceneView(frame: UIScreen.main.bounds)
@@ -23,7 +28,10 @@ class PriceSceneVC: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.navigationScene?.loadNavigaition(controller: self)
+        self.navigationScene?.loadView(controller: self)
+        if let view = viewScene {
+            self.presenter?.loadView(view: view)
+        }
     }
     
     override func viewDidLoad() {
@@ -50,12 +58,14 @@ extension PriceSceneVC: UITableViewDelegate {
         guard let cell = self.viewScene?.tableView.cellForRow(at: indexPath) as? PriceSceneCell
         else { return }
         cell.changeImageViewCell()
+        let selectedBody = cell.bodyLabel.text
+        self.selectedBodyHandler?(selectedBody!)
     }
 }
 
 extension PriceSceneVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return self.countHandler?() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,7 +73,9 @@ extension PriceSceneVC: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        
+        if let bodies = self.bodyHandler?() {
+            cell.setBody(body: bodies[indexPath.row])
+        }
         return cell
     }
 }

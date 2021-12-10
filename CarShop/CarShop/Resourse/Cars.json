@@ -1,107 +1,122 @@
 [
     {
         "brand" : "Audi",
-        "image" : {
-            "sedan" : "audi_sedan",
-            "hatchback" : "audi_hatchback",
-            "coupe" : "audi_coupe",
-            "cabrio" : "audi_cabrio"
-        },
-        "body" : {
-            "sedan" : "Седан",
-            "hatchback" : "Хэтчбек",
-            "coupe" : "Купе",
-            "cabrio" : "кабриолет"
-        },
-        "price" : {
-            "sedan" : "10К",
-            "hatchback" : "20К",
-            "coupe" : "15К",
-            "cabrio" : "30К"
-        }
+        "image": "audi_sedan",
+        "body": "Седан",
+        "price": "10K"
+    },
+    {
+        "brand" : "Audi",
+        "image": "audi_hatchback",
+        "body": "Хэтчбек",
+        "price": "20К"
+    },
+    {
+        "brand" : "Audi",
+        "image": "audi_coupe",
+        "body": "Купе",
+        "price": "15К"
+    },
+    {
+        "brand" : "Audi",
+        "image": "audi_cabrio",
+        "body": "Кабриолет",
+        "price": "30К"
     },
     {
         "brand" : "BMW",
-        "image" : {
-            "sedan" : "bmw_sedan",
-            "hatchback" : "bmw_hatchback",
-            "coupe" : "bmw_coupe",
-            "cabrio" : "bmw_cabrio"
-        },
-        "body" : {
-            "sedan" : "Седан",
-            "hatchback" : "Хэтчбек",
-            "coupe" : "Купе",
-            "cabrio" : "кабриолет"
-        },
-        "price" : {
-            "sedan" : "10К",
-            "hatchback" : "20К",
-            "coupe" : "15К",
-            "cabrio" : "30К"
-        }
+        "image": "bmw_sedan",
+        "body": "Седан",
+        "price": "10K"
+    },
+    {
+        "brand" : "BMW",
+        "image": "bmw_hatchback",
+        "body": "Хэтчбек",
+        "price": "20К"
+    },
+    {
+        "brand" : "BMW",
+        "image": "bmw_coupe",
+        "body": "Купе",
+        "price": "15К"
+    },
+    {
+        "brand" : "BMW",
+        "image": "bmw_cabrio",
+        "body": "Кабриолет",
+        "price": "30К"
     },
     {
         "brand" : "Ford",
-        "image" : {
-            "sedan" : "ford_sedan",
-            "hatchback" : "ford_hatchback",
-            "coupe" : "ford_coupe",
-            "cabrio" : "ford_cabrio"
-        },
-        "body" : {
-            "sedan" : "Седан",
-            "hatchback" : "Хэтчбек",
-            "coupe" : "Купе",
-            "cabrio" : "кабриолет"
-        },
-        "price" : {
-            "sedan" : "10К",
-            "hatchback" : "20К",
-            "coupe" : "15К",
-            "cabrio" : "30К"
-        }
+        "image": "ford_sedan",
+        "body": "Седан",
+        "price": "10K"
+    },
+    {
+        "brand" : "Ford",
+        "image": "ford_hatchback",
+        "body": "Хэтчбек",
+        "price": "20К"
+    },
+    {
+        "brand" : "Ford",
+        "image": "ford_coupe",
+        "body": "Купе",
+        "price": "15К"
+    },
+    {
+        "brand" : "Ford",
+        "image": "ford_cabrio",
+        "body": "Кабриолет",
+        "price": "30К"
     },
     {
         "brand" : "Lexus",
-        "image" : {
-            "sedan" : "lexus_sedan",
-            "hatchback" : "lexus_hatchback",
-            "coupe" : "lexus_coupe",
-            "cabrio" : "lexus_cabrio"
-        },
-        "body" : {
-            "sedan" : "Седан",
-            "hatchback" : "Хэтчбек",
-            "coupe" : "Купе",
-            "cabrio" : "кабриолет"
-        },
-        "price" : {
-            "sedan" : "10К",
-            "hatchback" : "20К",
-            "coupe" : "15К",
-            "cabrio" : "30К"
-        }
+        "image": "lexus_sedan",
+        "body": "Седан",
+        "price": "10K"
+    },
+    {
+        "brand" : "Lexus",
+        "image": "lexus_hatchback",
+        "body": "Хэтчбек",
+        "price": "20К"
+    },
+    {
+        "brand" : "Lexus",
+        "image": "lexus_coupe",
+        "body": "Купе",
+        "price": "15К"
+    },
+    {
+        "brand" : "Lexus",
+        "image": "lexus_cabrio",
+        "body": "Кабриолет",
+        "price": "30К"
     },
     {
         "brand" : "Chevrolet",
-        "image" : {
-            "sedan" : "chevrolet_sedan",
-            "hatchback" : "chevrolet_hatchback",
-            "coupe" : "chevrolet_coupe",
-            "cabrio" : "chevrolet_cabrio"
-        },
-        "body" : {
-            "sedan" : "Седан",
-            "hatchback" : "Хэтчбек",
-            "coupe" : "Купе",
-            "cabrio" : "кабриолет"
-        },
-        "price" : {
-            "sedan" : "10К",
-            "hatchback" : "20К",
-            "coupe" : "15К",
-            "cabrio" : "30К"
-        }
+        "image": "chevrolet_sedan",
+        "body": "Седан",
+        "price": "10K"
+    },
+    {
+        "brand" : "Chevrolet",
+        "image": "chevrolet_hatchback",
+        "body": "Хэтчбек",
+        "price": "20К"
+    },
+    {
+        "brand" : "Chevrolet",
+        "image": "chevrolet_coupe",
+        "body": "Купе",
+        "price": "15К"
+    },
+    {
+        "brand" : "Chevrolet",
+        "image": "chevrolet_cabrio",
+        "body": "Кабриолет",
+        "price": "30К"
     }
 ]

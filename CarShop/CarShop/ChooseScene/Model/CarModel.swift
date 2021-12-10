@@ -13,6 +13,18 @@ final class CarModel{
     init(){
         cars = getAndConvertFromJson()
     }
+    
+    func uniqueBrand() -> [String] {
+        var brands = [String]()
+        if let cars = self.cars {
+            for car in cars {
+                if(!brands.contains(car.brand)){
+                    brands.append(car.brand)
+                }
+            }
+        }
+        return brands
+    }
 }
 
 private extension CarModel {

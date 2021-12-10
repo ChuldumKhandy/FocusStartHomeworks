@@ -9,9 +9,9 @@ import Foundation
 
 final class CarDto: Decodable {
     var brand: String
-    var image: BodyCar
-    var body: BodyCar
-    var price: BodyCar
+    var image: String
+    var body: String
+    var price: String
 
     static func getDtosFromJson() -> [CarDto] {
         var cars = [CarDto]()
@@ -26,11 +26,4 @@ final class CarDto: Decodable {
         }
         return cars
     }
-}
-
-struct BodyCar: Decodable {
-    var sedan: String
-    var hatchback: String
-    var coupe: String
-    var cabrio: String
 }

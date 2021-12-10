@@ -13,9 +13,9 @@ class ChooseSceneVC: UIViewController {
     var presenter: ChooseScenePresenter?
     
     var countHandler: (() -> Int)?
-    var carHandler: (() -> [Car])?
+    var brandHandler: (() -> [String])?
     var nextVCHandler: (() -> Void)?
-    var carGiveBackHandler: ((Car) -> Void)?
+    var carBrandGiveBackHandler: ((String) -> Void)?
     
     init() {
         self.viewScene = ChooseSceneView(frame: UIScreen.main.bounds)
@@ -55,8 +55,9 @@ extension ChooseSceneVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cars = self.carHandler?()
-        self.carGiveBackHandler?(cars![indexPath.row])        
+        let carsBrands = self.brandHandler?()
+        
+        self.carBrandGiveBackHandler?(carsBrands![indexPath.row])
         self.nextVCHandler?()
     }
 }
@@ -73,8 +74,8 @@ extension ChooseSceneVC: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        let cars = self.carHandler?()
-        cell.brandCar(brand: cars![indexPath.row].brand)
+        let brand = self.brandHandler?()
+        cell.brandCar(brand: brand![indexPath.row])
         if (indexPath.row % 2 != 0) {
             cell.colorImage()
         }
