@@ -53,7 +53,13 @@ extension MainViewController: UICollectionViewDelegate {
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             if let cat = self.catModel?.cats?[indexPath.row] {
                 let controller = AssemblySecondScene.build(cat: cat)
-                navigationController?.pushViewController(controller, animated: true)
+                self.goToNextScreen(controller: controller)
             }
         }
+}
+
+private extension MainViewController {
+    func goToNextScreen(controller: UIViewController) {
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
 }
