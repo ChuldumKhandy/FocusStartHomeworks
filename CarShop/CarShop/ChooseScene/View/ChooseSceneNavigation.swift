@@ -12,6 +12,9 @@ class ChooseSceneNavigation: UIView {
     
     func loadView(controller: ChooseSceneVC) {
         self.controller = controller
+    }
+    
+    func customizeNav() {
         self.controller?.navigationController?.isNavigationBarHidden = true
     }
 }

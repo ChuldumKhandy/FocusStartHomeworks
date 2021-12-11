@@ -48,14 +48,14 @@ private extension ChooseSceneCell {
     }
     
     func customizeLables() {
-        self.brandLable.font = UIFont.init(name: "Inter", size: 16)
+        self.brandLable.font = UIFont.init(name: "Inter", size: FontSize.medium.rawValue)
         self.brandLable.textColor = .black
         self.brandLable.numberOfLines = 0
         self.brandLable.adjustsFontSizeToFitWidth = true
         
         self.selectLabel.text = "Select"
-        self.selectLabel.font = UIFont.init(name: "Inter", size: 16)
-        self.selectLabel.font = self.selectLabel.font.withSize(14)
+        self.selectLabel.font = UIFont.init(name: "Inter", size: FontSize.small.rawValue)
+        self.selectLabel.font = self.selectLabel.font.withSize(FontSize.small.rawValue)
         self.selectLabel.textColor = .black
         self.selectLabel.numberOfLines = 0
         self.selectLabel.adjustsFontSizeToFitWidth = true

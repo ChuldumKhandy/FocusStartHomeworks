@@ -26,8 +26,8 @@ class ChooseSceneView: UIView {
         titleLabel.frame.size.height = CellMetrics.height.rawValue
         titleLabel.frame.size.width = CellMetrics.width.rawValue
         titleLabel.text = "Марку машины"
-        titleLabel.font = UIFont(name: "Inter", size: 16)
-        titleLabel.font = titleLabel.font.withSize(24)
+        titleLabel.font = UIFont(name: "Inter", size: FontSize.large.rawValue)
+        titleLabel.font = titleLabel.font.withSize(FontSize.large.rawValue)
         titleLabel.textColor = .black
         headerView.backgroundColor = .white
         headerView.addSubview(titleLabel)
@@ -48,13 +48,13 @@ private extension ChooseSceneView {
     func customizeLabel() {
         self.headerLabel.text = "Выберите"
         self.headerLabel.textColor = .black
-        self.headerLabel.font = UIFont(name: "Inter", size: 20)
-        self.headerLabel.font = headerLabel.font.withSize(30)
+        self.headerLabel.font = UIFont(name: "Inter", size: FontSize.megaLarge.rawValue)
+        self.headerLabel.font = headerLabel.font.withSize(FontSize.megaLarge.rawValue)
     }
     
     func customizeTableView() {
         self.tableView.tableFooterView = UIView()
-        self.tableView.estimatedSectionHeaderHeight = 50
+        self.tableView.estimatedSectionHeaderHeight = CellMetrics.heightHeader.rawValue
         self.tableView.register(ChooseSceneCell.self, forCellReuseIdentifier: ChooseSceneCell.identifier)
     }
     

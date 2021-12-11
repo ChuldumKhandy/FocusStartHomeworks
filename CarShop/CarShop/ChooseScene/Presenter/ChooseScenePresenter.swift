@@ -30,7 +30,7 @@ final class ChooseScenePresenter {
         }
         
         self.controller?.brandHandler = { [weak self] in
-            return (self?.setBrands())!
+            return (self?.setBrands() ?? ["Марка машины"])
         }
         
         self.controller?.carBrandGiveBackHandler = { [weak self] carBrand in
@@ -58,7 +58,7 @@ private extension ChooseScenePresenter {
     }
     
     func setBrands() -> [String] {
-        return self.car?.uniqueBrand() ?? ["sds"]
+        return self.car?.uniqueBrand() ?? ["Марка машины"]
     }
     
 }

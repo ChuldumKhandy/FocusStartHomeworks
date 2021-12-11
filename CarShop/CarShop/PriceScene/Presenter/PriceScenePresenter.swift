@@ -19,6 +19,7 @@ final class PriceScenePresenter {
         self.controller = controller
     }
     func loadView(view: PriceSceneView) {
+        
         self.viewScene = view
         self.setInfo()
         self.controller?.countHandler = { [weak self] in

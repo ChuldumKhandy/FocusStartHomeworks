@@ -21,5 +21,6 @@ private extension PriceSceneNavigation {
         self.controller?.navigationController?.navigationBar.barTintColor = .white
         self.controller?.navigationController?.navigationBar.shadowImage = UIImage()
         self.controller?.navigationController?.isNavigationBarHidden = false
+        self.controller?.navigationController?.navigationBar.tintColor = MainPalette.greenPrimary
     }
 }

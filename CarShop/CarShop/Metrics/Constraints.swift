@@ -20,6 +20,7 @@ enum CellMetrics: CGFloat {
     case top = 43
     case height = 34
     case left = 16
+    case heightHeader = 50
 }
 
 enum IconMetrics: CGFloat {

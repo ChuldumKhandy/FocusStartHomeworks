@@ -8,11 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		CE141536275E623900B48750 /* PriceSceneAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141535275E623900B48750 /* PriceSceneAssembly.swift */; };
-		CE141539275E62B600B48750 /* PriceSceneRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141538275E62B600B48750 /* PriceSceneRouter.swift */; };
 		CE14153C275E62CB00B48750 /* PriceScenePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14153B275E62CB00B48750 /* PriceScenePresenter.swift */; };
 		CE141542275E630500B48750 /* PriceSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141541275E630500B48750 /* PriceSceneVC.swift */; };
 		CE141545275E631A00B48750 /* PriceSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141544275E631A00B48750 /* PriceSceneView.swift */; };
-		CE14154A275E6E8D00B48750 /* MainFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141549275E6E8D00B48750 /* MainFont.swift */; };
 		CE14154D275F53DC00B48750 /* PriceSceneNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE14154C275F53DC00B48750 /* PriceSceneNavigation.swift */; };
 		CE141551275F801300B48750 /* PriceSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE141550275F801300B48750 /* PriceSceneCell.swift */; };
 		CE381803275C83150038260E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE381802275C83150038260E /* AppDelegate.swift */; };
@@ -32,15 +30,14 @@
 		CE381846275CC8E90038260E /* Cars.json in Resources */ = {isa = PBXBuildFile; fileRef = CE381845275CC8E90038260E /* Cars.json */; };
 		CEB564C92760E4980082F662 /* CarDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB564C82760E4980082F662 /* CarDto.swift */; };
 		CEB564CC2760E5100082F662 /* CarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB564CB2760E5100082F662 /* CarModel.swift */; };
+		CEE1C8AE2764FBEF00EA024C /* FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1C8AD2764FBEF00EA024C /* FontSize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CE141535275E623900B48750 /* PriceSceneAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSceneAssembly.swift; sourceTree = "<group>"; };
-		CE141538275E62B600B48750 /* PriceSceneRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSceneRouter.swift; sourceTree = "<group>"; };
 		CE14153B275E62CB00B48750 /* PriceScenePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceScenePresenter.swift; sourceTree = "<group>"; };
 		CE141541275E630500B48750 /* PriceSceneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSceneVC.swift; sourceTree = "<group>"; };
 		CE141544275E631A00B48750 /* PriceSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSceneView.swift; sourceTree = "<group>"; };
-		CE141549275E6E8D00B48750 /* MainFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFont.swift; sourceTree = "<group>"; };
 		CE14154C275F53DC00B48750 /* PriceSceneNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSceneNavigation.swift; sourceTree = "<group>"; };
 		CE141550275F801300B48750 /* PriceSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSceneCell.swift; sourceTree = "<group>"; };
 		CE3817FF275C83150038260E /* CarShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +59,7 @@
 		CE381845275CC8E90038260E /* Cars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Cars.json; sourceTree = "<group>"; };
 		CEB564C82760E4980082F662 /* CarDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDto.swift; sourceTree = "<group>"; };
 		CEB564CB2760E5100082F662 /* CarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarModel.swift; sourceTree = "<group>"; };
+		CEE1C8AD2764FBEF00EA024C /* FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSize.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				CE141535275E623900B48750 /* PriceSceneAssembly.swift */,
-				CE141538275E62B600B48750 /* PriceSceneRouter.swift */,
-				CE14153B275E62CB00B48750 /* PriceScenePresenter.swift */,
+				CE1EF4AB27639AFB003E6AE5 /* Presenter */,
 				CE141547275E633900B48750 /* View */,
 			);
 			path = PriceScene;
@@ -95,6 +92,14 @@
 				CE141550275F801300B48750 /* PriceSceneCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		CE1EF4AB27639AFB003E6AE5 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				CE14153B275E62CB00B48750 /* PriceScenePresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		CE3817F6275C83150038260E = {
@@ -154,7 +159,7 @@
 			children = (
 				CE38181E275C862C0038260E /* MainPalette.swift */,
 				CE381822275C86420038260E /* Constraints.swift */,
-				CE141549275E6E8D00B48750 /* MainFont.swift */,
+				CEE1C8AD2764FBEF00EA024C /* FontSize.swift */,
 			);
 			path = Metrics;
 			sourceTree = "<group>";
@@ -271,9 +276,9 @@
 				CEB564C92760E4980082F662 /* CarDto.swift in Sources */,
 				CE38182C275C870C0038260E /* ChooseSceneRouter.swift in Sources */,
 				CE381829275C86980038260E /* ChooseSceneAssembly.swift in Sources */,
+				CEE1C8AE2764FBEF00EA024C /* FontSize.swift in Sources */,
 				CEB564CC2760E5100082F662 /* CarModel.swift in Sources */,
 				CE141545275E631A00B48750 /* PriceSceneView.swift in Sources */,
-				CE14154A275E6E8D00B48750 /* MainFont.swift in Sources */,
 				CE381838275C9C2D0038260E /* ChooseSceneNavigation.swift in Sources */,
 				CE381807275C83150038260E /* ChooseSceneVC.swift in Sources */,
 				CE38181F275C862C0038260E /* MainPalette.swift in Sources */,
@@ -281,7 +286,6 @@
 				CE38183F275CB1EA0038260E /* ChooseSceneCell.swift in Sources */,
 				CE141542275E630500B48750 /* PriceSceneVC.swift in Sources */,
 				CE381833275C882A0038260E /* ChooseSceneView.swift in Sources */,
-				CE141539275E62B600B48750 /* PriceSceneRouter.swift in Sources */,
 				CE381803275C83150038260E /* AppDelegate.swift in Sources */,
 				CE14154D275F53DC00B48750 /* PriceSceneNavigation.swift in Sources */,
 				CE141536275E623900B48750 /* PriceSceneAssembly.swift in Sources */,

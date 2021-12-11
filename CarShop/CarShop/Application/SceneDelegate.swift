@@ -16,6 +16,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController(rootViewController: AssemblyChooseScene.build())
         window.rootViewController = navigationController
         self.window = window
+        self.window?.backgroundColor = .white
         self.window?.makeKeyAndVisible()
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 class PriceSceneCell: UITableViewCell {
     static let identifier = "ItemTableViewCell"
     let bodyLabel = UILabel()
-    private let radioImageView = UIImageView()
+    let radioImageView = UIImageView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,8 +27,8 @@ class PriceSceneCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func changeImageViewCell() {
-        self.radioImageView.image = UIImage(systemName: "circle.inset.filled")
+    func selectedImageViewCell() {
+        self.radioImageView.image = UIImage(systemName: "checkmark.circle")
     }
     
     func setBody(body: String?) {
@@ -39,7 +39,7 @@ class PriceSceneCell: UITableViewCell {
 
 private extension PriceSceneCell {
     func customizeLable() {
-        self.bodyLabel.font = UIFont.init(name: "Inter", size: 16)
+        self.bodyLabel.font = UIFont.init(name: "Inter", size: FontSize.medium.rawValue)
         self.bodyLabel.textColor = .black
         self.bodyLabel.numberOfLines = 0
         self.bodyLabel.adjustsFontSizeToFitWidth = true

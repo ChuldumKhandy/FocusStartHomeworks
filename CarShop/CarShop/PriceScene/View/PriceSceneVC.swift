@@ -11,6 +11,7 @@ class PriceSceneVC: UIViewController {
     private var viewScene: PriceSceneView?
     private var navigationScene: PriceSceneNavigation?
     var presenter: PriceScenePresenter?
+    var activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     
     var countHandler: (() -> Int)?
     var bodyHandler: (() -> [String])?
@@ -36,6 +37,8 @@ class PriceSceneVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
+        self.showActivityIndicatory()
         self.viewScene?.tableView.delegate = self
         self.viewScene?.tableView.dataSource = self
     }
@@ -45,7 +48,6 @@ class PriceSceneVC: UIViewController {
         if let view = viewScene {
             self.view.addSubview(view)
         }
-        viewScene?.tableView.reloadData()
     }
 }
 
@@ -57,9 +59,15 @@ extension PriceSceneVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = self.viewScene?.tableView.cellForRow(at: indexPath) as? PriceSceneCell
         else { return }
-        cell.changeImageViewCell()
+        cell.selectedImageViewCell()
         let selectedBody = cell.bodyLabel.text
         self.selectedBodyHandler?(selectedBody!)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        guard let cell = self.viewScene?.tableView.cellForRow(at: indexPath) as? PriceSceneCell
+        else { return }
+        cell.radioImageView.image = UIImage(systemName: "circle")
     }
 }
 
@@ -77,5 +85,17 @@ extension PriceSceneVC: UITableViewDataSource {
             cell.setBody(body: bodies[indexPath.row])
         }
         return cell
+    }
+}
+
+private extension PriceSceneVC {
+    func showActivityIndicatory() {
+        self.view.addSubview(activityIndicator)
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.center = view.center
+        self.activityIndicator.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 10) {
+            self.activityIndicator.stopAnimating()
+        }
     }
 }

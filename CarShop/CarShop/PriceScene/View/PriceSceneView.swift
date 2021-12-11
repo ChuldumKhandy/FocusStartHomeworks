@@ -30,8 +30,8 @@ class PriceSceneView: UIView {
         titleLabel.frame.size.height = CellMetrics.height.rawValue
         titleLabel.frame.size.width = CellMetrics.width.rawValue
         titleLabel.text = "Выберите тип кузова"
-        titleLabel.font = UIFont(name: "Inter", size: 16)
-        titleLabel.font = titleLabel.font.withSize(24)
+        titleLabel.font = UIFont(name: "Inter", size: FontSize.large.rawValue)
+        titleLabel.font = titleLabel.font.withSize(FontSize.large.rawValue)
         titleLabel.textColor = .black
         headerView.backgroundColor = .white
         headerView.addSubview(titleLabel)
@@ -66,16 +66,16 @@ private extension PriceSceneView {
     func customizeLabels() {
         self.titleLabel.text = "Цена"
         self.titleLabel.textColor = .black
-        self.titleLabel.font = UIFont(name: "Inter", size: 20)
-        self.titleLabel.font = titleLabel.font.withSize(24)
+        self.titleLabel.font = UIFont(name: "Inter", size: FontSize.large.rawValue)
+        self.titleLabel.font = titleLabel.font.withSize(FontSize.large.rawValue)
     
         self.priceLabel.textColor = .black
-        self.priceLabel.font = UIFont.init(name: "Inter", size: 16)
+        self.priceLabel.font = UIFont.init(name: "Inter", size: FontSize.medium.rawValue)
     }
     
     func customizeButton() {
         self.calculateButton.setTitle("Рассчитать цену", for: .normal)
-        self.calculateButton.titleLabel?.font = UIFont.init(name: "Inter", size: 16)
+        self.calculateButton.titleLabel?.font = UIFont.init(name: "Inter", size: FontSize.medium.rawValue)
         self.calculateButton.backgroundColor = MainPalette.greenPrimary
         self.calculateButton.layer.cornerRadius = ButtonMetrics.radius.rawValue
         self.calculateButton.addTarget(self, action: #selector(self.touchedDown), for: .touchUpInside)
@@ -112,7 +112,7 @@ private extension PriceSceneView {
         self.priceLabel.heightAnchor.constraint(equalToConstant: LabelsMetrics.heightText.rawValue).isActive = true
         
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
-        self.tableView.topAnchor.constraint(equalTo: self.priceLabel.bottomAnchor, constant: 23).isActive = true
+        self.tableView.topAnchor.constraint(equalTo: self.priceLabel.bottomAnchor, constant: LabelsMetrics.topText.rawValue).isActive = true
         self.tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: LabelsMetrics.left.rawValue).isActive = true
         self.tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -LabelsMetrics.left.rawValue).isActive = true
         self.tableView.bottomAnchor.constraint(equalTo: self.calculateButton.topAnchor, constant: 0).isActive = true

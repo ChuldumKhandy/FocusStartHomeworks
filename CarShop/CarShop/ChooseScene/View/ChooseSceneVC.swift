@@ -43,6 +43,7 @@ class ChooseSceneVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationScene?.customizeNav()
         if let view = viewScene {
             self.view.addSubview(view)
         }
@@ -75,7 +76,7 @@ extension ChooseSceneVC: UITableViewDataSource {
             return UITableViewCell()
         }
         let brand = self.brandHandler?()
-        cell.brandCar(brand: brand![indexPath.row])
+        cell.brandCar(brand: brand?[indexPath.row] ?? "Марка машины")
         if (indexPath.row % 2 != 0) {
             cell.colorImage()
         }
