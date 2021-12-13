@@ -8,11 +8,12 @@
 import UIKit
 
 final class ImageTableView: UIView {
-    private let tableView = UITableView(frame: .zero)
+    private let ImageTableView = UITableView(frame: .zero)
+    private var imageData: Data?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(self.tableView)
+        self.addSubview(self.ImageTableView)
         self.customizeTableView()
         self.setConstraint()
     }
@@ -20,6 +21,12 @@ final class ImageTableView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func transmitImageData(data: Data) {
+        self.imageData = data
+        self.ImageTableView.reloadData()
+    }
+    
 }
 
 extension ImageTableView: UITableViewDataSource {
@@ -28,9 +35,11 @@ extension ImageTableView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: ImageCell.identifier, for: indexPath) as? ImageCell
-        else { return UITableViewCell() }
-        //cell.setImage(nameImage: <#T##String?#>)
+        guard let cell = self.ImageTableView.dequeueReusableCell(withIdentifier: ImageCell.identifier, for: indexPath) as? ImageCell
+        else {
+            return UITableViewCell()
+        }
+        cell.setImage(data: imageData)
         return cell
     }
 }
@@ -43,16 +52,16 @@ extension ImageTableView: UITableViewDelegate {
 
 private extension ImageTableView {
     func customizeTableView() {
-        self.tableView.register(ImageCell.self, forCellReuseIdentifier: ImageCell.identifier)
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
+        self.ImageTableView.register(ImageCell.self, forCellReuseIdentifier: ImageCell.identifier)
+        self.ImageTableView.dataSource = self
+        self.ImageTableView.delegate = self
     }
     
     func setConstraint() {
-        self.tableView.translatesAutoresizingMaskIntoConstraints = false
-        self.tableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        self.tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        self.tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.ImageTableView.translatesAutoresizingMaskIntoConstraints = false
+        self.ImageTableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.ImageTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.ImageTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.ImageTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
 }

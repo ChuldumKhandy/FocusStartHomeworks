@@ -7,8 +7,12 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+protocol IMainVC: AnyObject {
+}
+
+final class MainVC: UIViewController {
     private let viewScene: IMainView
+    var presenter: IMainPresenter?
     
     init() {
         self.viewScene = MainView(frame: UIScreen.main.bounds)
@@ -17,6 +21,11 @@ final class ViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        super.loadView()
+        self.presenter?.loadView(view: self.viewScene)
     }
     
     override func viewDidLoad() {
@@ -29,3 +38,5 @@ final class ViewController: UIViewController {
     }
 }
 
+extension MainVC: IMainVC {
+}

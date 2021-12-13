@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CE682667276700C90089263D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE682666276700C90089263D /* AppDelegate.swift */; };
 		CE682669276700C90089263D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE682668276700C90089263D /* SceneDelegate.swift */; };
-		CE68266B276700C90089263D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68266A276700C90089263D /* ViewController.swift */; };
+		CE68266B276700C90089263D /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68266A276700C90089263D /* MainVC.swift */; };
 		CE682670276700D60089263D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE68266F276700D60089263D /* Assets.xcassets */; };
 		CE682673276700D60089263D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE682671276700D60089263D /* LaunchScreen.storyboard */; };
 		CE68267D2767102E0089263D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68267C2767102E0089263D /* MainView.swift */; };
@@ -17,15 +17,16 @@
 		CE6826832767106A0089263D /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6826822767106A0089263D /* ImageCell.swift */; };
 		CE6826862767107F0089263D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6826852767107F0089263D /* NetworkService.swift */; };
 		CE6826892767108F0089263D /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6826882767108F0089263D /* MainPresenter.swift */; };
-		CE68268C276710A60089263D /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68268B276710A60089263D /* Image.swift */; };
+		CE68268C276710A60089263D /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68268B276710A60089263D /* ImageModel.swift */; };
 		CE68269927673A190089263D /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68269827673A190089263D /* Constraints.swift */; };
+		CE6826A0276760590089263D /* Assembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68269F276760590089263D /* Assembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CE682663276700C90089263D /* DownloadImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DownloadImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE682666276700C90089263D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE682668276700C90089263D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CE68266A276700C90089263D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CE68266A276700C90089263D /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		CE68266F276700D60089263D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE682672276700D60089263D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE682674276700D60089263D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -34,8 +35,9 @@
 		CE6826822767106A0089263D /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		CE6826852767107F0089263D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		CE6826882767108F0089263D /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
-		CE68268B276710A60089263D /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		CE68268B276710A60089263D /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		CE68269827673A190089263D /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
+		CE68269F276760590089263D /* Assembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembly.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			children = (
 				CE682695276710EA0089263D /* Application */,
 				CE68269827673A190089263D /* Constraints.swift */,
+				CE68269F276760590089263D /* Assembly.swift */,
 				CE682694276710D70089263D /* Network */,
 				CE682690276710C80089263D /* Presenter */,
 				CE68268E276710BE0089263D /* View */,
@@ -84,7 +87,7 @@
 		CE68268E276710BE0089263D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CE68266A276700C90089263D /* ViewController.swift */,
+				CE68266A276700C90089263D /* MainVC.swift */,
 				CE68267C2767102E0089263D /* MainView.swift */,
 				CE68267F276710540089263D /* ImageTableView.swift */,
 				CE6826822767106A0089263D /* ImageCell.swift */,
@@ -103,7 +106,7 @@
 		CE682692276710CF0089263D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CE68268B276710A60089263D /* Image.swift */,
+				CE68268B276710A60089263D /* ImageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,8 +197,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE68266B276700C90089263D /* ViewController.swift in Sources */,
-				CE68268C276710A60089263D /* Image.swift in Sources */,
+				CE68266B276700C90089263D /* MainVC.swift in Sources */,
+				CE6826A0276760590089263D /* Assembly.swift in Sources */,
+				CE68268C276710A60089263D /* ImageModel.swift in Sources */,
 				CE68269927673A190089263D /* Constraints.swift in Sources */,
 				CE68267D2767102E0089263D /* MainView.swift in Sources */,
 				CE682680276710540089263D /* ImageTableView.swift in Sources */,

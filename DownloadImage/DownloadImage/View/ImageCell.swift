@@ -22,10 +22,13 @@ final class ImageCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setImage(nameImage: String?) {
-        if let name = nameImage {
-            self.pictureImageView.image = UIImage(named: name)
+    func setImage(data: Data?) {
+        guard let data = data
+        else {
+            return
         }
+        self.pictureImageView.image = UIImage(data: data)
+        self.contentView.bringSubviewToFront(self.pictureImageView)
     }
 }
 

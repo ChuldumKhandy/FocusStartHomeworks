@@ -8,7 +8,10 @@
 import UIKit
 
 protocol IMainView: UIView {
+    var onTouchedHandler: (() -> Void)? { get set }
     
+    func getDataTextField() -> String
+    func getImageData(data: Data)
 }
 
 final class MainView: UIView {
@@ -16,6 +19,8 @@ final class MainView: UIView {
     private let urlTextField = UITextField()
     private let searchButton = UIButton()
     private let tableView = ImageTableView()
+    
+    var onTouchedHandler: (() -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +34,15 @@ final class MainView: UIView {
 }
 
 extension MainView: IMainView {
+  
+    func getDataTextField() -> String {
+        guard let text = self.urlTextField.text else { return  "" }
+        return text
+    }
     
+    func getImageData(data: Data) {
+        self.tableView.transmitImageData(data: data)
+    }
 }
 
 private extension MainView {
@@ -62,7 +75,11 @@ private extension MainView {
         self.searchButton.setTitle("Поиск", for: .normal)
         self.searchButton.setTitleColor(.black, for: .normal)
         self.searchButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        //self.searchButton.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        self.searchButton.addTarget(self, action: #selector(self.touchedDown), for: .touchDown)
+    }
+    
+    @objc private func touchedDown() {
+        self.onTouchedHandler?()
     }
     
     func setConstraints() {
