@@ -27,8 +27,5 @@ extension ImageModel: IImageModel {
             return
         }
         self.images.append(urlImage)
-        self.images.forEach { (URL) in
-            print("Наши УРЛЫ: \(URL)")
-        }
     }
 }

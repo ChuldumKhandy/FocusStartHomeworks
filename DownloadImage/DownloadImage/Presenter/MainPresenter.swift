@@ -40,36 +40,40 @@ private extension MainPresenter {
     
     func onTouched() {
         guard let viewScene = self.viewScene,
-              let imageModel = self.imageModel
+              let imageModel = self.imageModel,
+              let controller = self.controller
         else {
             return
         }
-        guard let url = URL(string: viewScene.getDataTextField())
-        else {
-            return
+        let urlString = viewScene.getDataTextField()
+        if controller.canOpenURL(urlString) {
+            guard let url = URL(string: urlString)
+            else {
+                return
+            }
+            imageModel.setUrl(url: url)
+            let urls = imageModel.getUrls()
+            viewScene.getNumberOfCell(number: urls.count)
+            self.loadImage()
+        } else {
+            self.controller?.showAlert()
         }
-        imageModel.setUrl(url: url)
-        let urls = imageModel.getUrls()
-        viewScene.getNumberOfCell(number: urls.count)
-        self.loadImage()
     }
     
     func loadImage() {
-        guard let urlImage = self.imageModel?.getUrls()
+        guard let urlImage = self.imageModel?.getUrls().last
         else {
             return
         }
-        urlImage.forEach { (URL) in
-            self.networkService.loadImage(from: URL) { result in
-                switch result {
-                case .success(let data):
-                    DispatchQueue.main.async {
-                        self.viewScene?.getImageData(data: data)
-                    }
-                case .failure(let error):
-                    print("[NETWORK] error is: \(error)")
-                    DispatchQueue.main.async {
-                    }
+        self.networkService.loadImage(from: urlImage) { result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.viewScene?.getImageData(data: data)
+                }
+            case .failure(let error):
+                print("[NETWORK] error is: \(error)")
+                DispatchQueue.main.async {
                 }
             }
         }
