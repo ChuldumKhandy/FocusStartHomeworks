@@ -35,8 +35,6 @@ final class ImageCell: UITableViewCell {
 private extension ImageCell {
     func customizeImageView() {
         self.pictureImageView.contentMode = .scaleAspectFit
-        self.pictureImageView.layer.cornerRadius = MetricsTableView.radius.rawValue
-        self.pictureImageView.layer.masksToBounds = true
     }
     
     func setConstraint() {

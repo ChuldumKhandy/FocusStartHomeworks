@@ -12,6 +12,7 @@ protocol IMainView: UIView {
     
     func getDataTextField() -> String
     func getImageData(data: Data)
+    func getNumberOfCell(number: Int)
 }
 
 final class MainView: UIView {
@@ -19,6 +20,11 @@ final class MainView: UIView {
     private let urlTextField = UITextField()
     private let searchButton = UIButton()
     private let tableView = ImageTableView()
+    private var imageData: [Data] = [] {
+        didSet {
+            self.tableView.ImageTableView.reloadData()
+        }
+    }
     
     var onTouchedHandler: (() -> Void)?
     
@@ -34,14 +40,25 @@ final class MainView: UIView {
 }
 
 extension MainView: IMainView {
-  
+    func getNumberOfCell(number: Int) {
+        self.tableView.rowCountHandler = { [weak self] in
+            return number
+        }
+    }
+    
     func getDataTextField() -> String {
-        guard let text = self.urlTextField.text else { return  "" }
+        guard let text = self.urlTextField.text
+        else {
+            return  ""
+        }
         return text
     }
     
     func getImageData(data: Data) {
-        self.tableView.transmitImageData(data: data)
+        self.imageData.append(data)
+        self.tableView.dataHandler = { [weak self] index in
+            return self?.imageData[index]
+        }
     }
 }
 

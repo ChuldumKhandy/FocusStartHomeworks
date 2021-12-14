@@ -8,8 +8,9 @@
 import UIKit
 
 final class ImageTableView: UIView {
-    private let ImageTableView = UITableView(frame: .zero)
-    private var imageData: Data?
+    let ImageTableView = UITableView(frame: .zero)
+    var rowCountHandler: (() -> Int)?
+    var dataHandler: ((Int) -> Data?)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,17 +22,11 @@ final class ImageTableView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func transmitImageData(data: Data) {
-        self.imageData = data
-        self.ImageTableView.reloadData()
-    }
-    
 }
 
 extension ImageTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return self.rowCountHandler?() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,7 +34,8 @@ extension ImageTableView: UITableViewDataSource {
         else {
             return UITableViewCell()
         }
-        cell.setImage(data: imageData)
+        let data = self.dataHandler?(indexPath.row)
+        cell.setImage(data: data)
         return cell
     }
 }
@@ -64,4 +60,6 @@ private extension ImageTableView {
         self.ImageTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         self.ImageTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
     }
+    
+    
 }

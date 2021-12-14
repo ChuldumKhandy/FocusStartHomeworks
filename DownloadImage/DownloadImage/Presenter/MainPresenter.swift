@@ -16,7 +16,6 @@ final class MainPresenter {
     private weak var viewScene: IMainView?
     private let networkService: INetworkService
     private let imageModel: ImageModel?
-    private var urlImage: URL?
     
     init(imageModel: ImageModel, controller: IMainVC) {
         self.networkService = NetworkService()
@@ -40,25 +39,37 @@ private extension MainPresenter {
     }
     
     func onTouched() {
-        guard let viewScene = self.viewScene
-        else { return }
-        self.urlImage = URL(string: viewScene.getDataTextField())
-        
+        guard let viewScene = self.viewScene,
+              let imageModel = self.imageModel
+        else {
+            return
+        }
+        guard let url = URL(string: viewScene.getDataTextField())
+        else {
+            return
+        }
+        imageModel.setUrl(url: url)
+        let urls = imageModel.getUrls()
+        viewScene.getNumberOfCell(number: urls.count)
         self.loadImage()
     }
     
     func loadImage() {
-        guard let urlImage = self.urlImage
-        else { return }
-        self.networkService.loadImage(from: urlImage) { result in
-            switch result {
-            case .success(let data):
-                DispatchQueue.main.async {
-                    self.viewScene?.getImageData(data: data)
-                }
-            case .failure(let error):
-                print("[NETWORK] error is: \(error)")
-                DispatchQueue.main.async {
+        guard let urlImage = self.imageModel?.getUrls()
+        else {
+            return
+        }
+        urlImage.forEach { (URL) in
+            self.networkService.loadImage(from: URL) { result in
+                switch result {
+                case .success(let data):
+                    DispatchQueue.main.async {
+                        self.viewScene?.getImageData(data: data)
+                    }
+                case .failure(let error):
+                    print("[NETWORK] error is: \(error)")
+                    DispatchQueue.main.async {
+                    }
                 }
             }
         }
