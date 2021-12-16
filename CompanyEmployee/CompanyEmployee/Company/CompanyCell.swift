@@ -21,11 +21,16 @@ final class CompanyCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setnameCompany(name: String?) {
+        if let name = name {
+            self.nameCompanyLabel.text = name
+        }
+    }
 }
 
 private extension CompanyCell {
     func customizeLabel() {
-        self.nameCompanyLabel.text = "Name Company"
         self.nameCompanyLabel.font = UIFont.systemFont(ofSize: 16)
         self.nameCompanyLabel.textColor = .black
     }

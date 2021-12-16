@@ -9,8 +9,7 @@ import UIKit
 
 final class CompanyAssembly {
     static func build() -> UIViewController {
-        let model = Company()
-        let presenter = CompanyPresenter(companyModel: model)
+        let presenter = CompanyPresenter()
         let controller = CompanyVC(presenter: presenter)
         return controller
     }

@@ -17,11 +17,12 @@
 		CEFA5B09276A19DE00D0B664 /* CompanyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B08276A19DE00D0B664 /* CompanyPresenter.swift */; };
 		CEFA5B0D276A1A0B00D0B664 /* CompanyAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B0C276A1A0A00D0B664 /* CompanyAssembly.swift */; };
 		CEFA5B10276A1A1A00D0B664 /* CompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B0F276A1A1A00D0B664 /* CompanyView.swift */; };
-		CEFA5B23276A38B400D0B664 /* Employee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B1F276A38B400D0B664 /* Employee+CoreDataClass.swift */; };
-		CEFA5B24276A38B400D0B664 /* Employee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B20276A38B400D0B664 /* Employee+CoreDataProperties.swift */; };
-		CEFA5B25276A38B400D0B664 /* Company+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B21276A38B400D0B664 /* Company+CoreDataClass.swift */; };
-		CEFA5B26276A38B400D0B664 /* Company+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B22276A38B400D0B664 /* Company+CoreDataProperties.swift */; };
 		CEFA5B29276A3DA900D0B664 /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B28276A3DA900D0B664 /* CompanyCell.swift */; };
+		CEFA5B37276A4CC200D0B664 /* Employee+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B33276A4CC200D0B664 /* Employee+CoreDataClass.swift */; };
+		CEFA5B38276A4CC200D0B664 /* Employee+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B34276A4CC200D0B664 /* Employee+CoreDataProperties.swift */; };
+		CEFA5B39276A4CC200D0B664 /* Company+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B35276A4CC200D0B664 /* Company+CoreDataClass.swift */; };
+		CEFA5B3A276A4CC200D0B664 /* Company+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B36276A4CC200D0B664 /* Company+CoreDataProperties.swift */; };
+		CEFA5B3D276A548900D0B664 /* CompanyNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFA5B3C276A548900D0B664 /* CompanyNavigation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,11 +38,12 @@
 		CEFA5B08276A19DE00D0B664 /* CompanyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyPresenter.swift; sourceTree = "<group>"; };
 		CEFA5B0C276A1A0A00D0B664 /* CompanyAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyAssembly.swift; sourceTree = "<group>"; };
 		CEFA5B0F276A1A1A00D0B664 /* CompanyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyView.swift; sourceTree = "<group>"; };
-		CEFA5B1F276A38B400D0B664 /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CEFA5B20276A38B400D0B664 /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CEFA5B21276A38B400D0B664 /* Company+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Company+CoreDataClass.swift"; sourceTree = "<group>"; };
-		CEFA5B22276A38B400D0B664 /* Company+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Company+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CEFA5B28276A3DA900D0B664 /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
+		CEFA5B33276A4CC200D0B664 /* Employee+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		CEFA5B34276A4CC200D0B664 /* Employee+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Employee+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		CEFA5B35276A4CC200D0B664 /* Company+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Company+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		CEFA5B36276A4CC200D0B664 /* Company+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Company+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		CEFA5B3C276A548900D0B664 /* CompanyNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyNavigation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				CEFA5B08276A19DE00D0B664 /* CompanyPresenter.swift */,
 				CEFA5AEF276A18A000D0B664 /* CompanyVC.swift */,
 				CEFA5B0F276A1A1A00D0B664 /* CompanyView.swift */,
+				CEFA5B3C276A548900D0B664 /* CompanyNavigation.swift */,
 				CEFA5B28276A3DA900D0B664 /* CompanyCell.swift */,
 			);
 			path = Company;
@@ -102,10 +105,10 @@
 		CEFA5B13276A1AE100D0B664 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CEFA5B1F276A38B400D0B664 /* Employee+CoreDataClass.swift */,
-				CEFA5B20276A38B400D0B664 /* Employee+CoreDataProperties.swift */,
-				CEFA5B21276A38B400D0B664 /* Company+CoreDataClass.swift */,
-				CEFA5B22276A38B400D0B664 /* Company+CoreDataProperties.swift */,
+				CEFA5B33276A4CC200D0B664 /* Employee+CoreDataClass.swift */,
+				CEFA5B34276A4CC200D0B664 /* Employee+CoreDataProperties.swift */,
+				CEFA5B35276A4CC200D0B664 /* Company+CoreDataClass.swift */,
+				CEFA5B36276A4CC200D0B664 /* Company+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -179,19 +182,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEFA5B25276A38B400D0B664 /* Company+CoreDataClass.swift in Sources */,
 				CEFA5B05276A198D00D0B664 /* DataStoreManager.swift in Sources */,
-				CEFA5B26276A38B400D0B664 /* Company+CoreDataProperties.swift in Sources */,
-				CEFA5B23276A38B400D0B664 /* Employee+CoreDataClass.swift in Sources */,
+				CEFA5B3D276A548900D0B664 /* CompanyNavigation.swift in Sources */,
+				CEFA5B39276A4CC200D0B664 /* Company+CoreDataClass.swift in Sources */,
+				CEFA5B3A276A4CC200D0B664 /* Company+CoreDataProperties.swift in Sources */,
 				CEFA5B09276A19DE00D0B664 /* CompanyPresenter.swift in Sources */,
 				CEFA5AF0276A18A000D0B664 /* CompanyVC.swift in Sources */,
+				CEFA5B37276A4CC200D0B664 /* Employee+CoreDataClass.swift in Sources */,
+				CEFA5B38276A4CC200D0B664 /* Employee+CoreDataProperties.swift in Sources */,
 				CEFA5AEC276A18A000D0B664 /* AppDelegate.swift in Sources */,
 				CEFA5B0D276A1A0B00D0B664 /* CompanyAssembly.swift in Sources */,
 				CEFA5AEE276A18A000D0B664 /* SceneDelegate.swift in Sources */,
 				CEFA5B29276A3DA900D0B664 /* CompanyCell.swift in Sources */,
 				CEFA5B10276A1A1A00D0B664 /* CompanyView.swift in Sources */,
 				CEFA5AF6276A18A000D0B664 /* CompanyEmployee.xcdatamodeld in Sources */,
-				CEFA5B24276A38B400D0B664 /* Employee+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

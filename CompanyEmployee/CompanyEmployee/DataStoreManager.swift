@@ -8,9 +8,15 @@
 import Foundation
 import CoreData
 
+protocol IDataStoreManager {
+    func obtainCompany() -> [Company]?
+    func updateCompany(name: String)
+    func removeCompany(index: Int)
+}
+
 final class DataStoreManager {
-    lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
-    lazy var persistentContainer: NSPersistentContainer = {
+    private lazy var viewContext: NSManagedObjectContext = persistentContainer.viewContext
+    private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "CompanyEmployee")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -31,23 +37,31 @@ final class DataStoreManager {
             }
         }
     }
-    
-    func obtainMainEmployee() -> Employee {
-        let company = Company(context: viewContext)
-        company.name = "CFT"
-        
-        let employee = Employee(context: viewContext)
-        employee.name = "Sasha"
-        employee.age = 23
-        employee.company = company
-        
-        do {
-            try viewContext.save()
-        } catch let error {
-            print("Error: \(error)")
-        }
-        
-        return employee
-    }
+}
 
+extension DataStoreManager: IDataStoreManager {
+    func obtainCompany() -> [Company]? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Company")
+        guard let companies = try? viewContext.fetch(fetchRequest) as? [Company] else {
+            return nil }
+        return companies
+    }
+    
+    func updateCompany(name: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Company")
+        if var companies = try? viewContext.fetch(fetchRequest) as? [Company] {
+            let company = Company(context: viewContext)
+            company.name = name
+            companies.append(company)
+            saveContext()
+        }
+    }
+    
+    func removeCompany(index: Int) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Company")
+        if let companies = try? viewContext.fetch(fetchRequest) as? [Company] {
+            viewContext.delete(companies[index])
+            saveContext()
+        }
+    }
 }
