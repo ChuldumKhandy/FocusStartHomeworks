@@ -11,7 +11,7 @@ final class CarModel{
     var cars: [Car]?
 
     init(){
-        cars = getAndConvertFromJson()
+        cars = getCars()
     }
     
     func uniqueBrand() -> [String] {
@@ -28,12 +28,16 @@ final class CarModel{
 }
 
 private extension CarModel {
-    func getAndConvertFromJson() -> [Car] {
+    func getCars() -> [Car] {
         var cars = [Car]()
         let dtos = CarDto.getDtosFromJson()
         for dto in dtos {
-            cars.append(Car(dto: dto))
+            cars.append(convertFromJson(dto: dto))
         }
         return cars
+    }
+     
+    func convertFromJson(dto: CarDto) -> Car {
+        return Car(dto: dto)
     }
 }

@@ -11,9 +11,8 @@ final class AssemblyChooseScene {
     static func build() -> UIViewController {
         let router = ChooseSceneRouter()        
         let car = CarModel()
-        let controller = ChooseSceneVC()
-        let presenter = ChooseScenePresenter(router: router, car: car, controller: controller)
-        controller.presenter = presenter
+        let presenter = ChooseScenePresenter(router: router, car: car)
+        let controller = ChooseSceneVC(presenter: presenter)
         router.setRootController(controller: controller)        
         return controller
     }

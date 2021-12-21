@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class Car {
+struct Car {
     var brand: String
     var image: String
     var body: String

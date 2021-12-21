@@ -7,9 +7,13 @@
 
 import UIKit
 
-class ChooseSceneView: UIView {
-    var tableView = UITableView()
-    let headerLabel = UILabel()
+protocol IChooseSceneView: UIView {
+    var tableView: ChooseSceneTableView { get }
+}
+
+final class ChooseSceneView: UIView {
+    var tableView = ChooseSceneTableView()
+    private let headerLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,20 +23,9 @@ class ChooseSceneView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func customizeHeader() -> UIView {
-        let headerView = UIView()
-        let titleLabel = UILabel()
-        titleLabel.frame.size.height = CellMetrics.height.rawValue
-        titleLabel.frame.size.width = CellMetrics.width.rawValue
-        titleLabel.text = "Марку машины"
-        titleLabel.font = UIFont(name: "Inter", size: FontSize.large.rawValue)
-        titleLabel.font = titleLabel.font.withSize(FontSize.large.rawValue)
-        titleLabel.textColor = .black
-        headerView.backgroundColor = .white
-        headerView.addSubview(titleLabel)
-        return headerView
-    }
+}
+ 
+extension ChooseSceneView: IChooseSceneView {
 }
 
 private extension ChooseSceneView {
@@ -41,7 +34,6 @@ private extension ChooseSceneView {
         self.addSubview(headerLabel)
         self.addSubview(tableView)
         self.customizeLabel()
-        self.customizeTableView()
         self.setConstraints()
     }
     
@@ -50,12 +42,6 @@ private extension ChooseSceneView {
         self.headerLabel.textColor = .black
         self.headerLabel.font = UIFont(name: "Inter", size: FontSize.megaLarge.rawValue)
         self.headerLabel.font = headerLabel.font.withSize(FontSize.megaLarge.rawValue)
-    }
-    
-    func customizeTableView() {
-        self.tableView.tableFooterView = UIView()
-        self.tableView.estimatedSectionHeaderHeight = CellMetrics.heightHeader.rawValue
-        self.tableView.register(ChooseSceneCell.self, forCellReuseIdentifier: ChooseSceneCell.identifier)
     }
     
     func setConstraints() {

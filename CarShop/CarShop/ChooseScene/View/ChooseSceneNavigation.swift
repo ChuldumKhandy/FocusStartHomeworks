@@ -7,11 +7,12 @@
 
 import UIKit
 
-class ChooseSceneNavigation: UIView {
+final class ChooseSceneNavigation: UIView {
     private weak var controller: ChooseSceneVC?
     
     func loadView(controller: ChooseSceneVC) {
         self.controller = controller
+        self.customizeNav()
     }
     
     func customizeNav() {

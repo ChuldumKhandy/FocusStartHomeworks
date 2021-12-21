@@ -7,42 +7,50 @@
 
 import Foundation
 
+protocol IChooseScenePresenter {
+    func loadView(controller: ChooseSceneVC, view: IChooseSceneView)
+}
+
 final class ChooseScenePresenter {
-    private let router: ChooseSceneRouter?
-    private let car: CarModel?
+    private let router: ChooseSceneRouter
+    private let car: CarModel
     var carsNextVC: [Car]?
     
-    private weak var controller: ChooseSceneVC?
-    private weak var viewScene: ChooseSceneView?
+    private weak var controller: IChooseSceneVC?
+    private weak var viewScene: IChooseSceneView?
+    private weak var tableView: IChooseSceneTableView?
     
-    init(router: ChooseSceneRouter, car: CarModel, controller: ChooseSceneVC) {
+    init(router: ChooseSceneRouter, car: CarModel) {
         self.router = router
         self.car = car
-        self.controller = controller
     }
-    
-    func loadView( view: ChooseSceneView) {
+}
+
+extension ChooseScenePresenter: IChooseScenePresenter {
+    func loadView(controller: ChooseSceneVC, view: IChooseSceneView) {
+        self.controller = controller
         self.viewScene = view
+        self.tableView = self.viewScene?.tableView
         
-        self.controller?.countHandler = { [weak self] in
+        self.tableView?.countHandler = { [weak self] in
             let brands = (self?.setBrands())!
             return brands.count
         }
         
-        self.controller?.brandHandler = { [weak self] in
+        self.tableView?.brandHandler = { [weak self] in
             return (self?.setBrands() ?? ["Марка машины"])
         }
         
-        self.controller?.carBrandGiveBackHandler = { [weak self] carBrand in
-           self?.carsNextVC = self?.car?.cars?.filter({ (Car) -> Bool in
+        self.tableView?.carBrandGiveBackHandler = { [weak self] carBrand in
+           self?.carsNextVC = self?.car.cars?.filter({ (Car) -> Bool in
                 Car.brand == carBrand
             })
         }
         
-        self.controller?.nextVCHandler = { [weak self] in
+        self.tableView?.nextVCHandler = { [weak self] in
             if let cars = self?.carsNextVC {
-                self?.router?.setTargerController(controller: PriceSceneAssembly.build(cars: cars))
-                self?.router?.next()
+                self?.router.setTargerController(controller: PriceSceneAssembly.build(cars: cars))
+                self?.router.next()
             }
         }
     }
@@ -50,15 +58,10 @@ final class ChooseScenePresenter {
 
 private extension ChooseScenePresenter {
     func setCarsCount() -> Int {
-        return self.car?.uniqueBrand().count ?? 0
-    }
-    
-    func nextVC() {
-        self.controller?.navigationController?.pushViewController(PriceSceneVC(), animated: true)
+        return self.car.uniqueBrand().count
     }
     
     func setBrands() -> [String] {
-        return self.car?.uniqueBrand() ?? ["Марка машины"]
+        return self.car.uniqueBrand()
     }
-    
 }

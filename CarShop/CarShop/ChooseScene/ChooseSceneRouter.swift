@@ -23,7 +23,6 @@ final class ChooseSceneRouter {
         guard let targertController = self.targertController else {
             return
         }
-
         self.controller?.navigationController?.pushViewController(targertController, animated: true)
     }
 }

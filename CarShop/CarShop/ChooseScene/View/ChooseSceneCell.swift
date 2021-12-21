@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChooseSceneCell: UITableViewCell {
+final class ChooseSceneCell: UITableViewCell {
     static let identifier = "ItemTableViewCell"
     private let iconImageView = UIImageView()
     private let brandLable = UILabel()
