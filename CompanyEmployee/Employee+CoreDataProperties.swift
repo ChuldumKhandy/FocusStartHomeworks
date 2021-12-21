@@ -2,7 +2,7 @@
 //  Employee+CoreDataProperties.swift
 //  CompanyEmployee
 //
-//  Created by user on 15.12.2021.
+//  Created by user on 19.12.2021.
 //
 //
 
@@ -17,9 +17,9 @@ extension Employee {
     }
 
     @NSManaged public var age: Int16
-    @NSManaged public var experience: Float
-    @NSManaged public var name: String?
-    @NSManaged public var company: Company?
+    @NSManaged public var experience: NSNumber?
+    @NSManaged public var name: String
+    @NSManaged public var company: Company
 
 }
 

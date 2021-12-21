@@ -15,10 +15,11 @@ final class CompanyPresenter {
     private weak var controller: ICompanyVC?
     private weak var viewScene: ICompanyView?
     private weak var navigation: ICompanyNavigation?
-    private let dataStoreManager: IDataStoreManager?
+    private let dataStoreManager: ICompanyDataStoreManager?
+    private let router: ICompanyRouter?
 
-
-    init() {
+    init(router: CompanyRouter) {
+        self.router = router
         self.dataStoreManager = DataStoreManager()
     }
 }
@@ -39,6 +40,7 @@ private extension CompanyPresenter {
         self.onTouched()
         self.addName()
         self.removeCompany()
+        self.nextVC()
     }
     
     func onTouched() {
@@ -46,14 +48,14 @@ private extension CompanyPresenter {
             self?.controller?.showAlert()
         }
         
-        self.controller?.rowCountHandler = { [weak self] in
-            let companies = self?.dataStoreManager?.obtainCompany()
-            return companies?.count ?? 0
+        self.controller?.rowCountHandler = { [weak self] section in
+            let sectionInfo = self?.dataStoreManager?.fetchCompanyResultController.sections?[section]
+            return sectionInfo?.numberOfObjects ?? 0
         }
         
         self.controller?.getNameHandler = { [weak self] index in
-            let companies = self?.dataStoreManager?.obtainCompany()
-            return companies?[index].name ?? "defaultName"
+            let company = self?.dataStoreManager?.fetchCompanyResultController.object(at: index)
+            return company?.name ?? "Noname"
         }
     }
     
@@ -68,6 +70,15 @@ private extension CompanyPresenter {
         self.controller?.deleteHandler = { [weak self] index in
             self?.dataStoreManager?.removeCompany(index: index)
             self?.viewScene?.tableView.reloadData()
+        }
+    }
+    
+    func nextVC() {
+        self.controller?.nextVCHandler = { [weak self] index in
+            if let company = self?.dataStoreManager?.fetchCompanyResultController.object(at: index) {
+                self?.router?.setTargerController(controller: EmployeeAssembly.build(company: company))
+                self?.router?.next()
+            }
         }
     }
 }

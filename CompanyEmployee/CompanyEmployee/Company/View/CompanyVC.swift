@@ -9,9 +9,10 @@ import UIKit
 
 protocol ICompanyVC: AnyObject {
     var nameCompanyHandler: ((String) -> Void)? { get set }
-    var rowCountHandler: (() -> Int)? { get set }
-    var getNameHandler: ((Int) -> String)? { get set }
+    var rowCountHandler: ((Int) -> Int)? { get set }
+    var getNameHandler: ((IndexPath) -> String)? { get set }
     var deleteHandler: ((Int) -> Void)? { get set }
+    var nextVCHandler: ((IndexPath) -> Void)? { get set }
     
     func showAlert()
 }
@@ -21,9 +22,10 @@ final class CompanyVC: UIViewController {
     private let presenter: ICompanyPresenter
     private let navigation: ICompanyNavigation
     var nameCompanyHandler: ((String) -> Void)?
-    var rowCountHandler: (() -> Int)?
-    var getNameHandler: ((Int) -> String)?
+    var rowCountHandler: ((Int) -> Int)?
+    var getNameHandler: ((IndexPath) -> String)?
     var deleteHandler: ((Int) -> Void)?
+    var nextVCHandler: ((IndexPath) -> Void)?
     
     init(presenter: ICompanyPresenter) {
         self.viewScene = CompanyView(frame: UIScreen.main.bounds)
@@ -51,17 +53,20 @@ final class CompanyVC: UIViewController {
 }
 
 extension CompanyVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.nextVCHandler?(indexPath)
+    }
 }
 
 extension CompanyVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.rowCountHandler?() ?? 0
+        return self.rowCountHandler?(section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CompanyCell.identifier, for: indexPath) as? CompanyCell else {
             return UITableViewCell() }
-        let name = self.getNameHandler?(indexPath.row)
+        let name = self.getNameHandler?(indexPath)
         cell.setnameCompany(name: name)
         return cell
     }

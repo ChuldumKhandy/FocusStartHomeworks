@@ -2,7 +2,7 @@
 //  Company+CoreDataProperties.swift
 //  CompanyEmployee
 //
-//  Created by user on 19.12.2021.
+//  Created by user on 15.12.2021.
 //
 //
 
@@ -16,7 +16,7 @@ extension Company {
         return NSFetchRequest<Company>(entityName: "Company")
     }
 
-    @NSManaged public var name: String
+    @NSManaged public var name: String?
     @NSManaged public var employee: Employee?
 
 }

@@ -6,7 +6,7 @@
     </entity>
     <entity name="Employee" representedClassName=".Employee" syncable="YES">
         <attribute name="age" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="experience" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="experience" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="company" maxCount="1" deletionRule="Nullify" destinationEntity="Company" inverseName="employee" inverseEntity="Company"/>
     </entity>
