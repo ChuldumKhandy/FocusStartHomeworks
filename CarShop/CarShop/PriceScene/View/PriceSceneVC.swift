@@ -7,19 +7,19 @@
 
 import UIKit
 
-class PriceSceneVC: UIViewController {
-    private var viewScene: PriceSceneView?
-    private var navigationScene: PriceSceneNavigation?
-    var presenter: PriceScenePresenter?
+protocol IPriceSceneVC: AnyObject {
+}
+
+final class PriceSceneVC: UIViewController {
+    private let viewScene: IPriceSceneView
+    private let navigationScene: PriceSceneNavigation
+    private var presenter: IPriceScenePresenter
     var activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
     
-    var countHandler: (() -> Int)?
-    var bodyHandler: (() -> [String])?
-    var selectedBodyHandler: ((String) -> Void)?
-    
-    init() {
+    init(presenter: PriceScenePresenter) {
         self.viewScene = PriceSceneView(frame: UIScreen.main.bounds)
         self.navigationScene = PriceSceneNavigation()
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,63 +29,23 @@ class PriceSceneVC: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.navigationScene?.loadView(controller: self)
-        if let view = viewScene {
-            self.presenter?.loadView(view: view)
-        }
+        self.navigationScene.loadView(controller: self)
+        self.presenter.loadView(controller: self, view: self.viewScene)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         self.showActivityIndicatory()
-        self.viewScene?.tableView.delegate = self
-        self.viewScene?.tableView.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let view = viewScene {
-            self.view.addSubview(view)
-        }
+        self.view.addSubview(self.viewScene)
     }
 }
 
-extension PriceSceneVC: UITableViewDelegate {    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return self.viewScene?.customizeHeader()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = self.viewScene?.tableView.cellForRow(at: indexPath) as? PriceSceneCell
-        else { return }
-        cell.selectedImageViewCell()
-        let selectedBody = cell.bodyLabel.text
-        self.selectedBodyHandler?(selectedBody!)
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard let cell = self.viewScene?.tableView.cellForRow(at: indexPath) as? PriceSceneCell
-        else { return }
-        cell.radioImageView.image = UIImage(systemName: "circle")
-    }
-}
-
-extension PriceSceneVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.countHandler?() ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = self.viewScene?.tableView.dequeueReusableCell(withIdentifier: PriceSceneCell.identifier, for: indexPath) as? PriceSceneCell
-        else {
-            return UITableViewCell()
-        }
-        if let bodies = self.bodyHandler?() {
-            cell.setBody(body: bodies[indexPath.row])
-        }
-        return cell
-    }
+extension PriceSceneVC: IPriceSceneVC {
 }
 
 private extension PriceSceneVC {

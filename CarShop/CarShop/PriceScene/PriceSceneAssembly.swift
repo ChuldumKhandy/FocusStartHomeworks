@@ -9,9 +9,8 @@ import UIKit
 
 final class PriceSceneAssembly {
     static func build(cars: [Car]) -> UIViewController {
-        let controller = PriceSceneVC()
-        let presenter = PriceScenePresenter(cars: cars, controller: controller)
-        controller.presenter = presenter
+        let presenter = PriceScenePresenter(cars: cars)
+        let controller = PriceSceneVC(presenter: presenter)
         
         return controller
     }

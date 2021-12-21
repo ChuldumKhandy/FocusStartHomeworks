@@ -14,8 +14,7 @@ protocol IChooseScenePresenter {
 final class ChooseScenePresenter {
     private let router: ChooseSceneRouter
     private let car: CarModel
-    var carsNextVC: [Car]?
-    
+    private var carsNextVC: [Car]?
     private weak var controller: IChooseSceneVC?
     private weak var viewScene: IChooseSceneView?
     private weak var tableView: IChooseSceneTableView?

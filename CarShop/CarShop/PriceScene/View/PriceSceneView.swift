@@ -7,13 +7,19 @@
 
 import UIKit
 
-class PriceSceneView: UIView {
+protocol IPriceSceneView: UIView {
+    var tableView: PriceSceneTableView { get }
+    var onCellTouchHandler: (() -> Void)? { get set }
+    func setCarInfo(name: String, price: String)
+}
+
+final class PriceSceneView: UIView {
     private let iconImageView = UIImageView()
     private let titleLabel = UILabel()
     private let priceLabel = UILabel()
     private let calculateButton = UIButton()
     var onCellTouchHandler: (() -> Void)?
-    let tableView = UITableView()
+    var tableView = PriceSceneTableView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,21 +29,9 @@ class PriceSceneView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func customizeHeader() -> UIView {
-        let headerView = UIView()
-        let titleLabel = UILabel()
-        titleLabel.frame.size.height = CellMetrics.height.rawValue
-        titleLabel.frame.size.width = CellMetrics.width.rawValue
-        titleLabel.text = "Выберите тип кузова"
-        titleLabel.font = UIFont(name: "Inter", size: FontSize.large.rawValue)
-        titleLabel.font = titleLabel.font.withSize(FontSize.large.rawValue)
-        titleLabel.textColor = .black
-        headerView.backgroundColor = .white
-        headerView.addSubview(titleLabel)
-        return headerView
-    }
-    
+}
+
+extension PriceSceneView: IPriceSceneView {
     func setCarInfo(name: String, price: String) {
         self.iconImageView.image = UIImage(named: name)
         self.priceLabel.text = price
@@ -54,7 +48,6 @@ private extension PriceSceneView {
         self.addSubview(tableView)
         self.customizeIcon()
         self.customizeLabels()
-        self.customizeTableView()
         self.customizeButton()
         self.setConstraints()
     }
@@ -84,12 +77,6 @@ private extension PriceSceneView {
     
     @objc func touchedDown() {
         self.onCellTouchHandler?()
-    }
-    
-    func customizeTableView() {
-        self.tableView.tableFooterView = UIView()
-        self.tableView.estimatedSectionHeaderHeight = CellMetrics.height.rawValue
-        self.tableView.register(PriceSceneCell.self, forCellReuseIdentifier: PriceSceneCell.identifier)
     }
     
     func setConstraints() {

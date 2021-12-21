@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PriceSceneNavigation: UIView {
+final class PriceSceneNavigation: UIView {
     private weak var controller: PriceSceneVC?
     
     func loadView(controller: PriceSceneVC) {

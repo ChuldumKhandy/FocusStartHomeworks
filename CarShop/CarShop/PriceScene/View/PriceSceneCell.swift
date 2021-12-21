@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PriceSceneCell: UITableViewCell {
+final class PriceSceneCell: UITableViewCell {
     static let identifier = "ItemTableViewCell"
     let bodyLabel = UILabel()
     let radioImageView = UIImageView()

@@ -7,31 +7,40 @@
 
 import Foundation
 
+protocol IPriceScenePresenter {
+    func loadView(controller: PriceSceneVC, view: IPriceSceneView)
+}
+
 final class PriceScenePresenter {
-    private let cars: [Car]?
+    private let cars: [Car]
     private var selectedCar: Car?
-    private weak var controller: PriceSceneVC?
-    private weak var viewScene: PriceSceneView?
+    private weak var controller: IPriceSceneVC?
+    private weak var viewScene: IPriceSceneView?
+    private weak var tableview: IPriceSceneTableView?
     
-    init(cars: [Car], controller: PriceSceneVC) {
+    init(cars: [Car]) {
         self.cars = cars
         self.selectedCar = cars.first
-        self.controller = controller
     }
-    func loadView(view: PriceSceneView) {
-        
+}
+
+extension PriceScenePresenter: IPriceScenePresenter{
+    func loadView(controller: PriceSceneVC, view: IPriceSceneView) {
+        self.controller = controller
         self.viewScene = view
+        self.tableview = self.viewScene?.tableView
+        
         self.setInfo()
-        self.controller?.countHandler = { [weak self] in
+        self.tableview?.countHandler = { [weak self] in
             return (self?.setBodyCount() ?? 0)
         }
         
-        self.controller?.bodyHandler = { [weak self] in
+        self.tableview?.bodyHandler = { [weak self] in
             return (self?.setBodies())!
         }
         
-        self.controller?.selectedBodyHandler = { [weak self] carBody in
-            self?.selectedCar = self?.cars?.first(where: { (Car) -> Bool in
+        self.tableview?.selectedBodyHandler = { [weak self] carBody in
+            self?.selectedCar = self?.cars.first(where: { (Car) -> Bool in
                 Car.body == carBody
             })
         }
@@ -44,7 +53,7 @@ final class PriceScenePresenter {
 
 private extension PriceScenePresenter {
     func setBodyCount() -> Int {
-        return cars?.count ?? 0
+        return cars.count
     }
     
     func setInfo() {
@@ -52,10 +61,6 @@ private extension PriceScenePresenter {
     }
     
     func setBodies() -> [String] {
-        return self.cars?.map({(car: Car) -> String in car.body}) ?? [""]
-    }
-    
-    func nextVC() {
-        self.controller?.navigationController?.pushViewController(PriceSceneVC(), animated: true)
+        return self.cars.map({(car: Car) -> String in car.body})
     }
 }

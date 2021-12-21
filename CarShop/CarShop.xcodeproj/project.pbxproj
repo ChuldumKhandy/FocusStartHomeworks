@@ -29,6 +29,7 @@
 		CE38183F275CB1EA0038260E /* ChooseSceneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE38183E275CB1EA0038260E /* ChooseSceneCell.swift */; };
 		CE381846275CC8E90038260E /* Cars.json in Resources */ = {isa = PBXBuildFile; fileRef = CE381845275CC8E90038260E /* Cars.json */; };
 		CE3D1FD92771C67300F4F80D /* ChooseSceneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D1FD82771C67300F4F80D /* ChooseSceneTableView.swift */; };
+		CE3D1FDC2771D5D000F4F80D /* PriceSceneTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3D1FDB2771D5D000F4F80D /* PriceSceneTableView.swift */; };
 		CEB564C92760E4980082F662 /* CarDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB564C82760E4980082F662 /* CarDto.swift */; };
 		CEB564CC2760E5100082F662 /* CarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB564CB2760E5100082F662 /* CarModel.swift */; };
 		CEE1C8AE2764FBEF00EA024C /* FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE1C8AD2764FBEF00EA024C /* FontSize.swift */; };
@@ -59,6 +60,7 @@
 		CE38183E275CB1EA0038260E /* ChooseSceneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSceneCell.swift; sourceTree = "<group>"; };
 		CE381845275CC8E90038260E /* Cars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Cars.json; sourceTree = "<group>"; };
 		CE3D1FD82771C67300F4F80D /* ChooseSceneTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSceneTableView.swift; sourceTree = "<group>"; };
+		CE3D1FDB2771D5D000F4F80D /* PriceSceneTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceSceneTableView.swift; sourceTree = "<group>"; };
 		CEB564C82760E4980082F662 /* CarDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDto.swift; sourceTree = "<group>"; };
 		CEB564CB2760E5100082F662 /* CarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarModel.swift; sourceTree = "<group>"; };
 		CEE1C8AD2764FBEF00EA024C /* FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSize.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				CE141541275E630500B48750 /* PriceSceneVC.swift */,
 				CE14154C275F53DC00B48750 /* PriceSceneNavigation.swift */,
 				CE141544275E631A00B48750 /* PriceSceneView.swift */,
+				CE3D1FDB2771D5D000F4F80D /* PriceSceneTableView.swift */,
 				CE141550275F801300B48750 /* PriceSceneCell.swift */,
 			);
 			path = View;
@@ -275,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE38182F275C874D0038260E /* ChooseScenePresenter.swift in Sources */,
+				CE3D1FDC2771D5D000F4F80D /* PriceSceneTableView.swift in Sources */,
 				CE141551275F801300B48750 /* PriceSceneCell.swift in Sources */,
 				CEB564C92760E4980082F662 /* CarDto.swift in Sources */,
 				CE38182C275C870C0038260E /* ChooseSceneRouter.swift in Sources */,
