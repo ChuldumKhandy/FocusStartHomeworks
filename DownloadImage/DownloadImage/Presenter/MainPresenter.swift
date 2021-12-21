@@ -73,8 +73,6 @@ private extension MainPresenter {
                 }
             case .failure(let error):
                 print("[NETWORK] error is: \(error)")
-                DispatchQueue.main.async {
-                }
             }
         }
     }
