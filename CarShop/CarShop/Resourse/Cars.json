@@ -1,0 +1,122 @@
+[
+    {
+        "brand" : "Audi",
+        "image": "audi_sedan",
+        "body": "Седан",
+        "price": "1 111 111"
+    },
+    {
+        "brand" : "Audi",
+        "image": "audi_hatchback",
+        "body": "Хэтчбек",
+        "price": "2 222 222"
+    },
+    {
+        "brand" : "Audi",
+        "image": "audi_coupe",
+        "body": "Купе",
+        "price": "3 333 333"
+    },
+    {
+        "brand" : "Audi",
+        "image": "audi_cabrio",
+        "body": "Кабриолет",
+        "price": "4 444 444"
+    },
+    {
+        "brand" : "BMW",
+        "image": "bmw_sedan",
+        "body": "Седан",
+        "price": "5 555 555"
+    },
+    {
+        "brand" : "BMW",
+        "image": "bmw_hatchback",
+        "body": "Хэтчбек",
+        "price": "6 666 666"
+    },
+    {
+        "brand" : "BMW",
+        "image": "bmw_coupe",
+        "body": "Купе",
+        "price": "7 777 777"
+    },
+    {
+        "brand" : "BMW",
+        "image": "bmw_cabrio",
+        "body": "Кабриолет",
+        "price": "8 888 888"
+    },
+    {
+        "brand" : "Ford",
+        "image": "ford_sedan",
+        "body": "Седан",
+        "price": "9 999 999"
+    },
+    {
+        "brand" : "Ford",
+        "image": "ford_hatchback",
+        "body": "Хэтчбек",
+        "price": "10 000 000"
+    },
+    {
+        "brand" : "Ford",
+        "image": "ford_coupe",
+        "body": "Купе",
+        "price": "1 234 567"
+    },
+    {
+        "brand" : "Ford",
+        "image": "ford_cabrio",
+        "body": "Кабриолет",
+        "price": "8 901 234"
+    },
+    {
+        "brand" : "Lexus",
+        "image": "lexus_sedan",
+        "body": "Седан",
+        "price": "5 678 901"
+    },
+    {
+        "brand" : "Lexus",
+        "image": "lexus_hatchback",
+        "body": "Хэтчбек",
+        "price": "2 345 678"
+    },
+    {
+        "brand" : "Lexus",
+        "image": "lexus_coupe",
+        "body": "Купе",
+        "price": "9 012 345"
+    },
+    {
+        "brand" : "Lexus",
+        "image": "lexus_cabrio",
+        "body": "Кабриолет",
+        "price": "6 789 012"
+    },
+    {
+        "brand" : "Chevrolet",
+        "image": "chevrolet_sedan",
+        "body": "Седан",
+        "price": "3 456 789"
+    },
+    {
+        "brand" : "Chevrolet",
+        "image": "chevrolet_hatchback",
+        "body": "Хэтчбек",
+        "price": "10 123 456"
+    },
+    {
+        "brand" : "Chevrolet",
+        "image": "chevrolet_coupe",
+        "body": "Купе",
+        "price": "7 890 123"
+    },
+    {
+        "brand" : "Chevrolet",
+        "image": "chevrolet_cabrio",
+        "body": "Кабриолет",
+        "price": "4 567 890"
+    }
+]
