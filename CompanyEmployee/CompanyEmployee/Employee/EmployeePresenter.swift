@@ -17,7 +17,6 @@ final class EmployeePresenter {
     private weak var navigation: IEmployeeNavigation?
     private let dataStoreManager: IEmployeeDataStoreManager?
     private let company: Company
-    private var employee: EmployeeModel?
 
     init(company: Company) {
         self.company = company
@@ -39,44 +38,50 @@ extension EmployeePresenter: IEmployeePresenter {
 private extension EmployeePresenter {
     func setHandler() {
         self.onTouched()
-        self.addName()
-        self.removeCompany()
+        self.createEmployee()
+        self.removeEmployee()
     }
     
     func onTouched() {
         self.navigation?.addHandler = { [weak self] in
-            self?.controller?.showAlert()
+            self?.controller?.addEmployeeAlert()
         }
         
-        self.controller?.rowCountHandler = { [weak self] section in
-            return self?.dataStoreManager?.fetchEmployeeResultController.sections?[section].numberOfObjects ?? 0
+        self.controller?.rowCountHandler = { [weak self] in
+            let employees = self?.getEmployees()
+            return employees?.count ?? 0
         }
         
-        self.controller?.getInfoHandler = { [weak self] in
-            if let company = self?.company {
-                return self?.dataStoreManager?.getEmployee(for: company)
-            }
-            return EmployeeModel()
+        self.controller?.getInfoHandler = { [weak self] index in
+            let employees = self?.getEmployees()
+            return employees?[index.row]
         }
     }
     
-    func addName() {
+    func createEmployee() {
         self.controller?.infoHandler = { [weak self] name, age, experience in
-            guard let age = Int(age),
-                  let experience = Float(experience),
-                  let company = self?.company else {
-            return  }
-            self?.employee = EmployeeModel(name: name, age: age, experience: experience, company: company)
-            if let employee = self?.employee {
-                self?.dataStoreManager?.updateEmployee(newEmployee: employee)
+            guard let age = Int16(age),
+                  let company = self?.company
+            else {
+                self?.controller?.showAlert()
+                return }
+            if let experience = Float(experience) {
+                self?.dataStoreManager?.createEmployee(name: name, age: age, experience: experience as NSNumber, company: company)
+            } else {
+                self?.dataStoreManager?.createEmployee(name: name, age: age, experience: nil, company: company)
             }
+            self?.viewScene?.tableView.reloadData()
         }
     }
     
-    func removeCompany() {
-//        self.controller?.deleteHandler = { [weak self] index in
-//            self?.dataStoreManager?.removeCompany(index: index)
-//            self?.viewScene?.tableView.reloadData()
-//        }
+    func removeEmployee() {
+        self.controller?.deleteHandler = { [weak self] index in
+            self?.dataStoreManager?.removeEmployee(index: index)
+            self?.viewScene?.tableView.reloadData()
+        }
+    }
+    
+    func getEmployees() -> [Employee] {
+        return self.dataStoreManager?.getEmployee(company: self.company) ?? []
     }
 }

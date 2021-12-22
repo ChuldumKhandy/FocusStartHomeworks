@@ -31,7 +31,7 @@ extension EmployeeView: IEmployeeView {
 
 private extension EmployeeView {
     func customizeTableView() {
-        self.tableView.register(CompanyCell.self, forCellReuseIdentifier: CompanyCell.identifier)
+        self.tableView.register(EmployeeCell.self, forCellReuseIdentifier: EmployeeCell.identifier)
     }
 
     func setConstraint() {

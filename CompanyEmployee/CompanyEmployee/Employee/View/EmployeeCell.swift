@@ -16,6 +16,8 @@ final class EmployeeCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(self.nameEmployeeLabel)
+        self.contentView.addSubview(self.ageEmployeeLabel)
+        self.contentView.addSubview(self.experienceEmployeeLabel)
         self.customizeLabels()
         self.setConstraint()
     }
@@ -54,16 +56,13 @@ private extension EmployeeCell {
         self.nameEmployeeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
         self.ageEmployeeLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.ageEmployeeLabel.topAnchor.constraint(equalTo: self.nameEmployeeLabel.topAnchor,
-                                                   constant: 10).isActive = true
+        self.ageEmployeeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         self.ageEmployeeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         self.ageEmployeeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
         self.experienceEmployeeLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.experienceEmployeeLabel.topAnchor.constraint(equalTo: self.ageEmployeeLabel.topAnchor,
-                                                          constant: 10).isActive = true
+        self.experienceEmployeeLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         self.experienceEmployeeLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        self.experienceEmployeeLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        self.experienceEmployeeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.experienceEmployeeLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
     }
 }

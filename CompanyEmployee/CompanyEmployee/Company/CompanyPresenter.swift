@@ -61,7 +61,7 @@ private extension CompanyPresenter {
     
     func addName() {
         self.controller?.nameCompanyHandler = { [weak self] name in
-            self?.dataStoreManager?.updateCompany(name: name)
+            self?.dataStoreManager?.createCompany(name: name)
             self?.viewScene?.tableView.reloadData()
         }
     }

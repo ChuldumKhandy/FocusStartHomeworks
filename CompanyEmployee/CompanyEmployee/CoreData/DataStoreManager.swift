@@ -10,14 +10,15 @@ import CoreData
 
 protocol ICompanyDataStoreManager {
     var fetchCompanyResultController: NSFetchedResultsController<Company> { get }
-    func updateCompany(name: String)
+    func createCompany(name: String)
     func removeCompany(index: Int)
 }
 
 protocol IEmployeeDataStoreManager {
     var fetchEmployeeResultController: NSFetchedResultsController<Employee> { get }
-    func updateEmployee(newEmployee: EmployeeModel)
-    func getEmployee(for company: Company) -> EmployeeModel?
+    func createEmployee(name: String, age: Int16, experience: NSNumber?, company: Company)
+    func removeEmployee(index: Int)
+    func getEmployee(company: Company) -> [Employee]?
 }
 
 final class DataStoreManager: NSObject {
@@ -56,7 +57,6 @@ final class DataStoreManager: NSObject {
         return fetchedResultController
     }()
     
-    
     internal func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -76,48 +76,58 @@ extension DataStoreManager: NSFetchedResultsControllerDelegate {
 }
 
 extension DataStoreManager: ICompanyDataStoreManager {
-    func updateCompany(name: String) {
+    func createCompany(name: String) {
+        let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Company")
-        if var companies = try? viewContext.fetch(fetchRequest) as? [Company] {
-            let company = Company(context: viewContext)
+        if var companies = try? context.fetch(fetchRequest) as? [Company] {
+            let company = Company(context: context)
             company.name = name
             companies.append(company)
-            saveContext()
+            try? context.save()
         }
     }
     
     func removeCompany(index: Int) {
+        let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Company")
-        if let companies = try? viewContext.fetch(fetchRequest) as? [Company] {
+        if let companies = try? context.fetch(fetchRequest) as? [Company] {
             viewContext.delete(companies[index])
-            saveContext()
+            try? context.save()
         }
     }
 }
 
 extension DataStoreManager: IEmployeeDataStoreManager {
-    func updateEmployee(newEmployee: EmployeeModel) {
-        let fetchRequest: NSFetchRequest<Company> = Company.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "\(#keyPath(Company.name)) = %@", newEmployee.company.name)
-        guard let company = try? viewContext.fetch(fetchRequest).first else { return }
-        let employee = Employee(context: viewContext)
-        employee.name = newEmployee.name
-        employee.age = Int16(newEmployee.age)
-        if let experience = newEmployee.experience {
-            employee.experience = NSNumber(value: experience)
+    func createEmployee(name: String, age: Int16, experience: NSNumber?, company: Company) {
+        let context = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Company")
+        fetchRequest.predicate = NSPredicate(format: "\(#keyPath(Company.name)) = %@", company.name)
+        guard let company = try? context.fetch(fetchRequest).first as? Company else {
+            return }
+        let employee = Employee(context: context)
+        employee.name = name
+        employee.age = age
+        if let experience = experience {
+            employee.experience = experience
         } else {
             employee.experience = nil
         }
         employee.company = company
-        saveContext()
+        try? context.save()
     }
     
-    func getEmployee(for company: Company) -> EmployeeModel? {
-        let fetchRequest: NSFetchRequest<Employee> = Employee.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "\(#keyPath(Employee.company.name)) = %@", company.name)
-        guard let employee = try? viewContext.fetch(fetchRequest).first.map({ EmployeeModel(employee: $0) }) else {
-            return EmployeeModel()
+    func removeEmployee(index: Int) {
+        let context = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Employee")
+        if let employees = try? context.fetch(fetchRequest) as? [Employee] {
+            viewContext.delete(employees[index])
+            try? context.save()
         }
-        return employee
+    }
+    
+    func getEmployee(company: Company) -> [Employee]? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Employee")
+        fetchRequest.predicate = NSPredicate(format: "\(#keyPath(Employee.company.name)) = %@", company.name)
+        return try? self.persistentContainer.viewContext.fetch(fetchRequest) as? [Employee]
     }
 }

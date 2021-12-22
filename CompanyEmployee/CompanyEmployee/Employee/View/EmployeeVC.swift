@@ -9,10 +9,11 @@ import UIKit
 
 protocol IEmployeeVC: AnyObject {
     var infoHandler: ((String, String, String) -> Void)? { get set }
-    var rowCountHandler: ((Int) -> Int)? { get set }
-    var getInfoHandler: (() -> EmployeeModel?)? { get set }
+    var rowCountHandler: (() -> Int)? { get set }
+    var getInfoHandler: ((IndexPath) -> Employee?)? { get set }
     var deleteHandler: ((Int) -> Void)? { get set }
     
+    func addEmployeeAlert()
     func showAlert()
 }
 
@@ -21,8 +22,8 @@ final class EmployeeVC: UIViewController {
     private let presenter: IEmployeePresenter
     private let navigation: IEmployeeNavigation
     var infoHandler: ((String, String, String) -> Void)?
-    var rowCountHandler: ((Int) -> Int)?
-    var getInfoHandler: (() -> EmployeeModel?)?
+    var rowCountHandler: (() -> Int)?
+    var getInfoHandler: ((IndexPath) -> Employee?)?
     var deleteHandler: ((Int) -> Void)?
     
     init(presenter: IEmployeePresenter) {
@@ -56,17 +57,17 @@ extension EmployeeVC: UITableViewDelegate {
 
 extension EmployeeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.rowCountHandler?(section) ?? 0
+        return self.rowCountHandler?() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EmployeeCell.identifier, for: indexPath) as? EmployeeCell else {
             return UITableViewCell() }
-        guard let employee = self.getInfoHandler?() else {
+        guard let employee = self.getInfoHandler?(indexPath) else {
             return UITableViewCell() }
         cell.setInfoEmployee(name: employee.name,
                              age: Int(employee.age),
-                             experience: employee.experience)
+                             experience: employee.experience as? Float)
         return cell
     }
     
@@ -76,7 +77,7 @@ extension EmployeeVC: UITableViewDataSource {
 }
 
 extension EmployeeVC: IEmployeeVC {
-    func showAlert() {
+    func addEmployeeAlert() {
         let alertController = UIAlertController(title: "Введите данные о сотруднике", message: "", preferredStyle: .alert)
         alertController.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Имя сотрудника"
@@ -99,6 +100,12 @@ extension EmployeeVC: IEmployeeVC {
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+    func showAlert() {
+        let alert = UIAlertController(title: "Не заполнены обязательные поля", message: "Проверьте правильность ввода данных", preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "Понятно", style: .default, handler: nil)
+        alert.addAction(okButton)
+        present(alert, animated: true, completion: nil)
     }
 }
 
