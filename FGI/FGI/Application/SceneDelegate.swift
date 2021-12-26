@@ -17,7 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = tabs
         self.window = window
         self.window?.makeKeyAndVisible()
-        
     }
 }
 
@@ -25,13 +24,10 @@ private extension SceneDelegate {
     func createTabs() -> UITabBarController {
         let tabBar = UITabBarController()
         let infoVC = InfoSceneAssembly.build()
-        let diagramVC = DiagramVC()
-        let newsVC = NewsVC()
+        let diagramVC = DiagramSceneAssembly.build()
         infoVC.tabBarItem = self.createTab("info.circle")
         diagramVC.tabBarItem = self.createTab("chart.bar")
-        newsVC.tabBarItem = self.createTab("newspaper")
-        
-        tabBar.setViewControllers([infoVC, diagramVC, newsVC], animated: false)
+        tabBar.setViewControllers([infoVC, diagramVC], animated: false)
         return tabBar
     }
     

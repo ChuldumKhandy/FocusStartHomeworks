@@ -38,7 +38,7 @@ private extension InfoView {
     func customizeLable() {
         self.titleLabel.text = InfoText.title.rawValue
         self.titleLabel.font = .boldSystemFont(ofSize: 20)
-        self.titleLabel.textAlignment = .left
+        self.titleLabel.textAlignment = .center
         self.titleLabel.numberOfLines = 0
     }
     
@@ -77,22 +77,22 @@ private extension InfoView {
     
     func setConstraints() {
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40).isActive = true
-        self.titleLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+        self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: ViewConstraints.top.rawValue).isActive = true
+        self.titleLabel.heightAnchor.constraint(equalToConstant: ViewConstraints.margin.rawValue).isActive = true
+        self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ViewConstraints.left.rawValue).isActive = true
+        self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ViewConstraints.left.rawValue).isActive = true
         
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
-        self.scrollView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 5).isActive = true
+        self.scrollView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
         self.scrollView.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor).isActive = true
         self.scrollView.trailingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor).isActive = true
-        self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -ViewConstraints.bottom.rawValue).isActive = true
         
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
-        self.stackView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 20).isActive = true
-        self.stackView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height - 45).isActive = true
-        self.stackView.topAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
-        self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor).isActive = true
+        self.stackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor).isActive = true
+        self.stackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor).isActive = true
+        self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
+        self.stackView.widthAnchor.constraint(equalToConstant: self.frame.size.width - ViewConstraints.left.rawValue * 2).isActive = true
     }
 }
