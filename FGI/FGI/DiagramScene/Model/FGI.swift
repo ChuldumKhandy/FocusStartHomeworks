@@ -10,7 +10,7 @@ import Foundation
 struct FGI: Decodable {
     var currency: String
     var date: String
-    var value: String
+    var value: Float
 
     init(dto: FGIDto){
         self.currency = dto.currency

@@ -8,8 +8,11 @@
 import UIKit
 
 protocol IDiagramView: UIView {
-    func passCurrency(currencies: [String])
+    var onTouchedHandler: ((String) -> Void)? { get set }
+    func passCurrencies(currencies: [String])
     func loadView(controller: IDiagramVC)
+    func getSelectedCurrency() -> String?
+    func setFGI(fgi: [FGI])
 }
 
 final class DiagramView: UIView {
@@ -22,6 +25,10 @@ final class DiagramView: UIView {
     private let graphView = GraphView()
     private let detailView = DetailTableView()
     
+    var onTouchedHandler: ((String) -> Void)?
+    
+    private var selectedCurrency: String?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -29,6 +36,9 @@ final class DiagramView: UIView {
         self.customizeLabel()
         self.customizeButtons()
         self.setConstraints()
+        self.menuView.selectedCurrencyHandler = { [weak self] selectedCurrency in
+            self?.selectedCurrency = selectedCurrency
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -38,15 +48,22 @@ final class DiagramView: UIView {
 
 extension DiagramView: IDiagramView {
     func loadView(controller: IDiagramVC) {
-        self.controller = controller
-        
-        
+        self.controller = controller        
     }
-    
-    func passCurrency(currencies: [String]) {
+    func passCurrencies(currencies: [String]) {
         self.menuView.getCurrenciesHandler = { [weak self] in
             return currencies
         }
+    }
+    func getSelectedCurrency() -> String? {
+        return self.selectedCurrency
+    }
+    
+    func setFGI(fgi: [FGI]) {        
+        self.graphView.pointHandler?(fgi.map { (fgi) -> Float in
+            fgi.value
+        })
+        self.detailView.valueHandler?(fgi)
     }
 }
 
@@ -85,13 +102,13 @@ private extension DiagramView {
     }
     
     @objc func touchedWeek() {
-        print("Press Week")
+        self.onTouchedHandler?("Week")
     }
     @objc func touchedMonth() {
-        print("Press Month")
+        self.onTouchedHandler?("Month")
     }
     @objc func touchedYear() {
-        print("Press Year")
+        self.onTouchedHandler?("Year")
     }
     
     func setConstraints() {

@@ -9,7 +9,7 @@ import UIKit
 
 final class GridView: UIView {
     private var path = UIBezierPath()
-    private var gridWidthMultiple: CGFloat = 12 // self.graphPoints.count - 1
+    private var gridWidthMultiple: CGFloat
     private var gridHeightMultiple: CGFloat = 10
     private var gridWidth: CGFloat {
         return bounds.width/CGFloat(gridWidthMultiple)
@@ -17,8 +17,10 @@ final class GridView: UIView {
     private var gridHeight: CGFloat {
         return bounds.height/CGFloat(gridHeightMultiple)
     }
+    var countHandler: (() -> Int)?
     
     override init(frame: CGRect) {
+        self.gridWidthMultiple = CGFloat(self.countHandler?() ?? 2)
         super.init(frame: frame)
         self.backgroundColor = .clear
         self.draw(frame)

@@ -10,5 +10,5 @@ import Foundation
 struct FGIDto: Decodable {
     var currency: String
     var date: String
-    var value: String
+    var value: Float
 }

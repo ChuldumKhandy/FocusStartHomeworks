@@ -19,4 +19,5 @@ enum ViewConstraints: CGFloat {
     case heightMenu = 100
     case heightGraph = 250
     case heightButtons = 20
+    case heightCell = 50
 }

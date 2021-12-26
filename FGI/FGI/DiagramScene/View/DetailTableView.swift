@@ -9,12 +9,18 @@ import UIKit
 
 final class DetailTableView: UIView {
     private let tableView = UITableView(frame: .zero)
+    private var fgi = [FGI]()
+    var valueHandler: (([FGI]) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(self.tableView)
         self.configureTableView()
         self.setConstraints()
+        self.valueHandler = { [weak self] FGIes in
+            self?.fgi = FGIes
+            self?.tableView.reloadData()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -24,18 +30,21 @@ final class DetailTableView: UIView {
 
 extension DetailTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return ViewConstraints.heightCell.rawValue
     }
 }
 
 extension DetailTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return fgi.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailCell.identifier, for: indexPath) as? DetailCell else {
             return UITableViewCell() }
+        let date = fgi[indexPath.row].date
+        let value = fgi[indexPath.row].value
+        cell.setValue(date: date, value: value)
         return cell
     }
 }

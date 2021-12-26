@@ -8,15 +8,25 @@
 import UIKit
 
 final class GraphView: UIView {
-    private var graphPoints: [Float] = [50.5, 45.6, 67, 45.4, 53.5, 77.7, 23.5, 89.8, 23.4, 89.0, 100.0, 34.5, 1.3]
+    private var graphPoints = [Float]()
     private let graphLayer = CAShapeLayer()
     private let gradientLayer = CAGradientLayer()
     private let grid = GridView()
+    var pointHandler: (([Float]) -> Void)?
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.applyGradient()
         self.addSubview(self.grid)
+        self.grid.countHandler = { [weak self] in
+            let count = (self?.graphPoints.count ?? 0)
+            return count
+        }
+        self.pointHandler = { [weak self] FGIes in
+            self?.graphPoints = FGIes
+            self?.drawLine(self?.bounds ?? CGRect(x: 0, y: 0, width: 0, height: 0))
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -26,11 +36,8 @@ final class GraphView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.gradientLayer.frame = self.bounds
-        self.drawLine(self.bounds)
         self.grid.frame = self.bounds
     }
-    
-    
 }
 
 private extension GraphView {

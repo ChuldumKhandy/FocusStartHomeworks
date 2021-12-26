@@ -19,23 +19,31 @@ final class DetailCell: UITableViewCell {
         self.contentView.addSubview(self.dateLabel)
         self.contentView.addSubview(self.descriptionLabel)
         self.contentView.addSubview(self.valueLabel)
-        self.customizeLabels()
         self.setConstraints()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setValue(date: String, value: Float) {
+        self.dateLabel.text = date
+        self.valueLabel.text = String(value)
+        switch value {
+        case 0...25:
+            self.descriptionLabel.text = "инвесторы напуганы"
+        case 25...49:
+            self.descriptionLabel.text = "на рынке преобладает страх"
+        case 49...51:
+            self.descriptionLabel.text = "нейтральный настрой"
+        case 51...75:
+            self.descriptionLabel.text = "на рынке преобладает жадность"
+        default:
+            self.descriptionLabel.text = "инвесторы категорично жадны"
+        }
+    }
 }
 
 private extension DetailCell {
-    func customizeLabels() {
-        self.dateLabel.text = "21.01.2021"
-        
-        self.descriptionLabel.text = "Жадно"
-        
-        self.valueLabel.text = "23.34"
-    }
-    
     func setConstraints() {
         self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
         self.dateLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true

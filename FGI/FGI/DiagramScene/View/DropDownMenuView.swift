@@ -8,16 +8,14 @@
 import UIKit
 
 final class DropDownMenuView: UIView {
-    //private let currencyTextField = UITextField()
     private let currencyPikerView = UIPickerView()
     var getCurrenciesHandler: (() -> [String])?
+    var selectedCurrencyHandler: ((String) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
-        //self.addSubview(self.currencyTextField)
         self.addSubview(self.currencyPikerView)
-        //self.customizeTextField()
         self.customizePickerView()
         self.setConstraints()
     }
@@ -29,10 +27,7 @@ final class DropDownMenuView: UIView {
 
 extension DropDownMenuView: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //self.currencyTextField.text = self.setCurrencies()[row]
-        //self.currencyPikerView.isHidden = true
-        
-        self.currencyPikerView.reloadAllComponents()
+        self.selectedCurrencyHandler?(self.setCurrencies()[row])
     }
 }
 
@@ -56,47 +51,23 @@ extension DropDownMenuView: UIPickerViewDataSource {
     }
 }
 
-//extension DropDownMenuView: UITextFieldDelegate {
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        if textField == self.currencyTextField {
-//            self.currencyPikerView.isHidden = false
-//            textField.endEditing(true)
-//        }
-//    }
-//}
-
 private extension DropDownMenuView {
     func setCurrencies() -> [String] {
         guard let currencies = getCurrenciesHandler?() else {
             return ["Что-то пошло не так"] }
         return currencies
     }
-    
-//    func customizeTextField() {
-//        self.currencyTextField.placeholder = "Выберите валюту"
-//        self.currencyTextField.backgroundColor = .systemGray6
-//        self.currencyTextField.borderStyle = .roundedRect
-//        self.currencyTextField.layer.cornerRadius = 8
-//        self.currencyTextField.layer.masksToBounds = true
-//        self.currencyTextField.delegate = self
-//    }
-    
+   
     func customizePickerView() {
         self.currencyPikerView.dataSource = self
         self.currencyPikerView.delegate = self
     }
     
     func setConstraints() {
-//        self.currencyTextField.translatesAutoresizingMaskIntoConstraints = false
-//        self.currencyTextField.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-//        self.currencyTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-//        self.currencyTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-//        self.currencyTextField.heightAnchor.constraint(equalToConstant: ViewConstraints.margin.rawValue).isActive = true
-        
         self.currencyPikerView.translatesAutoresizingMaskIntoConstraints = false
         self.currencyPikerView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         self.currencyPikerView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         self.currencyPikerView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        //self.currencyPikerView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        self.currencyPikerView.heightAnchor.constraint(equalToConstant: ViewConstraints.heightMenu.rawValue).isActive = true
     }
 }

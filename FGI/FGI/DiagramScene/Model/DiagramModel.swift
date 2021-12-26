@@ -17,9 +17,6 @@ protocol IDiagramModel {
 final class DiagramModel {
     private var FGIes: [FGI]?
     private var currencies: [String]?
-
-    init(){
-    }
 }
 
 extension DiagramModel: IDiagramModel {
@@ -29,6 +26,7 @@ extension DiagramModel: IDiagramModel {
     
     func setFGI(FGIes: [FGI]) {
         self.FGIes = FGIes
+        print("MY FGI: \(String(describing: self.FGIes))")
     }
     
     func setCurrencies(currencies: [String]) {
