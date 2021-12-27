@@ -11,8 +11,8 @@ import UIKit
 
 enum ViewConstraints: CGFloat {
     case radius = 8
-    case top = 60
-    case bottom = 80
+    case top = 70
+    case bottom = 15
     case left = 16
     case margin = 30
     case marginSmall = 10

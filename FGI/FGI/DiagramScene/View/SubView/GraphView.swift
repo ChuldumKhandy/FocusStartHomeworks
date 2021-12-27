@@ -11,22 +11,18 @@ final class GraphView: UIView {
     private var graphPoints = [Float]()
     private let graphLayer = CAShapeLayer()
     private let gradientLayer = CAGradientLayer()
-    private let grid = GridView()
+    //private let grid = GridView()
     var pointHandler: (([Float]) -> Void)?
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.applyGradient()
-        self.addSubview(self.grid)
-        self.grid.countHandler = { [weak self] in
-            let count = (self?.graphPoints.count ?? 0)
-            return count
-        }
+        //self.addSubview(self.grid)
         self.pointHandler = { [weak self] FGIes in
             self?.graphPoints = FGIes
             self?.drawLine(self?.bounds ?? CGRect(x: 0, y: 0, width: 0, height: 0))
         }
+        //self.grid.countHandler?(CGFloat(self.graphPoints.count))
     }
     
     required init?(coder: NSCoder) {
@@ -36,12 +32,16 @@ final class GraphView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.gradientLayer.frame = self.bounds
-        self.grid.frame = self.bounds
+        //self.grid.frame = self.bounds
     }
 }
 
 private extension GraphView {
     func drawLine(_ frame: CGRect) {
+        let grid = GridView()
+        grid.countHandler?(CGFloat(self.graphPoints.count - 1))
+        grid.frame = frame
+        
         let columnXpoint = { (clumn: Float) -> CGFloat in
             let spacing = frame.width / CGFloat(self.graphPoints.count - 1)
             return CGFloat(clumn) * spacing
@@ -63,10 +63,15 @@ private extension GraphView {
         self.graphLayer.lineWidth = 2.0
         self.graphLayer.strokeEnd = 1.0
         self.layer.addSublayer(self.graphLayer)
+        self.addSubview(grid)
     }
     
     func applyGradient() {
-        self.gradientLayer.colors = [UIColor.green.cgColor, UIColor.white.cgColor, UIColor.red.cgColor]
+        self.gradientLayer.colors = [UIColor.systemGreen.cgColor,
+                                     UIColor.green.cgColor,
+                                     UIColor.white.cgColor,
+                                     UIColor.orange.cgColor,
+                                     UIColor.red.cgColor]
         self.layer.addSublayer(self.gradientLayer)
     }
 }

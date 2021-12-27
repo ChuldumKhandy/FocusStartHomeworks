@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FGIMapper{
+final class FGIMapper{
     static func fromDto(dtos: [FGIDto]) -> [FGI]{
         return dtos.map { (dto) -> FGI in
             FGI(dto: dto)

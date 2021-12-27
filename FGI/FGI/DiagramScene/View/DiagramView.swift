@@ -8,7 +8,7 @@
 import UIKit
 
 protocol IDiagramView: UIView {
-    var onTouchedHandler: ((String) -> Void)? { get set }
+    var onTouchedHandler: (([String]) -> Void)? { get set }
     func passCurrencies(currencies: [String])
     func loadView(controller: IDiagramVC)
     func getSelectedCurrency() -> String?
@@ -17,15 +17,14 @@ protocol IDiagramView: UIView {
 
 final class DiagramView: UIView {
     private weak var controller: IDiagramVC?
-    private let titleLabel = UILabel()
-    private let weekButton = UIButton()
-    private let monthButton = UIButton()
-    private let yearButton = UIButton()
+    private let calculateButton = UIButton()
+    private let dateFromTextField = UITextField()
+    private let dateToTextField = UITextField()
     private let menuView = DropDownMenuView()
     private let graphView = GraphView()
     private let detailView = DetailTableView()
     
-    var onTouchedHandler: ((String) -> Void)?
+    var onTouchedHandler: (([String]) -> Void)?
     
     private var selectedCurrency: String?
     
@@ -33,12 +32,14 @@ final class DiagramView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
         self.addSubviews()
-        self.customizeLabel()
-        self.customizeButtons()
+        self.customizeTextFields()
+        self.customizeButton()
         self.setConstraints()
+        self.graphView.isHidden = true
         self.menuView.selectedCurrencyHandler = { [weak self] selectedCurrency in
             self?.selectedCurrency = selectedCurrency
         }
+        
     }
     
     required init?(coder: NSCoder) {
@@ -51,9 +52,7 @@ extension DiagramView: IDiagramView {
         self.controller = controller        
     }
     func passCurrencies(currencies: [String]) {
-        self.menuView.getCurrenciesHandler = { [weak self] in
-            return currencies
-        }
+        self.menuView.getCurrenciesHandler?(currencies)
     }
     func getSelectedCurrency() -> String? {
         return self.selectedCurrency
@@ -69,84 +68,72 @@ extension DiagramView: IDiagramView {
 
 private extension DiagramView {
     func addSubviews() {
-        self.addSubview(self.titleLabel)
         self.addSubview(self.menuView)
         self.addSubview(self.graphView)
         self.addSubview(self.detailView)
-        self.addSubview(self.weekButton)
-        self.addSubview(self.monthButton)
-        self.addSubview(self.yearButton)
+        self.addSubview(self.calculateButton)
+        self.addSubview(self.dateFromTextField)
+        self.addSubview(self.dateToTextField)
     }
     
-    func customizeLabel() {
-        self.titleLabel.text = "Индек страха и жадности"
-        self.titleLabel.font = .boldSystemFont(ofSize: 20)
-        self.titleLabel.textAlignment = .center
-        self.titleLabel.numberOfLines = 0
+    func customizeTextFields() {
+        UITextField.appearance().borderStyle = .roundedRect
+        UITextField.appearance().layer.cornerRadius = ViewConstraints.radius.rawValue
+        UITextField.appearance().layer.masksToBounds = true
+        UITextField.appearance().frame.size.height = ViewConstraints.heightButtons.rawValue
+        self.dateFromTextField.placeholder = "c: ММ.ДД"
+        self.dateToTextField.placeholder = "по: ММ.ДД"
     }
     
-    func customizeButtons() {
-        UIButton.appearance().layer.cornerRadius = ViewConstraints.radius.rawValue
-        UIButton.appearance().clipsToBounds = true
-        UIButton.appearance().backgroundColor = .systemGray6
-        UIButton.appearance().frame.size.width = self.graphView.frame.size.width / 4
-        UIButton.appearance().frame.size.height = ViewConstraints.heightButtons.rawValue
-        UIButton.appearance().setTitleColor(.black, for: .normal)
-        
-        self.weekButton.setTitle(" Неделя ", for: .normal)
-        self.weekButton.addTarget(self, action: #selector(self.touchedWeek), for: .touchDown)
-        self.monthButton.setTitle(" Месяц ", for: .normal)
-        self.monthButton.addTarget(self, action: #selector(self.touchedMonth), for: .touchDown)
-        self.yearButton.setTitle(" Год ", for: .normal)
-        self.yearButton.addTarget(self, action: #selector(self.touchedYear), for: .touchDown)
+    func customizeButton() {
+        self.calculateButton.layer.cornerRadius = ViewConstraints.radius.rawValue
+        self.calculateButton.clipsToBounds = true
+        self.calculateButton.backgroundColor = .systemGray6
+        self.calculateButton.frame.size.height = ViewConstraints.heightButtons.rawValue
+        self.calculateButton.setTitleColor(.black, for: .normal)
+        self.calculateButton.setTitle(" Рассчитать ", for: .normal)
+        self.calculateButton.addTarget(self, action: #selector(self.touchedDown), for: .touchDown)
     }
     
-    @objc func touchedWeek() {
-        self.onTouchedHandler?("Week")
-    }
-    @objc func touchedMonth() {
-        self.onTouchedHandler?("Month")
-    }
-    @objc func touchedYear() {
-        self.onTouchedHandler?("Year")
+    @objc func touchedDown() {
+        var date = [String]()
+        date.append(self.dateFromTextField.text ?? "")
+        date.append(self.dateToTextField.text ?? "")
+        self.onTouchedHandler?(date)
+        self.graphView.isHidden = false
     }
     
-    func setConstraints() {
-        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: ViewConstraints.top.rawValue).isActive = true
-        self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ViewConstraints.left.rawValue).isActive = true
-        self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ViewConstraints.left.rawValue).isActive = true
-        
+    func setConstraints() {     
         self.menuView.translatesAutoresizingMaskIntoConstraints = false
-        self.menuView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: ViewConstraints.margin.rawValue).isActive = true
-        self.menuView.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor).isActive = true
-        self.menuView.trailingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor).isActive = true
+        self.menuView.topAnchor.constraint(equalTo: self.topAnchor, constant: ViewConstraints.top.rawValue).isActive = true
+        self.menuView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ViewConstraints.left.rawValue).isActive = true
+        self.menuView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ViewConstraints.left.rawValue).isActive = true
         self.menuView.heightAnchor.constraint(equalToConstant: ViewConstraints.heightMenu.rawValue).isActive = true
         
-        self.weekButton.translatesAutoresizingMaskIntoConstraints = false
-        self.weekButton.topAnchor.constraint(equalTo: self.menuView.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
-        self.weekButton.leadingAnchor.constraint(equalTo: self.menuView.leadingAnchor, constant: ViewConstraints.left.rawValue).isActive = true
-        self.weekButton.trailingAnchor.constraint(equalTo: self.monthButton.leadingAnchor, constant: -ViewConstraints.left.rawValue).isActive = true
+        self.dateFromTextField.translatesAutoresizingMaskIntoConstraints = false
+        self.dateFromTextField.topAnchor.constraint(equalTo: self.menuView.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
+        self.dateFromTextField.leadingAnchor.constraint(equalTo: self.menuView.leadingAnchor).isActive = true
+        self.dateFromTextField.trailingAnchor.constraint(equalTo: self.centerXAnchor, constant: -ViewConstraints.left.rawValue).isActive = true
         
-        self.monthButton.translatesAutoresizingMaskIntoConstraints = false
-        self.monthButton.topAnchor.constraint(equalTo: self.menuView.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
-        self.monthButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.dateToTextField.translatesAutoresizingMaskIntoConstraints = false
+        self.dateToTextField.topAnchor.constraint(equalTo: self.menuView.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
+        self.dateToTextField.leadingAnchor.constraint(equalTo: self.centerXAnchor, constant: ViewConstraints.left.rawValue).isActive = true
+        self.dateToTextField.trailingAnchor.constraint(equalTo: self.menuView.trailingAnchor).isActive = true
         
-        self.yearButton.translatesAutoresizingMaskIntoConstraints = false
-        self.yearButton.topAnchor.constraint(equalTo: self.menuView.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
-        self.yearButton.leadingAnchor.constraint(equalTo: self.monthButton.trailingAnchor, constant: ViewConstraints.left.rawValue).isActive = true
-        self.yearButton.trailingAnchor.constraint(equalTo: self.menuView.trailingAnchor, constant: -ViewConstraints.left.rawValue).isActive = true
+        self.calculateButton.translatesAutoresizingMaskIntoConstraints = false
+        self.calculateButton.topAnchor.constraint(equalTo: self.dateFromTextField.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
+        self.calculateButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         
         self.graphView.translatesAutoresizingMaskIntoConstraints = false
-        self.graphView.topAnchor.constraint(equalTo: self.weekButton.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
-        self.graphView.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor).isActive = true
-        self.graphView.trailingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor).isActive = true
+        self.graphView.topAnchor.constraint(equalTo: self.calculateButton.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
+        self.graphView.leadingAnchor.constraint(equalTo: self.menuView.leadingAnchor).isActive = true
+        self.graphView.trailingAnchor.constraint(equalTo: self.menuView.trailingAnchor).isActive = true
         self.graphView.heightAnchor.constraint(equalToConstant: ViewConstraints.heightGraph.rawValue).isActive = true
         
         self.detailView.translatesAutoresizingMaskIntoConstraints = false
         self.detailView.topAnchor.constraint(equalTo: self.graphView.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
-        self.detailView.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor).isActive = true
-        self.detailView.trailingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor).isActive = true
+        self.detailView.leadingAnchor.constraint(equalTo: self.menuView.leadingAnchor).isActive = true
+        self.detailView.trailingAnchor.constraint(equalTo: self.menuView.trailingAnchor).isActive = true
         self.detailView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -ViewConstraints.bottom.rawValue).isActive = true
     }
 }

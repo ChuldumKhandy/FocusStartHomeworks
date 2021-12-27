@@ -8,6 +8,7 @@
 import UIKit
 
 protocol IInfoVC: AnyObject {
+    func followingLink(url: String)
 }
 
 final class InfoVC: UIViewController {
@@ -36,4 +37,11 @@ final class InfoVC: UIViewController {
 }
 
 extension InfoVC: IInfoVC {
+    func followingLink(url: String) {
+        if let url = URL(string: url) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:])
+            }
+        }
+    }
 }

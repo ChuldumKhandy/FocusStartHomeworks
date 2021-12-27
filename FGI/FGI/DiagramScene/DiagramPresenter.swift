@@ -16,6 +16,7 @@ final class DiagramPresenter {
     private weak var viewScene: IDiagramView?
     private let networkService: INetworkService
     private let diagramModel: IDiagramModel
+    
     init(diagramModel: DiagramModel) {
         self.networkService = NetworkService()
         self.diagramModel = diagramModel
@@ -28,41 +29,26 @@ extension DiagramPresenter: IDiagramPresenter{
         self.controller = controller
         self.viewScene = viewScene
         self.setHandlers()
+        
+        self.controller?.openInfo()
+        self.controller?.openAlert()
     }
 }
 
 private extension DiagramPresenter {
     func setHandlers() {
-        self.getCurrencies()
         self.onTouched()
-        //self.getFGI()
     }
     
     func onTouched() {
         if let view = self.viewScene {
-            view.onTouchedHandler = { [weak self] selectedDate in
-                switch selectedDate {
-                case "Week":
-                    self?.loadData(currency: view.getSelectedCurrency() ?? "",
-                                  dateFrom: "12.19.2021",
-                                  dateTo: "12.26.2021")
-                    self?.getFGI()
-                case "Month":
-                    self?.loadData(currency: view.getSelectedCurrency() ?? "",
-                                  dateFrom: "11.26.2021",
-                                  dateTo: "12.26.2021")
-                    self?.getFGI()
-                case "Year":
-                    self?.loadData(currency: view.getSelectedCurrency() ?? "",
-                                  dateFrom: "01.01.2021",
-                                  dateTo: "12.26.2021")
-                    self?.getFGI()
-                default:
-                    print("Не выбран период")
-                }
+            view.onTouchedHandler = { [weak self] Dates in
+                self?.loadData(currency: view.getSelectedCurrency() ?? "",
+                               dateFrom: Dates[0],
+                               dateTo: Dates[1])
+                self?.getFGI()
             }
         }
-        //self.getFGI()
     }
     
     func getFGI() {
@@ -84,6 +70,7 @@ private extension DiagramPresenter {
                 case .success(let model):
                     DispatchQueue.main.async {
                         self.diagramModel.setCurrencies(currencies: model)
+                        self.getCurrencies()
                     }
                 case .failure(let error):
                     print("[NETWORK] error is: \(error)")
@@ -95,11 +82,10 @@ private extension DiagramPresenter {
     }
     
     func loadData(currency: String, dateFrom: String, dateTo: String) {
-        if let url = URL(string: "https://valutes20211226150144.azurewebsites.net/api/valutes/GetValutes?dateFrom=\(dateFrom)&dateTo=\(dateTo)&currency=\(currency.replacingOccurrences(of: " ", with: "%20"))") {
+        if let url = URL(string: "https://valutes20211226150144.azurewebsites.net/api/valutes/GetValutes?dateFrom=\(dateFrom).2021&dateTo=\(dateTo).2021&currency=\(currency.replacingOccurrences(of: " ", with: "%20"))") {
             self.networkService.loadFGIes(from: url) { (result: Result<[FGIDto], Error>) in
                 switch result {
                 case .success(let model):
-                    //print("[NETWORK] model is: \(model)")
                     DispatchQueue.main.async {
                         self.diagramModel.setFGI(FGIes: FGIMapper.fromDto(dtos: model))
                     }

@@ -26,7 +26,6 @@ extension DiagramModel: IDiagramModel {
     
     func setFGI(FGIes: [FGI]) {
         self.FGIes = FGIes
-        print("MY FGI: \(String(describing: self.FGIes))")
     }
     
     func setCurrencies(currencies: [String]) {
@@ -36,8 +35,6 @@ extension DiagramModel: IDiagramModel {
     func getCurrencies() -> [String]? {
         return self.currencies
     }
-    
-    
 }
 
 private extension DiagramModel {

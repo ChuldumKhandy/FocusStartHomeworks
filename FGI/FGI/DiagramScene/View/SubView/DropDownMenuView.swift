@@ -9,7 +9,8 @@ import UIKit
 
 final class DropDownMenuView: UIView {
     private let currencyPikerView = UIPickerView()
-    var getCurrenciesHandler: (() -> [String])?
+    private var currencies = [String]()
+    var getCurrenciesHandler: (([String]) -> Void)?
     var selectedCurrencyHandler: ((String) -> Void)?
     
     override init(frame: CGRect) {
@@ -18,6 +19,10 @@ final class DropDownMenuView: UIView {
         self.addSubview(self.currencyPikerView)
         self.customizePickerView()
         self.setConstraints()
+        self.getCurrenciesHandler = { [weak self] currencies in
+            self?.currencies = currencies
+            self?.currencyPikerView.reloadAllComponents()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -27,7 +32,7 @@ final class DropDownMenuView: UIView {
 
 extension DropDownMenuView: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.selectedCurrencyHandler?(self.setCurrencies()[row])
+        self.selectedCurrencyHandler?(self.currencies[row])
     }
 }
 
@@ -37,13 +42,13 @@ extension DropDownMenuView: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.setCurrencies().count
+        return self.currencies.count
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         self.endEditing(true)
         let pickerLabel = UILabel()
-        pickerLabel.text = self.setCurrencies()[row]
+        pickerLabel.text = self.currencies[row]
         pickerLabel.textAlignment = .center
         pickerLabel.textColor = .black
         pickerLabel.font = UIFont(name: "Inter", size: 10)
@@ -52,12 +57,6 @@ extension DropDownMenuView: UIPickerViewDataSource {
 }
 
 private extension DropDownMenuView {
-    func setCurrencies() -> [String] {
-        guard let currencies = getCurrenciesHandler?() else {
-            return ["Что-то пошло не так"] }
-        return currencies
-    }
-   
     func customizePickerView() {
         self.currencyPikerView.dataSource = self
         self.currencyPikerView.delegate = self
