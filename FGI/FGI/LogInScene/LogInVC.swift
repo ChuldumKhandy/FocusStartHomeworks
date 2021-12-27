@@ -8,6 +8,7 @@
 import UIKit
 
 protocol ILogInVC: AnyObject {
+    func showAlert(message: String)
 }
 
 final class LogInVC: UIViewController {
@@ -36,4 +37,9 @@ final class LogInVC: UIViewController {
 }
 
 extension LogInVC: ILogInVC {
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Понятно", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

@@ -10,8 +10,8 @@ import UIKit
 final class LogInAssembly {
     static func build() -> UIViewController {
         let router = LogInRouter()
-        let model = LogInUser()
-        let presenter = LogInPresenter(users: model, router: router)
+        //let model = LogInUser()
+        let presenter = LogInPresenter(router: router)
         let controller = LogInVC(presenter: presenter)
         router.setRootController(controller: controller)
         return controller
