@@ -8,7 +8,7 @@
 import UIKit
 
 protocol IDiagramView: UIView {
-    var onTouchedHandler: (([String]) -> Void)? { get set }
+    var onTouchedHandler: ((_ dateFrom: String?, _ dateTo: String?) -> Void)? { get set }
     func passCurrencies(currencies: [String])
     func loadView(controller: IDiagramVC)
     func getSelectedCurrency() -> String?
@@ -24,7 +24,7 @@ final class DiagramView: UIView {
     private let graphView = GraphView()
     private let detailView = DetailTableView()
     
-    var onTouchedHandler: (([String]) -> Void)?
+    var onTouchedHandler: ((_ dateFrom: String?, _ dateTo: String?) -> Void)?
     
     private var selectedCurrency: String?
     
@@ -58,7 +58,8 @@ extension DiagramView: IDiagramView {
         return self.selectedCurrency
     }
     
-    func setFGI(fgi: [FGI]) {        
+    func setFGI(fgi: [FGI]) {
+        self.graphView.isHidden = false
         self.graphView.pointHandler?(fgi.map { (fgi) -> Float in
             fgi.value
         })
@@ -81,8 +82,8 @@ private extension DiagramView {
         UITextField.appearance().layer.cornerRadius = ViewConstraints.radius.rawValue
         UITextField.appearance().layer.masksToBounds = true
         UITextField.appearance().frame.size.height = ViewConstraints.heightButtons.rawValue
-        self.dateFromTextField.placeholder = "c: ММ.ДД"
-        self.dateToTextField.placeholder = "по: ММ.ДД"
+        self.dateFromTextField.placeholder = "c: дд.ММ"
+        self.dateToTextField.placeholder = "по: дд.ММ"
     }
     
     func customizeButton() {
@@ -96,11 +97,7 @@ private extension DiagramView {
     }
     
     @objc func touchedDown() {
-        var date = [String]()
-        date.append(self.dateFromTextField.text ?? "")
-        date.append(self.dateToTextField.text ?? "")
-        self.onTouchedHandler?(date)
-        self.graphView.isHidden = false
+        self.onTouchedHandler?(self.dateFromTextField.text, self.dateToTextField.text)
     }
     
     func setConstraints() {     
@@ -122,7 +119,8 @@ private extension DiagramView {
         
         self.calculateButton.translatesAutoresizingMaskIntoConstraints = false
         self.calculateButton.topAnchor.constraint(equalTo: self.dateFromTextField.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
-        self.calculateButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.calculateButton.leadingAnchor.constraint(equalTo: self.menuView.leadingAnchor).isActive = true
+        self.calculateButton.trailingAnchor.constraint(equalTo: self.menuView.trailingAnchor).isActive = true
         
         self.graphView.translatesAutoresizingMaskIntoConstraints = false
         self.graphView.topAnchor.constraint(equalTo: self.calculateButton.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true

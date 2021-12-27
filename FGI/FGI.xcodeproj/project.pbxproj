@@ -17,6 +17,7 @@
 		CE145A712779AD7A00C57A6A /* Ext TapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE145A702779AD7A00C57A6A /* Ext TapGestureRecognizer.swift */; };
 		CE145A7E2779DC5D00C57A6A /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE145A7C2779DC5D00C57A6A /* User+CoreDataClass.swift */; };
 		CE145A7F2779DC5D00C57A6A /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE145A7D2779DC5D00C57A6A /* User+CoreDataProperties.swift */; };
+		CE145A822779F82F00C57A6A /* LogInNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE145A812779F82F00C57A6A /* LogInNavigation.swift */; };
 		CE174DE527787A23001EF597 /* FGIMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE174DE427787A23001EF597 /* FGIMapper.swift */; };
 		CE31C41E2777860900C1AD5C /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE31C41D2777860900C1AD5C /* GridView.swift */; };
 		CE4F1AF2277439020083239A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F1AF1277439020083239A /* AppDelegate.swift */; };
@@ -56,6 +57,7 @@
 		CE145A702779AD7A00C57A6A /* Ext TapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext TapGestureRecognizer.swift"; sourceTree = "<group>"; };
 		CE145A7C2779DC5D00C57A6A /* User+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		CE145A7D2779DC5D00C57A6A /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		CE145A812779F82F00C57A6A /* LogInNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInNavigation.swift; sourceTree = "<group>"; };
 		CE174DE427787A23001EF597 /* FGIMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FGIMapper.swift; sourceTree = "<group>"; };
 		CE31C41D2777860900C1AD5C /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		CE4F1AEE277439020083239A /* FGI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FGI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,12 +116,21 @@
 			children = (
 				CE145A6A2779A93000C57A6A /* LogInAssembly.swift */,
 				CE145A672779A91E00C57A6A /* LogInRouter.swift */,
-				CE145A642779A90E00C57A6A /* LogInPresenter.swift */,
-				CE145A612779A8F400C57A6A /* LogInVC.swift */,
-				CE145A5E2779A8E100C57A6A /* LogInView.swift */,
 				CE145A6D2779ABE600C57A6A /* LogInUser.swift */,
+				CE145A642779A90E00C57A6A /* LogInPresenter.swift */,
+				CE145A842779FB0B00C57A6A /* View */,
 			);
 			path = LogInScene;
+			sourceTree = "<group>";
+		};
+		CE145A842779FB0B00C57A6A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE145A612779A8F400C57A6A /* LogInVC.swift */,
+				CE145A812779F82F00C57A6A /* LogInNavigation.swift */,
+				CE145A5E2779A8E100C57A6A /* LogInView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		CE4F1AE5277439020083239A = {
@@ -311,6 +322,7 @@
 				CE4F1B1527743F790083239A /* DiagramVC.swift in Sources */,
 				CE4F1B26277445EF0083239A /* InfoText.swift in Sources */,
 				CE31C41E2777860900C1AD5C /* GridView.swift in Sources */,
+				CE145A822779F82F00C57A6A /* LogInNavigation.swift in Sources */,
 				CE174DE527787A23001EF597 /* FGIMapper.swift in Sources */,
 				CE6706482777577C00740E52 /* Constraints.swift in Sources */,
 				CE670611277592AE00740E52 /* DiagramModel.swift in Sources */,

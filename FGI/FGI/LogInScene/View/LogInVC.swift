@@ -9,15 +9,19 @@ import UIKit
 
 protocol ILogInVC: AnyObject {
     func showAlert(message: String)
+    func showActivityIndicatory(startAnimating: Bool)
 }
 
 final class LogInVC: UIViewController {
     private let viewScene: ILogInView
     private let presenter: ILogInPresenter
+    private let navigation: LogInNavigation
+    var activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     
     init(presenter: LogInPresenter) {
         self.viewScene = LogInView(frame: UIScreen.main.bounds)
         self.presenter = presenter
+        self.navigation = LogInNavigation()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -28,6 +32,7 @@ final class LogInVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter.loadView(controller: self, viewScene: self.viewScene)
+        self.navigation.loadView(controller: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,5 +46,17 @@ extension LogInVC: ILogInVC {
         let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Понятно", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showActivityIndicatory(startAnimating: Bool) {
+        self.view.addSubview(activityIndicator)
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.color = .gray
+        self.activityIndicator.center = view.center
+        if startAnimating {
+            self.activityIndicator.startAnimating()
+        } else {
+            self.activityIndicator.stopAnimating()
+        }
     }
 }

@@ -103,7 +103,7 @@ private extension LogInView {
         
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -ViewConstraints.top.rawValue).isActive = true
+        self.stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         self.stackView.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor).isActive = true
         self.stackView.trailingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor).isActive = true
     }

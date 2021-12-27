@@ -15,7 +15,7 @@ final class LogInPresenter {
     private weak var controller: ILogInVC?
     private weak var viewScene: ILogInView?
     private let coreDataManager: ICoreDataManager
-    private let router: LogInRouter
+    private let router: ILogInRouter
     
     init(router: LogInRouter) {
         self.router = router
@@ -42,7 +42,7 @@ private extension LogInPresenter {
                 self?.controller?.showAlert(message: "Введите логин и пароль")
                 return
             }
-            guard let user = self?.coreDataManager.getUser(login: login, password: password) else {
+            guard (self?.coreDataManager.getUser(login: login, password: password)) != nil else {
                 self?.controller?.showAlert(message: "Пользователь не зарегистрирован или пароль не верен")
                 return
             }
@@ -63,10 +63,10 @@ private extension LogInPresenter {
                 self?.controller?.showAlert(message: "Такой пользователь уже зарегистрирован")
                 return
             }
-            //self.uiView?.set(progress: true)
+            self?.controller?.showActivityIndicatory(startAnimating: true)
             let newUser = LogInUser(login: login, password: password)
             self?.coreDataManager.saveUser(user: newUser, completion: {
-                //self.uiView?.set(progress: false)
+                self?.controller?.showActivityIndicatory(startAnimating: false)
                 self?.router.next(controller: DiagramSceneAssembly.build())
             })
         }

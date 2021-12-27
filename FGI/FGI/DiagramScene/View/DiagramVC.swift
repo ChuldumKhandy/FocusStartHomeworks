@@ -10,12 +10,15 @@ import UIKit
 protocol IDiagramVC: AnyObject {
     func openInfo()
     func openAlert()
+    func showAlert(message: String)
+    func showActivityIndicatory(startAnimating: Bool)
 }
 
 final class DiagramVC: UIViewController {
     private let viewScene: IDiagramView
     private let presenter: IDiagramPresenter
     private let navigation: DiagramNavigation
+    var activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     
     init(presenter: DiagramPresenter) {
         self.presenter = presenter
@@ -46,6 +49,13 @@ final class DiagramVC: UIViewController {
 }
 
 extension DiagramVC: IDiagramVC {
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "Понятно", style: .default, handler: nil)
+        alert.addAction(okButton)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func openInfo() {
         self.navigation.openInfoSceneHandler = { [weak self] in
             self?.present(InfoSceneAssembly.build(), animated: true, completion: nil)
@@ -54,13 +64,25 @@ extension DiagramVC: IDiagramVC {
     
     func openAlert() {
         self.navigation.openAlerteHandler = { [weak self] in
-            self?.showAlert()
+            self?.howToUseAlert()
+        }
+    }
+    
+    func showActivityIndicatory(startAnimating: Bool) {
+        self.view.addSubview(activityIndicator)
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.color = .gray
+        self.activityIndicator.center = view.center
+        if startAnimating {
+            self.activityIndicator.startAnimating()
+        } else {
+            self.activityIndicator.stopAnimating()
         }
     }
 }
 
 private extension DiagramVC {
-    func showAlert() {
+    func howToUseAlert() {
         let alert = UIAlertController(title: "Как пользоваться", message: "Выберите валюту, установите период, нажмите на кнопочку <3", preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Понятно", style: .default, handler: nil)
         alert.addAction(okButton)

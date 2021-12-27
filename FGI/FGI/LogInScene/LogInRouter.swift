@@ -7,9 +7,16 @@
 
 import UIKit
 
+protocol ILogInRouter {
+    func setRootController(controller: UIViewController)
+    func next(controller: UIViewController)
+}
+
 final class LogInRouter {
     private var controller: UIViewController?
+}
 
+extension LogInRouter: ILogInRouter {
     func setRootController(controller: UIViewController) {
         self.controller = controller
     }

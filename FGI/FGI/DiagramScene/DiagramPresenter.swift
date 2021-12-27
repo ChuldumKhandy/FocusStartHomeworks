@@ -28,24 +28,24 @@ extension DiagramPresenter: IDiagramPresenter{
     func loadView(controller: DiagramVC, viewScene: IDiagramView) {
         self.controller = controller
         self.viewScene = viewScene
-        self.setHandlers()
-        
+        self.onTouched()
         self.controller?.openInfo()
         self.controller?.openAlert()
     }
 }
 
 private extension DiagramPresenter {
-    func setHandlers() {
-        self.onTouched()
-    }
-    
     func onTouched() {
         if let view = self.viewScene {
-            view.onTouchedHandler = { [weak self] Dates in
+            view.onTouchedHandler = { [weak self] dateFrom, dateTo in
+                guard let dateFrom = self?.isValidDate(date: dateFrom),
+                      let dateTo = self?.isValidDate(date: dateTo) else {
+                    self?.controller?.showAlert(message: "Некорректный ввод данных")
+                    return
+                }
                 self?.loadData(currency: view.getSelectedCurrency() ?? "",
-                               dateFrom: Dates[0],
-                               dateTo: Dates[1])
+                               dateFrom: dateFrom,
+                               dateTo: dateTo)
                 self?.getFGI()
             }
         }
@@ -73,11 +73,11 @@ private extension DiagramPresenter {
                         self.getCurrencies()
                     }
                 case .failure(let error):
-                    print("[NETWORK] error is: \(error)")
+                    print("[NETWORK] error Currencies is: \(error)")
                 }
             }
         } else {
-            print("Проблемки с УРЛ")
+            self.controller?.showAlert(message: "Возникли проблемы с доступом к серверу")
         }
     }
     
@@ -90,11 +90,35 @@ private extension DiagramPresenter {
                         self.diagramModel.setFGI(FGIes: FGIMapper.fromDto(dtos: model))
                     }
                 case .failure(let error):
-                    print("[NETWORK] error is: \(error)")
+                    print("[NETWORK] error Data is: \(error)")
+                    DispatchQueue.main.async {
+                        self.controller?.showAlert(message: "Некорректный ввод данных")
+                    }
                 }
             }
         } else {
-            print("Проблемки с УРЛ 2")
+            self.controller?.showAlert(message: "Возникли проблемы с доступом к серверу")
         }
+    }
+    
+    func isValidDate(date: String?) -> String? {
+        guard let date = date,
+              date.isEmpty == false,
+              date.count < 6 else {
+            return nil
+        }
+        let correct = self.dateForUrl(date: date)
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "MM.dd"
+        if dateFormatterGet.date(from: correct) != nil {
+            return correct
+        } else {
+            return nil
+        }
+    }
+    
+    func dateForUrl(date: String) -> String {
+        let dateComponets = date.components(separatedBy: ".")
+        return dateComponets[1] + "." + dateComponets[0]
     }
 }
