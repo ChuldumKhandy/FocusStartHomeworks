@@ -1,0 +1,125 @@
+//
+//  DiagramPresenter.swift
+//  FGI
+//
+//  Created by user on 24.12.2021.
+//
+
+import Foundation
+
+protocol IDiagramPresenter {
+    func loadView(controller: DiagramVC, viewScene: IDiagramView)
+}
+
+final class DiagramPresenter {
+    private weak var controller: IDiagramVC?
+    private weak var viewScene: IDiagramView?
+    private let networkService: INetworkService
+    private let diagramModel: IDiagramModel
+    private let urlValute = "https://valutes20211226150144.azurewebsites.net/api/valutes"
+    
+    init(diagramModel: DiagramModel) {
+        self.networkService = NetworkService()
+        self.diagramModel = diagramModel
+        self.loadCurrencies()
+    }
+}
+
+extension DiagramPresenter: IDiagramPresenter{
+    func loadView(controller: DiagramVC, viewScene: IDiagramView) {
+        self.controller = controller
+        self.viewScene = viewScene
+        self.onTouched()
+        self.controller?.openInfo()
+        self.controller?.openAlert()
+    }
+}
+
+private extension DiagramPresenter {
+    func onTouched() {
+        if let view = self.viewScene {
+            view.onTouchedHandler = { [weak self] dateFrom, dateTo in
+                guard let dateFrom = self?.isValidDate(date: dateFrom),
+                      let dateTo = self?.isValidDate(date: dateTo) else {
+                    self?.controller?.showAlert(message: "Некорректный ввод данных")
+                    return }
+                guard let currency = self?.diagramModel.getCurrencies()?.first else {
+                    return }
+                self?.loadData(currency: view.getSelectedCurrency() ?? currency,
+                               dateFrom: dateFrom,
+                               dateTo: dateTo)
+                self?.getFGI()
+            }
+        }
+    }
+    
+    func getFGI() {
+        if let fgi = self.diagramModel.getFGI() {
+            self.viewScene?.setFGI(fgi: fgi)
+        }
+    }
+    
+    func getCurrencies() {
+        if let currencies = self.diagramModel.getCurrencies() {
+            self.viewScene?.passCurrencies(currencies: currencies)
+        }
+    }
+    
+    func loadCurrencies() {
+        if let url = URL(string: "\(self.urlValute)/GetCurrencies") {
+            self.networkService.loadCurriencies(from: url) { (result: Result<[String], Error>) in
+                switch result {
+                case .success(let model):
+                    DispatchQueue.main.async {
+                        self.diagramModel.setCurrencies(currencies: model)
+                        self.getCurrencies()
+                    }
+                case .failure(let error):
+                    print("[NETWORK] error Currencies is: \(error)")
+                }
+            }
+        } else {
+            self.controller?.showAlert(message: "Возникли проблемы с доступом к серверу")
+        }
+    }
+    
+    func loadData(currency: String, dateFrom: String, dateTo: String) {
+        let encodedTexts = currency.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+        if let encodedTexts = encodedTexts {
+            if let url = URL(string: "\(self.urlValute)/GetValutes?dateFrom=\(dateFrom).2021&dateTo=\(dateTo).2021&currency=\(encodedTexts.replacingOccurrences(of: " ", with: "%20"))") {
+                self.networkService.loadFGIes(from: url) { (result: Result<[FGIDto], Error>) in
+                    switch result {
+                    case .success(let model):
+                        DispatchQueue.main.async {
+                            self.diagramModel.setFGI(FGIes: FGIMapper.fromDto(dtos: model))
+                        }
+                    case .failure(let error):
+                        print("[NETWORK] error Data is: \(error)")
+                        DispatchQueue.main.async {
+                            self.controller?.showAlert(message: "Некорректный ввод данных")
+                        }
+                    }
+                }
+            } else {
+                self.controller?.showAlert(message: "Возникли проблемы с доступом к серверу")
+            }
+        }
+    }
+    
+    func isValidDate(date: String?) -> String? {
+        guard let date = date,
+              date.isEmpty == false,
+              let correct = self.convertDateFormater(date) else {
+            return nil
+        }
+        return correct
+    }
+    
+    func convertDateFormater(_ date: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM"
+        guard let date = dateFormatter.date(from: date) else { return nil }
+        dateFormatter.dateFormat = "MM.dd"
+        return dateFormatter.string(from: date)
+    }
+}
