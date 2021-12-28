@@ -21,3 +21,12 @@ enum ViewConstraints: CGFloat {
     case heightButtons = 20
     case heightCell = 50
 }
+
+
+enum FontSize: CGFloat {
+    case title = 20
+    case large = 18
+    case medium = 16
+    case small = 14
+    case weight = 300
+}

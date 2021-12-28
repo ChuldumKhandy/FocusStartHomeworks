@@ -23,7 +23,6 @@ private extension DiagramNavigation {
         self.controller?.navigationController?.navigationBar.barTintColor = .white
         self.controller?.navigationController?.navigationBar.shadowImage = UIImage()
         self.controller?.title = "Индек страха и жадности"
-        self.controller?.navigationController?.isNavigationBarHidden = false
         
         self.leftBarItem()
         self.rightBarItem()
@@ -35,6 +34,7 @@ private extension DiagramNavigation {
                                            target: self,
                                            action: #selector(self.openInfoScene))
         rightBarItem.tintColor = .black
+        self.controller?.navigationItem.rightBarButtonItem?.tintColor = .white
         self.controller?.navigationItem.rightBarButtonItem = rightBarItem
     }
     

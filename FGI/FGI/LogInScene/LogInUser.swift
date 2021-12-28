@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 final class LogInUser {
     let uid: UUID
     let login: String

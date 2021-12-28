@@ -34,8 +34,8 @@ final class DiagramVC: UIViewController {
     override func loadView() {
         super.loadView()
         self.presenter.loadView(controller: self, viewScene: self.viewScene)
-        self.viewScene.loadView(controller: self)
         self.navigation.loadView(controller: self)
+        self.hideKeyboardWhenTappedAround()
     }
     
     override func viewDidLoad() {
@@ -64,7 +64,7 @@ extension DiagramVC: IDiagramVC {
     
     func openAlert() {
         self.navigation.openAlerteHandler = { [weak self] in
-            self?.howToUseAlert()
+            self?.showAlert(message: "Выберите валюту, установите период, нажмите на кнопку")
         }
     }
     
@@ -82,10 +82,10 @@ extension DiagramVC: IDiagramVC {
 }
 
 private extension DiagramVC {
-    func howToUseAlert() {
-        let alert = UIAlertController(title: "Как пользоваться", message: "Выберите валюту, установите период, нажмите на кнопочку <3", preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "Понятно", style: .default, handler: nil)
-        alert.addAction(okButton)
-        self.present(alert, animated: true, completion: nil)
-    }
+//    func howToUseAlert() {
+//        let alert = UIAlertController(title: "Как пользоваться", message: "Выберите валюту, установите период, нажмите на кнопочку <3", preferredStyle: .alert)
+//        let okButton = UIAlertAction(title: "Понятно", style: .default, handler: nil)
+//        alert.addAction(okButton)
+//        self.present(alert, animated: true, completion: nil)
+//    }
 }

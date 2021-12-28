@@ -61,7 +61,7 @@ private extension LogInView {
     
     func customizeTextLabel() {
         self.titleLabel.text = "Авторизация"
-        self.titleLabel.font = .boldSystemFont(ofSize: 20)
+        self.titleLabel.font = .boldSystemFont(ofSize: FontSize.title.rawValue)
         self.titleLabel.textAlignment = .center
     }
     
@@ -103,7 +103,7 @@ private extension LogInView {
         
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: ViewConstraints.margin.rawValue).isActive = true
         self.stackView.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor).isActive = true
         self.stackView.trailingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor).isActive = true
     }

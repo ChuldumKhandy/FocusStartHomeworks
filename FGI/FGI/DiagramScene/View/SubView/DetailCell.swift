@@ -27,18 +27,18 @@ final class DetailCell: UITableViewCell {
     
     func setValue(date: String, value: Float) {
         self.dateLabel.text = date
-        self.valueLabel.text = String(value)
+        self.valueLabel.text = String(format: "% .2f", value)
         switch value {
         case 0...25:
-            self.descriptionLabel.text = "инвесторы напуганы"
+            self.textColor(text: "инвесторы напуганы", color: .red)
         case 25...49:
-            self.descriptionLabel.text = "на рынке преобладает страх"
+            self.textColor(text: "на рынке преобладает страх", color: .orange)
         case 49...51:
-            self.descriptionLabel.text = "нейтральный настрой"
+            self.textColor(text: "нейтральный настрой", color: .gray)
         case 51...75:
-            self.descriptionLabel.text = "на рынке преобладает жадность"
+            self.textColor(text: "на рынке преобладает жадность", color: .green)
         default:
-            self.descriptionLabel.text = "инвесторы категорично жадны"
+            self.textColor(text: "инвесторы категорично жадны", color: .systemGreen)
         }
     }
 }
@@ -47,16 +47,21 @@ private extension DetailCell {
     func setConstraints() {
         self.dateLabel.translatesAutoresizingMaskIntoConstraints = false
         self.dateLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.dateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
+        self.dateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ViewConstraints.left.rawValue).isActive = true
         
         self.descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         self.descriptionLabel.topAnchor.constraint(equalTo: self.dateLabel.bottomAnchor, constant: 5).isActive = true
-        self.descriptionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
+        self.descriptionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ViewConstraints.left.rawValue).isActive = true
         self.descriptionLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
         self.valueLabel.translatesAutoresizingMaskIntoConstraints = false
         self.valueLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.valueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        self.valueLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ViewConstraints.left.rawValue).isActive = true
         self.valueLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
+    
+    func textColor(text: String, color: UIColor) {
+        self.descriptionLabel.textColor = color
+        self.descriptionLabel.text = text
     }
 }

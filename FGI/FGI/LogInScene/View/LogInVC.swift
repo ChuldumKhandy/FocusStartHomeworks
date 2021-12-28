@@ -33,6 +33,7 @@ final class LogInVC: UIViewController {
         super.viewDidLoad()
         self.presenter.loadView(controller: self, viewScene: self.viewScene)
         self.navigation.loadView(controller: self)
+        self.hideKeyboardWhenTappedAround()
     }
     
     override func viewDidAppear(_ animated: Bool) {

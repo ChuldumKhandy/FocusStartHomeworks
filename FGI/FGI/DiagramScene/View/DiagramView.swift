@@ -10,13 +10,11 @@ import UIKit
 protocol IDiagramView: UIView {
     var onTouchedHandler: ((_ dateFrom: String?, _ dateTo: String?) -> Void)? { get set }
     func passCurrencies(currencies: [String])
-    func loadView(controller: IDiagramVC)
     func getSelectedCurrency() -> String?
     func setFGI(fgi: [FGI])
 }
 
 final class DiagramView: UIView {
-    private weak var controller: IDiagramVC?
     private let calculateButton = UIButton()
     private let dateFromTextField = UITextField()
     private let dateToTextField = UITextField()
@@ -48,9 +46,6 @@ final class DiagramView: UIView {
 }
 
 extension DiagramView: IDiagramView {
-    func loadView(controller: IDiagramVC) {
-        self.controller = controller        
-    }
     func passCurrencies(currencies: [String]) {
         self.menuView.getCurrenciesHandler?(currencies)
     }
@@ -92,7 +87,7 @@ private extension DiagramView {
         self.calculateButton.backgroundColor = .systemGray6
         self.calculateButton.frame.size.height = ViewConstraints.heightButtons.rawValue
         self.calculateButton.setTitleColor(.black, for: .normal)
-        self.calculateButton.setTitle(" Рассчитать ", for: .normal)
+        self.calculateButton.setTitle(" Показать ", for: .normal)
         self.calculateButton.addTarget(self, action: #selector(self.touchedDown), for: .touchDown)
     }
     

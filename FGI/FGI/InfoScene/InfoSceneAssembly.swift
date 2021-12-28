@@ -9,8 +9,10 @@ import UIKit
 
 final class InfoSceneAssembly {
     static func build() -> UIViewController {
-        let presenter = InfoPresenter()
+        let router = InfoRouter()
+        let presenter = InfoPresenter(router: router)
         let controller = InfoVC(presenter: presenter)
+        router.setRootController(controller: controller)
         return controller
     }
 }

@@ -32,6 +32,8 @@
 		CE4F1B26277445EF0083239A /* InfoText.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F1B25277445EF0083239A /* InfoText.swift */; };
 		CE4F1B29277445FD0083239A /* InfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F1B28277445FD0083239A /* InfoPresenter.swift */; };
 		CE4F1B2C277448970083239A /* InfoSceneAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4F1B2B277448970083239A /* InfoSceneAssembly.swift */; };
+		CE5CCC92277AAF4500603C7F /* InfoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CCC91277AAF4500603C7F /* InfoRouter.swift */; };
+		CE5CCC95277AD4CD00603C7F /* Ext HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CCC94277AD4CD00603C7F /* Ext HideKeyboard.swift */; };
 		CE6705FF27757BBF00740E52 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6705FE27757BBF00740E52 /* GraphView.swift */; };
 		CE6706022775925000740E52 /* DiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6706012775925000740E52 /* DiagramView.swift */; };
 		CE6706052775926800740E52 /* DiagramPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6706042775926800740E52 /* DiagramPresenter.swift */; };
@@ -74,6 +76,8 @@
 		CE4F1B25277445EF0083239A /* InfoText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoText.swift; sourceTree = "<group>"; };
 		CE4F1B28277445FD0083239A /* InfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPresenter.swift; sourceTree = "<group>"; };
 		CE4F1B2B277448970083239A /* InfoSceneAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoSceneAssembly.swift; sourceTree = "<group>"; };
+		CE5CCC91277AAF4500603C7F /* InfoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRouter.swift; sourceTree = "<group>"; };
+		CE5CCC94277AD4CD00603C7F /* Ext HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext HideKeyboard.swift"; sourceTree = "<group>"; };
 		CE6705FE27757BBF00740E52 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		CE6706012775925000740E52 /* DiagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagramView.swift; sourceTree = "<group>"; };
 		CE6706042775926800740E52 /* DiagramPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagramPresenter.swift; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4F1B2B277448970083239A /* InfoSceneAssembly.swift */,
+				CE5CCC91277AAF4500603C7F /* InfoRouter.swift */,
 				CE4F1B28277445FD0083239A /* InfoPresenter.swift */,
 				CE6706452777466300740E52 /* View */,
 			);
@@ -235,7 +240,6 @@
 				CE4F1B0D27743F4B0083239A /* InfoVC.swift */,
 				CE4F1B1E277445490083239A /* InfoView.swift */,
 				CE4F1B25277445EF0083239A /* InfoText.swift */,
-				CE145A702779AD7A00C57A6A /* Ext TapGestureRecognizer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -244,6 +248,8 @@
 			isa = PBXGroup;
 			children = (
 				CE6706472777577C00740E52 /* Constraints.swift */,
+				CE5CCC94277AD4CD00603C7F /* Ext HideKeyboard.swift */,
+				CE145A702779AD7A00C57A6A /* Ext TapGestureRecognizer.swift */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -338,6 +344,7 @@
 				CE6705FF27757BBF00740E52 /* GraphView.swift in Sources */,
 				CE145A6B2779A93000C57A6A /* LogInAssembly.swift in Sources */,
 				CE4F1B0B277439870083239A /* CoreDataManager.swift in Sources */,
+				CE5CCC95277AD4CD00603C7F /* Ext HideKeyboard.swift in Sources */,
 				CE145A5427797C6B00C57A6A /* DiagramNavigation.swift in Sources */,
 				CE4F1B29277445FD0083239A /* InfoPresenter.swift in Sources */,
 				CE670637277729F100740E52 /* DropDownMenuView.swift in Sources */,
@@ -349,6 +356,7 @@
 				CE145A652779A90E00C57A6A /* LogInPresenter.swift in Sources */,
 				CE67063327771B8800740E52 /* FGI.swift in Sources */,
 				CE145A7F2779DC5D00C57A6A /* User+CoreDataProperties.swift in Sources */,
+				CE5CCC92277AAF4500603C7F /* InfoRouter.swift in Sources */,
 				CE4F1AF4277439020083239A /* SceneDelegate.swift in Sources */,
 				CE145A622779A8F400C57A6A /* LogInVC.swift in Sources */,
 				CE145A6E2779ABE600C57A6A /* LogInUser.swift in Sources */,

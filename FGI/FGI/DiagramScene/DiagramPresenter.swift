@@ -16,6 +16,7 @@ final class DiagramPresenter {
     private weak var viewScene: IDiagramView?
     private let networkService: INetworkService
     private let diagramModel: IDiagramModel
+    private let urlValute = "https://valutes20211226150144.azurewebsites.net/api/valutes"
     
     init(diagramModel: DiagramModel) {
         self.networkService = NetworkService()
@@ -41,9 +42,10 @@ private extension DiagramPresenter {
                 guard let dateFrom = self?.isValidDate(date: dateFrom),
                       let dateTo = self?.isValidDate(date: dateTo) else {
                     self?.controller?.showAlert(message: "Некорректный ввод данных")
-                    return
-                }
-                self?.loadData(currency: view.getSelectedCurrency() ?? "",
+                    return }
+                guard let currency = self?.diagramModel.getCurrencies()?.first else {
+                    return }
+                self?.loadData(currency: view.getSelectedCurrency() ?? currency,
                                dateFrom: dateFrom,
                                dateTo: dateTo)
                 self?.getFGI()
@@ -64,7 +66,7 @@ private extension DiagramPresenter {
     }
     
     func loadCurrencies() {
-        if let url = URL(string: "https://valutes20211226150144.azurewebsites.net/api/valutes/GetCurrencies") {
+        if let url = URL(string: "\(self.urlValute)/GetCurrencies") {
             self.networkService.loadCurriencies(from: url) { (result: Result<[String], Error>) in
                 switch result {
                 case .success(let model):
@@ -82,43 +84,42 @@ private extension DiagramPresenter {
     }
     
     func loadData(currency: String, dateFrom: String, dateTo: String) {
-        if let url = URL(string: "https://valutes20211226150144.azurewebsites.net/api/valutes/GetValutes?dateFrom=\(dateFrom).2021&dateTo=\(dateTo).2021&currency=\(currency.replacingOccurrences(of: " ", with: "%20"))") {
-            self.networkService.loadFGIes(from: url) { (result: Result<[FGIDto], Error>) in
-                switch result {
-                case .success(let model):
-                    DispatchQueue.main.async {
-                        self.diagramModel.setFGI(FGIes: FGIMapper.fromDto(dtos: model))
-                    }
-                case .failure(let error):
-                    print("[NETWORK] error Data is: \(error)")
-                    DispatchQueue.main.async {
-                        self.controller?.showAlert(message: "Некорректный ввод данных")
+        let encodedTexts = currency.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+        if let encodedTexts = encodedTexts {
+            if let url = URL(string: "\(self.urlValute)/GetValutes?dateFrom=\(dateFrom).2021&dateTo=\(dateTo).2021&currency=\(encodedTexts.replacingOccurrences(of: " ", with: "%20"))") {
+                self.networkService.loadFGIes(from: url) { (result: Result<[FGIDto], Error>) in
+                    switch result {
+                    case .success(let model):
+                        DispatchQueue.main.async {
+                            self.diagramModel.setFGI(FGIes: FGIMapper.fromDto(dtos: model))
+                        }
+                    case .failure(let error):
+                        print("[NETWORK] error Data is: \(error)")
+                        DispatchQueue.main.async {
+                            self.controller?.showAlert(message: "Некорректный ввод данных")
+                        }
                     }
                 }
+            } else {
+                self.controller?.showAlert(message: "Возникли проблемы с доступом к серверу")
             }
-        } else {
-            self.controller?.showAlert(message: "Возникли проблемы с доступом к серверу")
         }
     }
     
     func isValidDate(date: String?) -> String? {
         guard let date = date,
               date.isEmpty == false,
-              date.count < 6 else {
+              let correct = self.convertDateFormater(date) else {
             return nil
         }
-        let correct = self.dateForUrl(date: date)
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "MM.dd"
-        if dateFormatterGet.date(from: correct) != nil {
-            return correct
-        } else {
-            return nil
-        }
+        return correct
     }
     
-    func dateForUrl(date: String) -> String {
-        let dateComponets = date.components(separatedBy: ".")
-        return dateComponets[1] + "." + dateComponets[0]
+    func convertDateFormater(_ date: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM"
+        guard let date = dateFormatter.date(from: date) else { return nil }
+        dateFormatter.dateFormat = "MM.dd"
+        return dateFormatter.string(from: date)
     }
 }
