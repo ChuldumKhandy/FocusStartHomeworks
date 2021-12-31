@@ -16,12 +16,11 @@ enum ViewConstraints: CGFloat {
     case left = 16
     case margin = 30
     case marginSmall = 10
-    case heightMenu = 120
+    case heightMenu = 200
     case heightGraph = 250
     case heightButtons = 20
     case heightCell = 50
 }
-
 
 enum FontSize: CGFloat {
     case title = 20

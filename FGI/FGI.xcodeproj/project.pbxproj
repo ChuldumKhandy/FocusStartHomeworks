@@ -46,6 +46,14 @@
 		CE67063B27772D9D00740E52 /* DetailTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67063A27772D9D00740E52 /* DetailTableView.swift */; };
 		CE67063E27772DB900740E52 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67063D27772DB900740E52 /* DetailCell.swift */; };
 		CE6706482777577C00740E52 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6706472777577C00740E52 /* Constraints.swift */; };
+		CE884251277E087100F134BD /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884250277E087100F134BD /* MenuPresenter.swift */; };
+		CE884254277E089100F134BD /* MenuSceneAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884253277E089100F134BD /* MenuSceneAssembly.swift */; };
+		CE884258277E08C000F134BD /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884257277E08C000F134BD /* CurrencyModel.swift */; };
+		CE88425B277E090200F134BD /* MenuNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88425A277E090200F134BD /* MenuNetworkService.swift */; };
+		CE88425E277E091500F134BD /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE88425D277E091500F134BD /* MenuVC.swift */; };
+		CE884261277E092500F134BD /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884260277E092500F134BD /* MenuView.swift */; };
+		CE884264277E09D700F134BD /* MenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884263277E09D700F134BD /* MenuRouter.swift */; };
+		CE884268277E0D7C00F134BD /* MenuNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884267277E0D7C00F134BD /* MenuNavigation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +98,14 @@
 		CE67063A27772D9D00740E52 /* DetailTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableView.swift; sourceTree = "<group>"; };
 		CE67063D27772DB900740E52 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		CE6706472777577C00740E52 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
+		CE884250277E087100F134BD /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
+		CE884253277E089100F134BD /* MenuSceneAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSceneAssembly.swift; sourceTree = "<group>"; };
+		CE884257277E08C000F134BD /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
+		CE88425A277E090200F134BD /* MenuNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNetworkService.swift; sourceTree = "<group>"; };
+		CE88425D277E091500F134BD /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
+		CE884260277E092500F134BD /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		CE884263277E09D700F134BD /* MenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRouter.swift; sourceTree = "<group>"; };
+		CE884267277E0D7C00F134BD /* MenuNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNavigation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +122,6 @@
 		CE145A5627797C7100C57A6A /* SubView */ = {
 			isa = PBXGroup;
 			children = (
-				CE670636277729F100740E52 /* DropDownMenuView.swift */,
 				CE6705FE27757BBF00740E52 /* GraphView.swift */,
 				CE31C41D2777860900C1AD5C /* GridView.swift */,
 				CE67063A27772D9D00740E52 /* DetailTableView.swift */,
@@ -159,8 +174,10 @@
 				CE4F1B1D277444DC0083239A /* CoreDataManager */,
 				CE4F1B1C277444CC0083239A /* Application */,
 				CE67064A2777578900740E52 /* Appearance */,
+				CE88426E277E36D200F134BD /* Extension */,
 				CE145A5D2779A8B800C57A6A /* LogInScene */,
 				CE4F1B18277444740083239A /* InfoScene */,
+				CE88424F277E083500F134BD /* MenuScene */,
 				CE4F1B192774448F0083239A /* DiagramScene */,
 				CE4F1AFD277439100083239A /* Assets.xcassets */,
 				CE4F1AFF277439100083239A /* LaunchScreen.storyboard */,
@@ -248,10 +265,41 @@
 			isa = PBXGroup;
 			children = (
 				CE6706472777577C00740E52 /* Constraints.swift */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
+		CE88424F277E083500F134BD /* MenuScene */ = {
+			isa = PBXGroup;
+			children = (
+				CE884253277E089100F134BD /* MenuSceneAssembly.swift */,
+				CE884263277E09D700F134BD /* MenuRouter.swift */,
+				CE88425A277E090200F134BD /* MenuNetworkService.swift */,
+				CE884250277E087100F134BD /* MenuPresenter.swift */,
+				CE884257277E08C000F134BD /* CurrencyModel.swift */,
+				CE88426A277E128C00F134BD /* View */,
+			);
+			path = MenuScene;
+			sourceTree = "<group>";
+		};
+		CE88426A277E128C00F134BD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE88425D277E091500F134BD /* MenuVC.swift */,
+				CE884267277E0D7C00F134BD /* MenuNavigation.swift */,
+				CE884260277E092500F134BD /* MenuView.swift */,
+				CE670636277729F100740E52 /* DropDownMenuView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CE88426E277E36D200F134BD /* Extension */ = {
+			isa = PBXGroup;
+			children = (
 				CE5CCC94277AD4CD00603C7F /* Ext HideKeyboard.swift */,
 				CE145A702779AD7A00C57A6A /* Ext TapGestureRecognizer.swift */,
 			);
-			path = Appearance;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE4F1B1F277445490083239A /* InfoView.swift in Sources */,
+				CE88425B277E090200F134BD /* MenuNetworkService.swift in Sources */,
 				CE67060E277592A100740E52 /* FGIDto.swift in Sources */,
 				CE4F1B1527743F790083239A /* DiagramVC.swift in Sources */,
 				CE4F1B26277445EF0083239A /* InfoText.swift in Sources */,
@@ -333,13 +382,17 @@
 				CE6706482777577C00740E52 /* Constraints.swift in Sources */,
 				CE670611277592AE00740E52 /* DiagramModel.swift in Sources */,
 				CE145A7E2779DC5D00C57A6A /* User+CoreDataClass.swift in Sources */,
+				CE884258277E08C000F134BD /* CurrencyModel.swift in Sources */,
 				CE67063B27772D9D00740E52 /* DetailTableView.swift in Sources */,
 				CE4F1B2C277448970083239A /* InfoSceneAssembly.swift in Sources */,
 				CE4F1AF2277439020083239A /* AppDelegate.swift in Sources */,
 				CE4F1AFC277439020083239A /* FGI.xcdatamodeld in Sources */,
+				CE884268277E0D7C00F134BD /* MenuNavigation.swift in Sources */,
 				CE145A682779A91E00C57A6A /* LogInRouter.swift in Sources */,
+				CE88425E277E091500F134BD /* MenuVC.swift in Sources */,
 				CE145A5F2779A8E100C57A6A /* LogInView.swift in Sources */,
 				CE67063E27772DB900740E52 /* DetailCell.swift in Sources */,
+				CE884251277E087100F134BD /* MenuPresenter.swift in Sources */,
 				CE67060B2775928E00740E52 /* DiagramSceneAssembly.swift in Sources */,
 				CE6705FF27757BBF00740E52 /* GraphView.swift in Sources */,
 				CE145A6B2779A93000C57A6A /* LogInAssembly.swift in Sources */,
@@ -357,8 +410,11 @@
 				CE67063327771B8800740E52 /* FGI.swift in Sources */,
 				CE145A7F2779DC5D00C57A6A /* User+CoreDataProperties.swift in Sources */,
 				CE5CCC92277AAF4500603C7F /* InfoRouter.swift in Sources */,
+				CE884261277E092500F134BD /* MenuView.swift in Sources */,
 				CE4F1AF4277439020083239A /* SceneDelegate.swift in Sources */,
 				CE145A622779A8F400C57A6A /* LogInVC.swift in Sources */,
+				CE884264277E09D700F134BD /* MenuRouter.swift in Sources */,
+				CE884254277E089100F134BD /* MenuSceneAssembly.swift in Sources */,
 				CE145A6E2779ABE600C57A6A /* LogInUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

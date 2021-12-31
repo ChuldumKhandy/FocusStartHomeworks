@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 final class DiagramSceneAssembly {
-    static func build() -> UIViewController {
+    static func build(currency: String, dateFrom: String, dateTo: String) -> UIViewController {
         let model = DiagramModel()
-        let presenter = DiagramPresenter(diagramModel: model)
+        let presenter = DiagramPresenter(diagramModel: model, currency: currency, dateFrom: dateFrom, dateTo: dateTo)
         let controller = DiagramVC(presenter: presenter)
         return controller
     }

@@ -12,7 +12,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
-        let nav = UINavigationController(rootViewController:  LogInAssembly.build())
+//        let nav = UINavigationController(rootViewController:  LogInAssembly.build())
+//        window.rootViewController = nav
+        let nav = UINavigationController(rootViewController:  MenuSceneAssembly.build())
         window.rootViewController = nav
         window.backgroundColor = .white
         self.window = window

@@ -1,17 +1,17 @@
 //
-//  NetworkService.swift
+//  MenuNetworkService.swift
 //  FGI
 //
-//  Created by user on 24.12.2021.
+//  Created by user on 30.12.2021.
 //
 
 import Foundation
 
-protocol INetworkService {
-    func loadFGIes(from url: URL, completion: @escaping (Result<[FGIDto], Error>) -> Void)
+protocol IMenuNetworkService {
+    func loadCurriencies(from url: URL, completion: @escaping (Result<[String], Error>) -> Void)
 }
 
-final class NetworkService: NSObject {
+final class MenuNetworkService: NSObject {
     private let session: URLSession
 
     init(configuration: URLSessionConfiguration? = nil) {
@@ -24,8 +24,8 @@ final class NetworkService: NSObject {
     }
 }
 
-extension NetworkService: INetworkService {    
-    func loadFGIes(from url: URL, completion: @escaping (Result<[FGIDto], Error>) -> Void) {
+extension MenuNetworkService: IMenuNetworkService {
+    func loadCurriencies(from url: URL, completion: @escaping (Result<[String], Error>) -> Void) {
         let request = URLRequest(url: url)
         self.session.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -33,7 +33,7 @@ extension NetworkService: INetworkService {
             }
             if let data = data {
                 do {
-                    let result = try JSONDecoder().decode([FGIDto].self, from: data)
+                    let result = try JSONDecoder().decode([String].self, from: data)
                     completion(.success(result))
                 }
                 catch {

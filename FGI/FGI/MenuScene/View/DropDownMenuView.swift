@@ -50,8 +50,9 @@ extension DropDownMenuView: UIPickerViewDataSource {
         let pickerLabel = UILabel()
         pickerLabel.text = self.currencies[row]
         pickerLabel.textAlignment = .center
+        pickerLabel.backgroundColor = .systemGray6
         pickerLabel.textColor = .black
-        pickerLabel.font = UIFont(name: "Inter", size: FontSize.large.rawValue)
+        pickerLabel.font = UIFont(name: "Inter", size: FontSize.title.rawValue)
         return pickerLabel
     }
 }
