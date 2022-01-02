@@ -10,6 +10,8 @@ import UIKit
 protocol IDiagramVC: AnyObject {
     func showAlert(message: String)
     func showActivityIndicatory(startAnimating: Bool)
+    func getTitle(currency: String, dateFrom: String, dateTo: String)
+    func backMenuVC()
 }
 
 final class DiagramVC: UIViewController {
@@ -46,6 +48,16 @@ final class DiagramVC: UIViewController {
 }
 
 extension DiagramVC: IDiagramVC {
+    func getTitle(currency: String, dateFrom: String, dateTo: String) {
+        self.navigation.setTitle(currency: currency, dateFrom: dateFrom, dateTo: dateTo)
+    }
+    
+    func backMenuVC() {
+        self.navigation.backMenuVC = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Понятно", style: .default, handler: nil)

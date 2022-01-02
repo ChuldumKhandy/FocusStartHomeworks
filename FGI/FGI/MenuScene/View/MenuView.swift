@@ -8,7 +8,7 @@
 import UIKit
 
 protocol IMenuView: UIView {
-    var onTouchedHandler: ((_ dateFrom: String?, _ dateTo: String?) -> Void)? { get set }
+    var onTouchedHandler: ((_ dateFrom: Date, _ dateTo: Date) -> Void)? { get set }
     func passCurrencies(currencies: [String])
     func getSelectedCurrency() -> String?
 }
@@ -19,9 +19,9 @@ final class MenuView: UIView {
     private let calculateButton = UIButton()
     private let dateFromPicker = UIDatePicker()
     private let dateToPicker = UIDatePicker()
-    private let menuView = DropDownMenuView()
+    private let menuView = CurrencyPikerView()
     
-    var onTouchedHandler: ((_ dateFrom: String?, _ dateTo: String?) -> Void)?
+    var onTouchedHandler: ((_ dateFrom: Date, _ dateTo: Date) -> Void)?
     
     private var selectedCurrency: String?
     
@@ -63,7 +63,15 @@ private extension MenuView {
         self.customizeLabels(label: self.currencyLabel, title: "Валюта:")
         self.customizeLabels(label: self.dateLabel, title: "Период:")
         self.customizeButton()
+        self.customizeDatePickers()
         self.setConstraints()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapDone))
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func tapDone() {
+        self.endEditing(true)
     }
     
     func customizeLabels(label: UILabel, title: String) {
@@ -74,27 +82,18 @@ private extension MenuView {
     }
     
     func customizeDatePickers() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapDone))
-        self.addGestureRecognizer(tapGesture)
         let startDate = Calendar.current.date(from: DateComponents(year: 2021, month: 1, day: 1))
         let endDate = Calendar.current.date(from: DateComponents(year: 2021, month: 12, day: 28))
-        
-        UIPickerView.appearance().backgroundColor = .systemGray6
         guard let localeID = Locale.preferredLanguages.first else {
             return }
-        self.dateFromPicker.locale = Locale(identifier: localeID)
-        self.dateFromPicker.datePickerMode = UIDatePicker.Mode.date
-        self.dateFromPicker.preferredDatePickerStyle = .compact
-        self.dateFromPicker.minimumDate = startDate
-        self.dateFromPicker.maximumDate = endDate
-        self.dateToPicker.minimumDate = startDate
-        self.dateToPicker.maximumDate = endDate
+        UIDatePicker.appearance().locale = Locale(identifier: localeID)
+        UIDatePicker.appearance().tintColor = .black
+        UIDatePicker.appearance().datePickerMode = UIDatePicker.Mode.date
+        UIDatePicker.appearance().preferredDatePickerStyle = .compact
+        UIDatePicker.appearance().minimumDate = startDate
+        UIDatePicker.appearance().maximumDate = endDate
         self.dateFromPicker.setDate(startDate ?? Date(), animated: true)
         self.dateToPicker.setDate(endDate ?? Date(), animated: true)
-    }
-    
-    @objc func tapDone() {
-        self.endEditing(true)
     }
       
     func customizeButton() {
@@ -110,8 +109,9 @@ private extension MenuView {
     @objc func touchedDown() {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM"
-        self.onTouchedHandler?(formatter.string(from: self.dateFromPicker.date),
-                               formatter.string(from: self.dateToPicker.date))
+        
+        
+        self.onTouchedHandler?(self.dateFromPicker.date, self.dateToPicker.date)
     }
     
     func setConstraints() {
@@ -133,16 +133,14 @@ private extension MenuView {
         
         self.dateFromPicker.translatesAutoresizingMaskIntoConstraints = false
         self.dateFromPicker.topAnchor.constraint(equalTo: self.dateLabel.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
-        self.dateFromPicker.leadingAnchor.constraint(equalTo: self.menuView.leadingAnchor).isActive = true
         self.dateFromPicker.trailingAnchor.constraint(equalTo: self.centerXAnchor, constant: -ViewConstraints.left.rawValue).isActive = true
         
         self.dateToPicker.translatesAutoresizingMaskIntoConstraints = false
         self.dateToPicker.topAnchor.constraint(equalTo: self.dateLabel.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
         self.dateToPicker.leadingAnchor.constraint(equalTo: self.centerXAnchor, constant: ViewConstraints.left.rawValue).isActive = true
-        self.dateToPicker.trailingAnchor.constraint(equalTo: self.menuView.trailingAnchor).isActive = true
         
         self.calculateButton.translatesAutoresizingMaskIntoConstraints = false
-        self.calculateButton.topAnchor.constraint(equalTo: self.dateFromPicker.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
+        self.calculateButton.topAnchor.constraint(equalTo: self.dateFromPicker.bottomAnchor, constant: ViewConstraints.margin.rawValue).isActive = true
         self.calculateButton.leadingAnchor.constraint(equalTo: self.menuView.leadingAnchor).isActive = true
         self.calculateButton.trailingAnchor.constraint(equalTo: self.menuView.trailingAnchor).isActive = true
     }

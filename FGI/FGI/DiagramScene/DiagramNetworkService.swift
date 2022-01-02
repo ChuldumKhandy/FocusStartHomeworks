@@ -11,7 +11,7 @@ protocol INetworkService {
     func loadFGIes(from url: URL, completion: @escaping (Result<[FGIDto], Error>) -> Void)
 }
 
-final class NetworkService: NSObject {
+final class DiagramNetworkService: NSObject {
     private let session: URLSession
 
     init(configuration: URLSessionConfiguration? = nil) {
@@ -24,7 +24,7 @@ final class NetworkService: NSObject {
     }
 }
 
-extension NetworkService: INetworkService {    
+extension DiagramNetworkService: INetworkService {    
     func loadFGIes(from url: URL, completion: @escaping (Result<[FGIDto], Error>) -> Void) {
         let request = URLRequest(url: url)
         self.session.dataTask(with: request) { data, response, error in

@@ -64,7 +64,7 @@ extension MenuVC: IMenuVC {
     
     func openAlert() {
         self.navigation.openAlerteHandler = { [weak self] in
-            self?.showAlert(message: "Выберите валюту, установите период, нажмите на кнопку")
+            self?.showAlert(message: "Тут будет окно настроек")
         }
     }
     

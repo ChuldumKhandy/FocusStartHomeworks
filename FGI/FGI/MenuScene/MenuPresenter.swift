@@ -41,13 +41,18 @@ private extension MenuPresenter {
     func onTouched() {
         if let view = self.viewScene {
             view.onTouchedHandler = { [weak self] dateFrom, dateTo in
-                guard let dateFrom = self?.isValidDate(date: dateFrom),
-                      let dateTo = self?.isValidDate(date: dateTo) else {
+                if dateFrom < dateTo {
+                    guard let dateFrom = self?.convertDateFormater(dateFrom),
+                          let dateTo = self?.convertDateFormater(dateTo) else {
+                        return }
+                    guard let currency = self?.currency.getCurrencies()?.first else {
+                        return }
+                    self?.router.nextVC(controller: DiagramSceneAssembly.build(currency: view.getSelectedCurrency() ?? currency,
+                                                                               dateFrom: dateFrom,
+                                                                               dateTo: dateTo))
+                } else {
                     self?.controller?.showAlert(message: "Некорректный ввод данных")
-                    return }
-                guard let currency = self?.currency.getCurrencies()?.first else {
-                    return }
-                self?.router.nextVC(controller: DiagramSceneAssembly.build(currency: currency, dateFrom: dateFrom, dateTo: dateTo))
+                }
             }
         }
     }
@@ -75,20 +80,9 @@ private extension MenuPresenter {
             self.controller?.showAlert(message: "Возникли проблемы с доступом к серверу")
         }
     }
-       
-    func isValidDate(date: String?) -> String? {
-        guard let date = date,
-              date.isEmpty == false,
-              let correct = self.convertDateFormater(date) else {
-            return nil
-        }
-        return correct
-    }
     
-    func convertDateFormater(_ date: String) -> String? {
+    func convertDateFormater(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM"
-        guard let date = dateFormatter.date(from: date) else { return nil }
         dateFormatter.dateFormat = "MM.dd"
         return dateFormatter.string(from: date)
     }

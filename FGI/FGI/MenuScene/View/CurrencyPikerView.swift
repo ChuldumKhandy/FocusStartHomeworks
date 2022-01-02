@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DropDownMenuView: UIView {
+final class CurrencyPikerView: UIView {
     private let currencyPikerView = UIPickerView()
     private var currencies = [String]()
     var getCurrenciesHandler: (([String]) -> Void)?
@@ -30,13 +30,13 @@ final class DropDownMenuView: UIView {
     }
 }
 
-extension DropDownMenuView: UIPickerViewDelegate {
+extension CurrencyPikerView: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.selectedCurrencyHandler?(self.currencies[row])
     }
 }
 
-extension DropDownMenuView: UIPickerViewDataSource {
+extension CurrencyPikerView: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -50,14 +50,13 @@ extension DropDownMenuView: UIPickerViewDataSource {
         let pickerLabel = UILabel()
         pickerLabel.text = self.currencies[row]
         pickerLabel.textAlignment = .center
-        pickerLabel.backgroundColor = .systemGray6
         pickerLabel.textColor = .black
-        pickerLabel.font = UIFont(name: "Inter", size: FontSize.title.rawValue)
+        pickerLabel.font = UIFont.systemFont(ofSize: FontSize.title.rawValue)
         return pickerLabel
     }
 }
 
-private extension DropDownMenuView {
+private extension CurrencyPikerView {
     func customizePickerView() {
         self.currencyPikerView.dataSource = self
         self.currencyPikerView.delegate = self

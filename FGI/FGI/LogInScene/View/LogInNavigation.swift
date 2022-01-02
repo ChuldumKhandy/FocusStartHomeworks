@@ -20,6 +20,5 @@ private extension LogInNavigation {
     func customizeNavigation() {
         self.controller?.navigationController?.navigationBar.barTintColor = .white
         self.controller?.navigationController?.navigationBar.shadowImage = UIImage()
-        self.controller?.navigationController?.isNavigationBarHidden = false
     }
 }

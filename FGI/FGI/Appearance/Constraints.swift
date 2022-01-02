@@ -11,14 +11,15 @@ import UIKit
 
 enum ViewConstraints: CGFloat {
     case radius = 8
-    case top = 70
+    case top = 95
+    case topInfo = 40
     case bottom = 15
     case left = 16
     case margin = 30
     case marginSmall = 10
     case heightMenu = 200
     case heightGraph = 250
-    case heightButtons = 20
+    case heightButtons = 25
     case heightCell = 50
 }
 

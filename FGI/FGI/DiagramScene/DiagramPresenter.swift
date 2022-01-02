@@ -16,14 +16,16 @@ final class DiagramPresenter {
     private weak var viewScene: IDiagramView?
     private let networkService: INetworkService
     private let diagramModel: IDiagramModel
+    private let router: IDiagramRouter
     private let urlValute = "https://valutes20211226150144.azurewebsites.net/api/valutes"
     private let dateFrom: String
     private let dateTo: String
     private let currency: String
     
-    init(diagramModel: DiagramModel, currency: String, dateFrom: String, dateTo: String) {
-        self.networkService = NetworkService()
+    init(diagramModel: DiagramModel, router: DiagramRouter, currency: String, dateFrom: String, dateTo: String) {
+        self.networkService = DiagramNetworkService()
         self.diagramModel = diagramModel
+        self.router = router
         self.currency = currency
         self.dateFrom = dateFrom
         self.dateTo = dateTo
@@ -35,6 +37,10 @@ extension DiagramPresenter: IDiagramPresenter{
         self.controller = controller
         self.viewScene = viewScene
         self.loadData(currency: self.currency, dateFrom: self.dateFrom, dateTo: self.dateTo)
+        self.controller?.getTitle(currency: self.currency,
+                                  dateFrom: self.convertDateFormater(self.dateFrom),
+                                  dateTo: self.convertDateFormater(self.dateTo))
+        self.controller?.backMenuVC()
     }
 }
 
@@ -67,5 +73,13 @@ private extension DiagramPresenter {
                 self.controller?.showAlert(message: "Возникли проблемы с доступом к серверу")
             }
         }
+    }
+    
+    func convertDateFormater(_ date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM.dd"
+        guard let _date = dateFormatter.date(from: date) else { return "" }
+        dateFormatter.dateFormat = "dd.MM"
+        return dateFormatter.string(from: _date)
     }
 }

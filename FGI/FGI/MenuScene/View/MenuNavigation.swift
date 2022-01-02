@@ -22,6 +22,7 @@ private extension MenuNavigation {
     func customizeNavigation() {
         self.controller?.navigationController?.navigationBar.barTintColor = .white
         self.controller?.navigationController?.navigationBar.shadowImage = UIImage()
+        self.controller?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: FontSize.title.rawValue)]
         self.controller?.title = "Индек страха и жадности"
         
         self.leftBarItem()
@@ -39,7 +40,7 @@ private extension MenuNavigation {
     }
     
     func leftBarItem() {
-        let leftBarItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"),
+        let leftBarItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"),
                                            style: .plain,
                                            target: self,
                                            action: #selector(self.openAlert))
