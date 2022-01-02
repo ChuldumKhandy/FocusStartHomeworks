@@ -1,29 +1,29 @@
 //
-//  DiagramVC.swift
+//  MenuVC.swift
 //  FGI
 //
-//  Created by user on 23.12.2021.
+//  Created by user on 30.12.2021.
 //
 
 import UIKit
 
-protocol IDiagramVC: AnyObject {
+protocol IMenuVC: AnyObject {
+    func openInfo()
+    func openAlert()
     func showAlert(message: String)
     func showActivityIndicatory(startAnimating: Bool)
-    func getTitle(currency: String, dateFrom: String, dateTo: String)
-    func backMenuVC()
 }
 
-final class DiagramVC: UIViewController {
-    private let viewScene: IDiagramView
-    private let presenter: IDiagramPresenter
-    private let navigation: DiagramNavigation
+final class MenuVC: UIViewController {
+    private let viewScene: IMenuView
+    private let presenter: IMenuPresenter
+    private let navigation: MenuNavigation
     var activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     
-    init(presenter: DiagramPresenter) {
+    init(presenter: MenuPresenter) {
         self.presenter = presenter
-        self.navigation = DiagramNavigation()
-        self.viewScene = DiagramView(frame: UIScreen.main.bounds)
+        self.navigation = MenuNavigation()
+        self.viewScene = MenuView(frame: UIScreen.main.bounds)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -35,6 +35,7 @@ final class DiagramVC: UIViewController {
         super.loadView()
         self.presenter.loadView(controller: self, viewScene: self.viewScene)
         self.navigation.loadView(controller: self)
+        self.hideKeyboardWhenTappedAround()
     }
     
     override func viewDidLoad() {
@@ -47,22 +48,24 @@ final class DiagramVC: UIViewController {
     }
 }
 
-extension DiagramVC: IDiagramVC {
-    func getTitle(currency: String, dateFrom: String, dateTo: String) {
-        self.navigation.setTitle(currency: currency, dateFrom: dateFrom, dateTo: dateTo)
-    }
-    
-    func backMenuVC() {
-        self.navigation.backMenuVC = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
-    }
-    
+extension MenuVC: IMenuVC {
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Понятно", style: .default, handler: nil)
         alert.addAction(okButton)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func openInfo() {
+        self.navigation.openInfoSceneHandler = { [weak self] in
+            self?.present(InfoSceneAssembly.build(), animated: true, completion: nil)
+        }
+    }
+    
+    func openAlert() {
+        self.navigation.openAlerteHandler = { [weak self] in
+            self?.showAlert(message: "Тут будет окно настроек")
+        }
     }
     
     func showActivityIndicatory(startAnimating: Bool) {

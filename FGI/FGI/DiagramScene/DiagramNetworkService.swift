@@ -8,11 +8,10 @@
 import Foundation
 
 protocol INetworkService {
-    func loadCurriencies(from url: URL, completion: @escaping (Result<[String], Error>) -> Void)
     func loadFGIes(from url: URL, completion: @escaping (Result<[FGIDto], Error>) -> Void)
 }
 
-final class NetworkService: NSObject {
+final class DiagramNetworkService: NSObject {
     private let session: URLSession
 
     init(configuration: URLSessionConfiguration? = nil) {
@@ -25,25 +24,7 @@ final class NetworkService: NSObject {
     }
 }
 
-extension NetworkService: INetworkService {
-    func loadCurriencies(from url: URL, completion: @escaping (Result<[String], Error>) -> Void) {
-        let request = URLRequest(url: url)
-        self.session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-            }
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode([String].self, from: data)
-                    completion(.success(result))
-                }
-                catch {
-                    completion(.failure(error))
-                }
-            }
-        }.resume()
-    }
-    
+extension DiagramNetworkService: INetworkService {    
     func loadFGIes(from url: URL, completion: @escaping (Result<[FGIDto], Error>) -> Void) {
         let request = URLRequest(url: url)
         self.session.dataTask(with: request) { data, response, error in

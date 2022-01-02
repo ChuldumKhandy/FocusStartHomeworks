@@ -19,7 +19,6 @@ final class GraphView: UIView {
         self.applyGradient()
         self.pointHandler = { [weak self] FGIes in
             self?.graphPoints = FGIes
-            self?.drawLine(self?.bounds ?? frame)
         }
     }
     
@@ -31,6 +30,11 @@ final class GraphView: UIView {
         super.layoutSubviews()
         self.gradientLayer.frame = self.bounds
         self.grid.frame = self.bounds
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.drawLine(rect)
     }
 }
 

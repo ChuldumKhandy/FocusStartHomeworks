@@ -153,7 +153,7 @@ private extension InfoView {
         self.backButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: ViewConstraints.top.rawValue).isActive = true
+        self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: ViewConstraints.topInfo.rawValue).isActive = true
         self.titleLabel.heightAnchor.constraint(equalToConstant: ViewConstraints.margin.rawValue).isActive = true
         self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ViewConstraints.left.rawValue).isActive = true
         self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ViewConstraints.left.rawValue).isActive = true

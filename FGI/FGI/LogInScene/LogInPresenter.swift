@@ -46,7 +46,7 @@ private extension LogInPresenter {
                 self?.controller?.showAlert(message: "Пользователь не зарегистрирован или пароль не верен")
                 return
             }
-            self?.router.next(controller: DiagramSceneAssembly.build())
+            self?.router.next(controller: MenuSceneAssembly.build())
         }
     }
     
@@ -67,7 +67,7 @@ private extension LogInPresenter {
             let newUser = LogInUser(login: login, password: password)
             self?.coreDataManager.saveUser(user: newUser, completion: {
                 self?.controller?.showActivityIndicatory(startAnimating: false)
-                self?.router.next(controller: DiagramSceneAssembly.build())
+                self?.router.next(controller: MenuSceneAssembly.build())
             })
         }
     }

@@ -16,12 +16,19 @@ final class DiagramPresenter {
     private weak var viewScene: IDiagramView?
     private let networkService: INetworkService
     private let diagramModel: IDiagramModel
+    private let router: IDiagramRouter
     private let urlValute = "https://valutes20211226150144.azurewebsites.net/api/valutes"
+    private let dateFrom: String
+    private let dateTo: String
+    private let currency: String
     
-    init(diagramModel: DiagramModel) {
-        self.networkService = NetworkService()
+    init(diagramModel: DiagramModel, router: DiagramRouter, currency: String, dateFrom: String, dateTo: String) {
+        self.networkService = DiagramNetworkService()
         self.diagramModel = diagramModel
-        self.loadCurrencies()
+        self.router = router
+        self.currency = currency
+        self.dateFrom = dateFrom
+        self.dateTo = dateTo
     }
 }
 
@@ -29,57 +36,18 @@ extension DiagramPresenter: IDiagramPresenter{
     func loadView(controller: DiagramVC, viewScene: IDiagramView) {
         self.controller = controller
         self.viewScene = viewScene
-        self.onTouched()
-        self.controller?.openInfo()
-        self.controller?.openAlert()
+        self.loadData(currency: self.currency, dateFrom: self.dateFrom, dateTo: self.dateTo)
+        self.controller?.getTitle(currency: self.currency,
+                                  dateFrom: self.convertDateFormater(self.dateFrom),
+                                  dateTo: self.convertDateFormater(self.dateTo))
+        self.controller?.backMenuVC()
     }
 }
 
-private extension DiagramPresenter {
-    func onTouched() {
-        if let view = self.viewScene {
-            view.onTouchedHandler = { [weak self] dateFrom, dateTo in
-                guard let dateFrom = self?.isValidDate(date: dateFrom),
-                      let dateTo = self?.isValidDate(date: dateTo) else {
-                    self?.controller?.showAlert(message: "Некорректный ввод данных")
-                    return }
-                guard let currency = self?.diagramModel.getCurrencies()?.first else {
-                    return }
-                self?.loadData(currency: view.getSelectedCurrency() ?? currency,
-                               dateFrom: dateFrom,
-                               dateTo: dateTo)
-                self?.getFGI()
-            }
-        }
-    }
-    
+private extension DiagramPresenter {    
     func getFGI() {
         if let fgi = self.diagramModel.getFGI() {
             self.viewScene?.setFGI(fgi: fgi)
-        }
-    }
-    
-    func getCurrencies() {
-        if let currencies = self.diagramModel.getCurrencies() {
-            self.viewScene?.passCurrencies(currencies: currencies)
-        }
-    }
-    
-    func loadCurrencies() {
-        if let url = URL(string: "\(self.urlValute)/GetCurrencies") {
-            self.networkService.loadCurriencies(from: url) { (result: Result<[String], Error>) in
-                switch result {
-                case .success(let model):
-                    DispatchQueue.main.async {
-                        self.diagramModel.setCurrencies(currencies: model)
-                        self.getCurrencies()
-                    }
-                case .failure(let error):
-                    print("[NETWORK] error Currencies is: \(error)")
-                }
-            }
-        } else {
-            self.controller?.showAlert(message: "Возникли проблемы с доступом к серверу")
         }
     }
     
@@ -92,6 +60,7 @@ private extension DiagramPresenter {
                     case .success(let model):
                         DispatchQueue.main.async {
                             self.diagramModel.setFGI(FGIes: FGIMapper.fromDto(dtos: model))
+                            self.getFGI()
                         }
                     case .failure(let error):
                         print("[NETWORK] error Data is: \(error)")
@@ -106,20 +75,11 @@ private extension DiagramPresenter {
         }
     }
     
-    func isValidDate(date: String?) -> String? {
-        guard let date = date,
-              date.isEmpty == false,
-              let correct = self.convertDateFormater(date) else {
-            return nil
-        }
-        return correct
-    }
-    
-    func convertDateFormater(_ date: String) -> String? {
+    func convertDateFormater(_ date: String) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM"
-        guard let date = dateFormatter.date(from: date) else { return nil }
         dateFormatter.dateFormat = "MM.dd"
-        return dateFormatter.string(from: date)
+        guard let _date = dateFormatter.date(from: date) else { return "" }
+        dateFormatter.dateFormat = "dd.MM"
+        return dateFormatter.string(from: _date)
     }
 }

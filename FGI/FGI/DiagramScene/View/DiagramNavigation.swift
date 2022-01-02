@@ -9,49 +9,31 @@ import UIKit
 
 final class DiagramNavigation: UIView {
     private weak var controller: DiagramVC?
-    var openInfoSceneHandler: (() -> Void)?
-    var openAlerteHandler: (() -> Void)?
+    private var title = ""
+    var backMenuVC: (() -> Void)?
     
     func loadView(controller: DiagramVC) {
         self.controller = controller
         self.customizeNavigation()
     }
+    
+    func setTitle(currency: String, dateFrom: String, dateTo: String) {
+        self.title = "\(currency): с \(dateFrom) по \(dateTo)"
+    }
 }
 
 private extension DiagramNavigation {
     func customizeNavigation() {
-        self.controller?.navigationController?.navigationBar.barTintColor = .white
-        self.controller?.navigationController?.navigationBar.shadowImage = UIImage()
-        self.controller?.title = "Индек страха и жадности"
-        
-        self.leftBarItem()
-        self.rightBarItem()
-    }
-    
-    func rightBarItem() {
-        let rightBarItem = UIBarButtonItem(image: UIImage(systemName: "info.circle"),
-                                           style: .plain,
-                                           target: self,
-                                           action: #selector(self.openInfoScene))
-        rightBarItem.tintColor = .black
-        self.controller?.navigationItem.rightBarButtonItem?.tintColor = .white
-        self.controller?.navigationItem.rightBarButtonItem = rightBarItem
-    }
-    
-    func leftBarItem() {
-        let leftBarItem = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"),
-                                           style: .plain,
-                                           target: self,
-                                           action: #selector(self.openAlert))
+        let leftBarItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(self.backVC))
         leftBarItem.tintColor = .black
         self.controller?.navigationItem.leftBarButtonItem = leftBarItem
+        self.controller?.title = self.title
     }
     
-    @objc func openInfoScene() {
-        self.openInfoSceneHandler?()
-    }
-    
-    @objc func openAlert() {
-        self.openAlerteHandler?()
+    @objc func backVC() {
+        self.backMenuVC?()
     }
 }

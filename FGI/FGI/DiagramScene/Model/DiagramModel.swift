@@ -8,15 +8,12 @@
 import Foundation
 
 protocol IDiagramModel {
-    func setCurrencies(currencies: [String])
-    func getCurrencies() -> [String]?
     func getFGI() -> [FGI]?
     func setFGI(FGIes: [FGI])
 }
 
 final class DiagramModel {
     private var FGIes: [FGI]?
-    private var currencies: [String]?
 }
 
 extension DiagramModel: IDiagramModel {
@@ -27,15 +24,4 @@ extension DiagramModel: IDiagramModel {
     func setFGI(FGIes: [FGI]) {
         self.FGIes = FGIes
     }
-    
-    func setCurrencies(currencies: [String]) {
-        self.currencies = currencies
-    }
-    
-    func getCurrencies() -> [String]? {
-        return self.currencies
-    }
-}
-
-private extension DiagramModel {
 }
