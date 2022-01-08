@@ -1,24 +1,25 @@
 //
-//  LogInView.swift
+//  SettingView.swift
 //  FGI
 //
-//  Created by user on 27.12.2021.
+//  Created by user on 07.01.2022.
 //
 
 import UIKit
 
-protocol ILogInView: UIView {
-    var checkPasswordHandler: ((String?) -> Void)? { get set }
-    var setName: ((String) -> Void)? { get set }
+protocol ISettingView: UIView {
+    var signinHandler: ((_ login: String?, _ password: String?, _ passwordState: Bool) -> Void)? { get set }
 }
 
-final class LogInView: UIView {
+final class SettingView: UIView {
     private let titleLabel = UILabel()
+    private let loginTextView = UITextField()
     private let passwordTextView = UITextField()
-    private let loginButton = UIButton()
+    private let passwordStateSwitch = UISwitch()
+    private var passwordState = false
+    private let saveButton = UIButton()
     private let stackView = UIStackView()
-    var checkPasswordHandler: ((String?) -> Void)?
-    var setName: ((String) -> Void)?
+    var signinHandler: ((_ login: String?, _ password: String?, _ passwordState: Bool) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,12 +27,10 @@ final class LogInView: UIView {
         self.addSubview()
         self.customizeStackView()
         self.customizeTextLabel()
-        self.customizeTextField()
-        self.customizeButtons()
+        self.customizeTextFields()
+        self.customizeSwitch()
+        self.customizeButton()
         self.setConstraints()
-        self.setName = { [weak self] login in
-            self?.titleLabel.text = "Добрый день, \(login)"
-        }
     }
     
     required init?(coder: NSCoder) {
@@ -39,10 +38,10 @@ final class LogInView: UIView {
     }
 }
 
-extension LogInView: ILogInView {
+extension SettingView: ISettingView {
 }
 
-private extension LogInView {
+private extension SettingView {
     func addSubview() {
         self.addSubview(self.titleLabel)
         self.addSubview(self.stackView)
@@ -53,35 +52,49 @@ private extension LogInView {
         self.stackView.distribution = .equalSpacing
         self.stackView.alignment = .fill
         self.stackView.spacing = ViewConstraints.marginSmall.rawValue
+        self.stackView.addArrangedSubview(self.loginTextView)
         self.stackView.addArrangedSubview(self.passwordTextView)
-        self.stackView.addArrangedSubview(self.loginButton)
+        self.stackView.addArrangedSubview(self.passwordStateSwitch)
+        self.stackView.addArrangedSubview(self.saveButton)
     }
     
     func customizeTextLabel() {
+        self.titleLabel.text = "Авторизация"
         self.titleLabel.font = .boldSystemFont(ofSize: FontSize.title.rawValue)
         self.titleLabel.textAlignment = .center
     }
     
-    func customizeTextField() {
-        self.passwordTextView.borderStyle = .roundedRect
-        self.passwordTextView.layer.cornerRadius = ViewConstraints.radius.rawValue
-        self.passwordTextView.layer.masksToBounds = true
-        self.passwordTextView.frame.size.height = ViewConstraints.heightButtons.rawValue
+    func customizeTextFields() {
+        UITextField.appearance().borderStyle = .roundedRect
+        UITextField.appearance().layer.cornerRadius = ViewConstraints.radius.rawValue
+        UITextField.appearance().layer.masksToBounds = true
+        UITextField.appearance().frame.size.height = ViewConstraints.heightButtons.rawValue
+        self.loginTextView.placeholder = "Логин"
         self.passwordTextView.placeholder = "Пароль"
     }
     
-    func customizeButtons() {
-        self.loginButton.layer.cornerRadius = ViewConstraints.radius.rawValue
-        self.loginButton.clipsToBounds = true
-        self.loginButton.backgroundColor = .systemGray6
-        self.loginButton.frame.size.height = ViewConstraints.heightButtons.rawValue
-        self.loginButton.setTitleColor(.black, for: .normal)
-        self.loginButton.setTitle("Войти", for: .normal)
-        self.loginButton.addTarget(self, action: #selector(self.onLoginClick), for: .touchUpInside)
+    func customizeSwitch() {
+        self.passwordStateSwitch.addTarget(self, action: #selector(self.isOnSwitch), for: .valueChanged)
     }
     
-    @objc func onLoginClick() {
-        self.checkPasswordHandler?(self.passwordTextView.text)
+    @objc func isOnSwitch() {
+        if self.passwordStateSwitch.isOn {
+            self.passwordState = true
+        }
+    }
+    
+    func customizeButton() {
+        self.saveButton.layer.cornerRadius = ViewConstraints.radius.rawValue
+        self.saveButton.clipsToBounds = true
+        self.saveButton.backgroundColor = .systemGray6
+        self.saveButton.frame.size.height = ViewConstraints.heightButtons.rawValue
+        self.saveButton.setTitleColor(.black, for: .normal)
+        self.saveButton.setTitle("Сохранить", for: .normal)
+        self.saveButton.addTarget(self, action: #selector(self.onSignClick), for: .touchUpInside)
+    }
+
+    @objc func onSignClick() {
+        self.signinHandler?(self.loginTextView.text, self.passwordTextView.text, self.passwordState)
     }
     
     func setConstraints() {
@@ -98,3 +111,4 @@ private extension LogInView {
         self.stackView.trailingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor).isActive = true
     }
 }
+

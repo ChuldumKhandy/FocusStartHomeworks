@@ -10,7 +10,7 @@ import UIKit
 final class MenuNavigation: UIView {
     private weak var controller: MenuVC?
     var openInfoSceneHandler: (() -> Void)?
-    var openAlerteHandler: (() -> Void)?
+    var openSettingSceneHandler: (() -> Void)?
     
     func loadView(controller: MenuVC) {
         self.controller = controller
@@ -43,7 +43,7 @@ private extension MenuNavigation {
         let leftBarItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"),
                                            style: .plain,
                                            target: self,
-                                           action: #selector(self.openAlert))
+                                           action: #selector(self.openSetting))
         leftBarItem.tintColor = .black
         self.controller?.navigationItem.leftBarButtonItem = leftBarItem
     }
@@ -52,7 +52,7 @@ private extension MenuNavigation {
         self.openInfoSceneHandler?()
     }
     
-    @objc func openAlert() {
-        self.openAlerteHandler?()
+    @objc func openSetting() {
+        self.openSettingSceneHandler?()
     }
 }

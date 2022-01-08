@@ -1,29 +1,27 @@
 //
-//  MenuVC.swift
+//  SettingVC.swift
 //  FGI
 //
-//  Created by user on 30.12.2021.
+//  Created by user on 07.01.2022.
 //
 
 import UIKit
 
-protocol IMenuVC: AnyObject {
-    func openInfo()
-    func openSettingScene()
+protocol ISettingVC: AnyObject {
     func showAlert(message: String)
     func showActivityIndicatory(startAnimating: Bool)
 }
 
-final class MenuVC: UIViewController {
-    private let viewScene: IMenuView
-    private let presenter: IMenuPresenter
-    private let navigation: MenuNavigation
+final class SettingVC: UIViewController {
+    private let viewScene: ISettingView
+    private let presenter: ISettingPresenter
+    private let navigation: SettingNavigation
     var activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     
-    init(presenter: MenuPresenter) {
+    init(presenter: SettingPresenter) {
+        self.viewScene = SettingView(frame: UIScreen.main.bounds)
         self.presenter = presenter
-        self.navigation = MenuNavigation()
-        self.viewScene = MenuView(frame: UIScreen.main.bounds)
+        self.navigation = SettingNavigation()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -31,15 +29,11 @@ final class MenuVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         self.presenter.loadView(controller: self, viewScene: self.viewScene)
         self.navigation.loadView(controller: self)
         self.hideKeyboardWhenTappedAround()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,28 +42,15 @@ final class MenuVC: UIViewController {
     }
 }
 
-extension MenuVC: IMenuVC {
+extension SettingVC: ISettingVC {
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "Понятно", style: .default, handler: nil)
-        alert.addAction(okButton)
+        alert.addAction(UIAlertAction(title: "Понятно", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
-    func openInfo() {
-        self.navigation.openInfoSceneHandler = { [weak self] in
-            self?.present(InfoSceneAssembly.build(), animated: true, completion: nil)
-        }
-    }
-    
-    func openSettingScene() {
-        self.navigation.openSettingSceneHandler = { [weak self] in
-            self?.present(SettingAssembly.build(), animated: true, completion: nil)
-        }
-    }
-    
     func showActivityIndicatory(startAnimating: Bool) {
-        self.view.addSubview(activityIndicator)
+        self.view.addSubview(self.activityIndicator)
         self.activityIndicator.hidesWhenStopped = true
         self.activityIndicator.color = .gray
         self.activityIndicator.center = view.center

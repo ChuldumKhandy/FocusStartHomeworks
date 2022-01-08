@@ -33,7 +33,7 @@ extension MenuPresenter: IMenuPresenter {
         self.viewScene = viewScene
         self.onTouched()
         self.controller?.openInfo()
-        self.controller?.openAlert()
+        self.controller?.openSettingScene()
     }
 }
 
