@@ -13,10 +13,12 @@ protocol IInfoVC: AnyObject {
 
 final class InfoVC: UIViewController {
     private let viewScene: IInfoView
+    private let navigation: IInfoNavigation
     private let presenter: IInfoPresenter
     
     init(presenter: InfoPresenter) {
         self.viewScene = InfoView(frame: UIScreen.main.bounds)
+        self.navigation = InfoNavigation()
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,7 +29,8 @@ final class InfoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.presenter.loadView(controller: self, viewScene: self.viewScene)
+        self.presenter.loadView(controller: self, viewScene: self.viewScene, navigation: self.navigation)
+        self.navigation.loadView(controller: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {

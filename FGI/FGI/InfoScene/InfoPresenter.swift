@@ -8,13 +8,15 @@
 import Foundation
 
 protocol IInfoPresenter {
-    func loadView(controller: InfoVC, viewScene: IInfoView)
+    func loadView(controller: InfoVC, viewScene: IInfoView, navigation: IInfoNavigation)
 }
 
 final class InfoPresenter {
     private weak var controller: IInfoVC?
     private weak var viewScene: IInfoView?
+    private weak var navigation: IInfoNavigation?
     private let router: IInfoRouter
+    private let urlCNN = "https://money.cnn.com/data/fear-and-greed/"
     
     init(router: InfoRouter) {
         self.router = router
@@ -22,13 +24,14 @@ final class InfoPresenter {
 }
 
 extension InfoPresenter: IInfoPresenter {
-    func loadView(controller: InfoVC, viewScene: IInfoView) {
+    func loadView(controller: InfoVC, viewScene: IInfoView, navigation: IInfoNavigation) {
         self.controller = controller
         self.viewScene = viewScene
+        self.navigation = navigation
         self.viewScene?.tappedOnLabelHandler = { [weak self] in
             self?.onTouchedLabel()
         }
-        self.viewScene?.backHandler = { [weak self] in
+        self.navigation?.backMenuVC = { [weak self] in
             self?.router.backVC()
         }
     }
@@ -36,6 +39,6 @@ extension InfoPresenter: IInfoPresenter {
 
 private extension InfoPresenter {
     func onTouchedLabel() {
-        self.controller?.followingLink(url: "https://money.cnn.com/data/fear-and-greed/")
+        self.controller?.followingLink(url: self.urlCNN)
     }
 }

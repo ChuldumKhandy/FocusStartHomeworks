@@ -8,12 +8,13 @@
 import Foundation
 
 protocol IMenuPresenter {
-    func loadView(controller: MenuVC, viewScene: IMenuView)
+    func loadView(controller: MenuVC, viewScene: IMenuView, navigation: IMenuNavigation)
 }
 
 final class MenuPresenter {
     private weak var controller: IMenuVC?
     private weak var viewScene: IMenuView?
+    private weak var navigation: IMenuNavigation?
     private let networkService: IMenuNetworkService
     private let router: IMenuRouter
     private let currency: ICurrencyModel
@@ -28,16 +29,29 @@ final class MenuPresenter {
 }
 
 extension MenuPresenter: IMenuPresenter {
-    func loadView(controller: MenuVC, viewScene: IMenuView) {
+    func loadView(controller: MenuVC, viewScene: IMenuView, navigation: IMenuNavigation) {
         self.controller = controller
         self.viewScene = viewScene
+        self.navigation = navigation
         self.onTouched()
-        self.controller?.openInfo()
-        self.controller?.openAlert()
+        self.openInfo()
+        self.openSettingScene()
     }
 }
 
 private extension MenuPresenter {
+    func openInfo() {
+        self.navigation?.openInfoSceneHandler = { [weak self] in
+            self?.router.nextVC(controller: InfoSceneAssembly.build())
+        }
+    }
+
+    func openSettingScene() {
+        self.navigation?.openSettingSceneHandler = { [weak self] in
+            self?.router.nextVC(controller: SettingAssembly.build())
+        }
+    }
+    
     func onTouched() {
         if let view = self.viewScene {
             view.onTouchedHandler = { [weak self] dateFrom, dateTo in

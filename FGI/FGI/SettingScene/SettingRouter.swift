@@ -1,22 +1,22 @@
 //
-//  InfoRouter.swift
+//  SettingRouter.swift
 //  FGI
 //
-//  Created by user on 28.12.2021.
+//  Created by user on 08.01.2022.
 //
 
 import UIKit
 
-protocol IInfoRouter {
+protocol ISettingRouter {
     func setRootController(controller: UIViewController)
     func backVC()
 }
 
-final class InfoRouter {
+final class SettingRouter {
     private var controller: UIViewController?
 }
 
-extension InfoRouter: IInfoRouter {
+extension SettingRouter: ISettingRouter {
     func setRootController(controller: UIViewController) {
         self.controller = controller
     }

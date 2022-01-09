@@ -16,7 +16,7 @@ protocol IMenuView: UIView {
 final class MenuView: UIView {
     private let currencyLabel = UILabel()
     private let dateLabel = UILabel()
-    private let calculateButton = UIButton()
+    private let calculateButton = StandartButton()
     private let dateFromPicker = UIDatePicker()
     private let dateToPicker = UIDatePicker()
     private let menuView = CurrencyPikerView()
@@ -97,11 +97,6 @@ private extension MenuView {
     }
       
     func customizeButton() {
-        self.calculateButton.layer.cornerRadius = ViewConstraints.radius.rawValue
-        self.calculateButton.clipsToBounds = true
-        self.calculateButton.backgroundColor = .systemGray6
-        self.calculateButton.frame.size.height = ViewConstraints.heightButtons.rawValue
-        self.calculateButton.setTitleColor(.black, for: .normal)
         self.calculateButton.setTitle(" Показать ", for: .normal)
         self.calculateButton.addTarget(self, action: #selector(self.touchedDown), for: .touchDown)
     }
@@ -109,8 +104,6 @@ private extension MenuView {
     @objc func touchedDown() {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM"
-        
-        
         self.onTouchedHandler?(self.dateFromPicker.date, self.dateToPicker.date)
     }
     

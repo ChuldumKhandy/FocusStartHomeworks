@@ -9,15 +9,12 @@ import UIKit
 
 protocol IDiagramVC: AnyObject {
     func showAlert(message: String)
-    func showActivityIndicatory(startAnimating: Bool)
-    func getTitle(currency: String, dateFrom: String, dateTo: String)
-    func backMenuVC()
-}
+    func showActivityIndicatory(startAnimating: Bool)}
 
 final class DiagramVC: UIViewController {
     private let viewScene: IDiagramView
     private let presenter: IDiagramPresenter
-    private let navigation: DiagramNavigation
+    private let navigation: IDiagramNavigation
     var activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     
     init(presenter: DiagramPresenter) {
@@ -33,7 +30,7 @@ final class DiagramVC: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.presenter.loadView(controller: self, viewScene: self.viewScene)
+        self.presenter.loadView(controller: self, viewScene: self.viewScene, navigation: self.navigation)
         self.navigation.loadView(controller: self)
     }
     
@@ -48,16 +45,6 @@ final class DiagramVC: UIViewController {
 }
 
 extension DiagramVC: IDiagramVC {
-    func getTitle(currency: String, dateFrom: String, dateTo: String) {
-        self.navigation.setTitle(currency: currency, dateFrom: dateFrom, dateTo: dateTo)
-    }
-    
-    func backMenuVC() {
-        self.navigation.backMenuVC = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
-    }
-    
     func showAlert(message: String) {
         let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Понятно", style: .default, handler: nil)

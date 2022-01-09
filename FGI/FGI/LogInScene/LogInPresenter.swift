@@ -14,12 +14,12 @@ protocol ILogInPresenter {
 final class LogInPresenter {
     private weak var controller: ILogInVC?
     private weak var viewScene: ILogInView?
-    private let coreDataManager: ICoreDataManager
+    private let userStorage: IUserStorage
     private let router: ILogInRouter
     
     init(router: LogInRouter) {
         self.router = router
-        self.coreDataManager = CoreDataManager()
+        self.userStorage = UserStorage()
     }
 }
 
@@ -28,47 +28,27 @@ extension LogInPresenter: ILogInPresenter {
         self.controller = controller
         self.viewScene = viewScene
         self.login()
-        self.signin()
+        self.getName()
     }
 }
 
 private extension LogInPresenter {
+    func getName() {
+        self.viewScene?.setName?(self.userStorage.getName())
+    }
+    
     func login() {
-        self.viewScene?.loginHandler = { [weak self] login, password in
-            guard let login = login,
-                  login.isEmpty == false,
-                  let password = password,
+        self.viewScene?.checkPasswordHandler = { [weak self] password in
+            guard let password = password,
                   password.isEmpty == false else {
-                self?.controller?.showAlert(message: "Введите логин и пароль")
+                self?.controller?.showAlert(message: "Введите пароль")
                 return
             }
-            guard (self?.coreDataManager.getUser(login: login, password: password)) != nil else {
-                self?.controller?.showAlert(message: "Пользователь не зарегистрирован или пароль не верен")
+            guard ((self?.userStorage.checkPassword(passoword: password)) != nil) else {
+                self?.controller?.showAlert(message: "Пароль не верен")
                 return
             }
             self?.router.next(controller: MenuSceneAssembly.build())
-        }
-    }
-    
-    func signin() {
-        self.viewScene?.signinHandler = { [weak self] login, password in
-            guard let login = login,
-                  login.isEmpty == false,
-                  let password = password,
-                  password.isEmpty == false else {
-                self?.controller?.showAlert(message: "Введите логин и пароль")
-                return
-            }
-            guard self?.coreDataManager.getUser(login: login, password: password) == nil else {
-                self?.controller?.showAlert(message: "Такой пользователь уже зарегистрирован")
-                return
-            }
-            self?.controller?.showActivityIndicatory(startAnimating: true)
-            let newUser = LogInUser(login: login, password: password)
-            self?.coreDataManager.saveUser(user: newUser, completion: {
-                self?.controller?.showActivityIndicatory(startAnimating: false)
-                self?.router.next(controller: MenuSceneAssembly.build())
-            })
         }
     }
 }
