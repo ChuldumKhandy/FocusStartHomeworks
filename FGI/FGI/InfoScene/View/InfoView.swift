@@ -9,14 +9,11 @@ import UIKit
 
 protocol IInfoView: UIView {
     var tappedOnLabelHandler: (() -> Void)? { get set }
-    var backHandler: (() -> Void)? { get set }
 }
 
 final class InfoView: UIView {
     private let scrollView = UIScrollView(frame: .zero)
-    private let backButton = UIButton()
     private let stackView = UIStackView()
-    private let titleLabel = UILabel()
     private let annotation = UILabel()
     private let calculationIndex = UILabel()
     private let resultFGI = UILabel()
@@ -28,11 +25,8 @@ final class InfoView: UIView {
         super.init(frame: frame)
         self.backgroundColor = .white
         self.addSubview(self.scrollView)
-        self.addSubview(self.titleLabel)
-        self.addSubview(self.backButton)
         self.customizeScrollView()
         self.customizeLables()
-        self.customizeButton()
         self.customizeStackView()
         self.setConstraints()
     }
@@ -46,27 +40,11 @@ extension InfoView: IInfoView {
 }
 
 private extension InfoView {
-    func customizeButton() {
-        self.backButton.backgroundColor = .white
-        self.backButton.frame.size.height = ViewConstraints.heightButtons.rawValue
-        self.backButton.tintColor = .black
-        self.backButton.setBackgroundImage(UIImage(systemName: "chevron.down"), for: .normal)
-        self.backButton.addTarget(self, action: #selector(self.backDiagramVC), for: .touchUpInside)
-    }
-    
-    @objc func backDiagramVC() {
-        self.backHandler?()
-    }
-    
     func customizeLables() {
         UILabel.appearance().textAlignment = .natural
         UILabel.appearance().textColor = .black
         UILabel.appearance().numberOfLines = 0
         UILabel.appearance().lineBreakMode = .byWordWrapping
-
-        self.titleLabel.text = InfoText.title.rawValue
-        self.titleLabel.font = .boldSystemFont(ofSize: FontSize.title.rawValue)
-        self.titleLabel.textAlignment = .center
         
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(self.tappedOnLabel(_:)))
         self.annotation.isUserInteractionEnabled = true
@@ -115,13 +93,13 @@ private extension InfoView {
         let titleAttr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: FontSize.medium.rawValue,
                                                                         weight: UIFont.Weight(rawValue: FontSize.weight.rawValue))]
         let resultFGIStr = NSMutableAttributedString(string: InfoText.resultFGItitle.rawValue,
-                                                      attributes: titleAttr as [NSAttributedString.Key : Any])
+                                                     attributes: titleAttr as [NSAttributedString.Key : Any])
         resultFGIStr.append(NSAttributedString(string: InfoText.resultFGI1.rawValue, attributes: self.setColorText(color: .black)))
-        resultFGIStr.append(NSAttributedString(string: InfoText.resultFGI2.rawValue, attributes: self.setColorText(color: .red)))
-        resultFGIStr.append(NSAttributedString(string: InfoText.resultFGI3.rawValue, attributes: self.setColorText(color: .orange)))
-        resultFGIStr.append(NSAttributedString(string: InfoText.resultFGI4.rawValue, attributes: self.setColorText(color: .gray)))
-        resultFGIStr.append(NSAttributedString(string: InfoText.resultFGI5.rawValue, attributes: self.setColorText(color: .green)))
-        resultFGIStr.append(NSAttributedString(string: InfoText.resultFGI6.rawValue, attributes: self.setColorText(color: .systemGreen)))
+        resultFGIStr.append(NSAttributedString(string: InfoText.resultFGI2.rawValue, attributes: self.setColorText(color: MainPallete.red)))
+        resultFGIStr.append(NSAttributedString(string: InfoText.resultFGI3.rawValue, attributes: self.setColorText(color: MainPallete.orange)))
+        resultFGIStr.append(NSAttributedString(string: InfoText.resultFGI4.rawValue, attributes: self.setColorText(color: MainPallete.gray)))
+        resultFGIStr.append(NSAttributedString(string: InfoText.resultFGI5.rawValue, attributes: self.setColorText(color: MainPallete.green)))
+        resultFGIStr.append(NSAttributedString(string: InfoText.resultFGI6.rawValue, attributes: self.setColorText(color: MainPallete.darkGreen)))
         return resultFGIStr
     }
     
@@ -147,22 +125,11 @@ private extension InfoView {
     }
     
     func setConstraints() {
-        self.backButton.translatesAutoresizingMaskIntoConstraints = false
-        self.backButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.backButton.heightAnchor.constraint(equalToConstant: ViewConstraints.heightButtons.rawValue).isActive = true
-        self.backButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        
-        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: ViewConstraints.topInfo.rawValue).isActive = true
-        self.titleLabel.heightAnchor.constraint(equalToConstant: ViewConstraints.margin.rawValue).isActive = true
-        self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ViewConstraints.left.rawValue).isActive = true
-        self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ViewConstraints.left.rawValue).isActive = true
-        
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
-        self.scrollView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: ViewConstraints.marginSmall.rawValue).isActive = true
-        self.scrollView.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor).isActive = true
-        self.scrollView.trailingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor).isActive = true
-        self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -ViewConstraints.top.rawValue).isActive = true
+        self.scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: ViewConstraints.top.rawValue).isActive = true
+        self.scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ViewConstraints.left.rawValue).isActive = true
+        self.scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ViewConstraints.left.rawValue).isActive = true
+        self.scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -ViewConstraints.marginSmall.rawValue).isActive = true
         
         self.stackView.translatesAutoresizingMaskIntoConstraints = false
         self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor).isActive = true

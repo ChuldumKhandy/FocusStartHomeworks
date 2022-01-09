@@ -7,11 +7,19 @@
 
 import UIKit
 
+protocol IMenuNavigation: UIView {
+    var openInfoSceneHandler: (() -> Void)? { get set }
+    var openSettingSceneHandler: (() -> Void)? { get set }
+    func loadView(controller: MenuVC)
+}
+
 final class MenuNavigation: UIView {
     private weak var controller: MenuVC?
     var openInfoSceneHandler: (() -> Void)?
     var openSettingSceneHandler: (() -> Void)?
-    
+}
+
+extension MenuNavigation: IMenuNavigation {
     func loadView(controller: MenuVC) {
         self.controller = controller
         self.customizeNavigation()

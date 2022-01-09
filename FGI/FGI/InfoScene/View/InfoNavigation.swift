@@ -1,44 +1,40 @@
 //
-//  DiagramNavigation.swift
+//  InfoNavigation.swift
 //  FGI
 //
-//  Created by user on 27.12.2021.
+//  Created by user on 09.01.2022.
 //
 
 import UIKit
 
-protocol IDiagramNavigation: UIView {
+protocol IInfoNavigation: UIView {
     var backMenuVC: (() -> Void)? { get set }
-    func loadView(controller: DiagramVC)
-    func setTitle(currency: String, dateFrom: String, dateTo: String)
+    func loadView(controller: InfoVC)
 }
 
-final class DiagramNavigation: UIView {
-    private weak var controller: DiagramVC?
-    private var title = ""
+final class InfoNavigation: UIView {
+    private weak var controller: InfoVC?
     var backMenuVC: (() -> Void)?
 }
 
-extension DiagramNavigation: IDiagramNavigation {
-    func loadView(controller: DiagramVC) {
+extension InfoNavigation: IInfoNavigation {
+    func loadView(controller: InfoVC) {
         self.controller = controller
         self.customizeNavigation()
     }
-    
-    func setTitle(currency: String, dateFrom: String, dateTo: String) {
-        self.title = "\(currency): с \(dateFrom) по \(dateTo)"
-    }
 }
 
-private extension DiagramNavigation {
+private extension InfoNavigation {
     func customizeNavigation() {
+        self.controller?.title = InfoText.title.rawValue
+        self.controller?.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: FontSize.title.rawValue)]
+        
         let leftBarItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
                                           style: .plain,
                                           target: self,
                                           action: #selector(self.backVC))
         leftBarItem.tintColor = .black
         self.controller?.navigationItem.leftBarButtonItem = leftBarItem
-        self.controller?.title = self.title
     }
     
     @objc func backVC() {

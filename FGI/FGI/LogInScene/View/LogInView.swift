@@ -14,8 +14,8 @@ protocol ILogInView: UIView {
 
 final class LogInView: UIView {
     private let titleLabel = UILabel()
-    private let passwordTextView = UITextField()
-    private let loginButton = UIButton()
+    private let passwordTextView = StandartTextField()
+    private let loginButton = StandartButton()
     private let stackView = UIStackView()
     var checkPasswordHandler: ((String?) -> Void)?
     var setName: ((String) -> Void)?
@@ -30,7 +30,11 @@ final class LogInView: UIView {
         self.customizeButtons()
         self.setConstraints()
         self.setName = { [weak self] login in
-            self?.titleLabel.text = "Добрый день, \(login)"
+            if login == "" {
+                self?.titleLabel.text = "Добрый день"
+            } else {
+                self?.titleLabel.text = "Добрый день, \(login)"
+            }
         }
     }
     
@@ -63,19 +67,10 @@ private extension LogInView {
     }
     
     func customizeTextField() {
-        self.passwordTextView.borderStyle = .roundedRect
-        self.passwordTextView.layer.cornerRadius = ViewConstraints.radius.rawValue
-        self.passwordTextView.layer.masksToBounds = true
-        self.passwordTextView.frame.size.height = ViewConstraints.heightButtons.rawValue
         self.passwordTextView.placeholder = "Пароль"
     }
     
     func customizeButtons() {
-        self.loginButton.layer.cornerRadius = ViewConstraints.radius.rawValue
-        self.loginButton.clipsToBounds = true
-        self.loginButton.backgroundColor = .systemGray6
-        self.loginButton.frame.size.height = ViewConstraints.heightButtons.rawValue
-        self.loginButton.setTitleColor(.black, for: .normal)
         self.loginButton.setTitle("Войти", for: .normal)
         self.loginButton.addTarget(self, action: #selector(self.onLoginClick), for: .touchUpInside)
     }
@@ -86,7 +81,7 @@ private extension LogInView {
     
     func setConstraints() {
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.titleLabel.bottomAnchor.constraint(equalTo: self.stackView.topAnchor, constant: -ViewConstraints.top.rawValue).isActive = true
+        self.titleLabel.bottomAnchor.constraint(equalTo: self.stackView.topAnchor, constant: -ViewConstraints.margin.rawValue).isActive = true
         self.titleLabel.heightAnchor.constraint(equalToConstant: ViewConstraints.margin.rawValue).isActive = true
         self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: ViewConstraints.left.rawValue).isActive = true
         self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -ViewConstraints.left.rawValue).isActive = true

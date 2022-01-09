@@ -36,7 +36,7 @@ final class GridView: UIView {
 private extension GridView {
     func drawGrid(_ rect: CGRect) {
         let path = UIBezierPath()
-        if self.gridWidthMultiple != 0 {
+        if self.gridWidthMultiple > 2 {
             for index in 1...Int(self.gridWidthMultiple) - 1 {
                 let start = CGPoint(x: CGFloat(index) * self.gridWidth, y: 0)
                 let end = CGPoint(x: CGFloat(index) * self.gridWidth, y:bounds.height)

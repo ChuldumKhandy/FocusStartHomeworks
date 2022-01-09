@@ -8,12 +8,13 @@
 import Foundation
 
 protocol ISettingPresenter {
-    func loadView(controller: SettingVC, viewScene: ISettingView)
+    func loadView(controller: SettingVC, viewScene: ISettingView, navigation: ISettingNavigation)
 }
 
 final class SettingPresenter {
     private weak var controller: ISettingVC?
     private weak var viewScene: ISettingView?
+    private weak var navigation: ISettingNavigation?
     private let userStorage: IUserStorage
     private let router: ISettingRouter
     
@@ -24,10 +25,14 @@ final class SettingPresenter {
 }
 
 extension SettingPresenter: ISettingPresenter {
-    func loadView(controller: SettingVC, viewScene: ISettingView) {
+    func loadView(controller: SettingVC, viewScene: ISettingView, navigation: ISettingNavigation) {
         self.controller = controller
         self.viewScene = viewScene
+        self.navigation = navigation
         self.signin()
+        self.navigation?.backMenuVC = { [weak self] in
+            self?.router.backVC()
+        }
     }
 }
 
@@ -41,11 +46,9 @@ private extension SettingPresenter {
                 self?.controller?.showAlert(message: "Введите логин и пароль")
                 return
             }
-            self?.controller?.showActivityIndicatory(startAnimating: true)
             let newUser = SettingUser(name: name, password: password, passwordState: passwordState)
             self?.userStorage.saveUser(user: newUser)
-            self?.controller?.showActivityIndicatory(startAnimating: false)
-            //self?.router.next(controller: MenuSceneAssembly.build())
+            self?.controller?.showAlert(message: "Настройки успешно сохранены")
         }
     }
 }

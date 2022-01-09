@@ -8,16 +8,13 @@
 import UIKit
 
 protocol IMenuVC: AnyObject {
-    func openInfo()
-    func openSettingScene()
     func showAlert(message: String)
-    func showActivityIndicatory(startAnimating: Bool)
 }
 
 final class MenuVC: UIViewController {
     private let viewScene: IMenuView
     private let presenter: IMenuPresenter
-    private let navigation: MenuNavigation
+    private let navigation: IMenuNavigation
     var activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     
     init(presenter: MenuPresenter) {
@@ -33,7 +30,7 @@ final class MenuVC: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.presenter.loadView(controller: self, viewScene: self.viewScene)
+        self.presenter.loadView(controller: self, viewScene: self.viewScene, navigation: self.navigation)
         self.navigation.loadView(controller: self)
         self.hideKeyboardWhenTappedAround()
     }
@@ -54,29 +51,5 @@ extension MenuVC: IMenuVC {
         let okButton = UIAlertAction(title: "Понятно", style: .default, handler: nil)
         alert.addAction(okButton)
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    func openInfo() {
-        self.navigation.openInfoSceneHandler = { [weak self] in
-            self?.present(InfoSceneAssembly.build(), animated: true, completion: nil)
-        }
-    }
-    
-    func openSettingScene() {
-        self.navigation.openSettingSceneHandler = { [weak self] in
-            self?.present(SettingAssembly.build(), animated: true, completion: nil)
-        }
-    }
-    
-    func showActivityIndicatory(startAnimating: Bool) {
-        self.view.addSubview(activityIndicator)
-        self.activityIndicator.hidesWhenStopped = true
-        self.activityIndicator.color = .gray
-        self.activityIndicator.center = view.center
-        if startAnimating {
-            self.activityIndicator.startAnimating()
-        } else {
-            self.activityIndicator.stopAnimating()
-        }
     }
 }

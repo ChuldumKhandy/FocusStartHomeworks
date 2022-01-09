@@ -31,7 +31,7 @@ extension UserStorage: IUserStorage {
     }
     
     func getName() -> String {
-        return defaults.string(forKey: SettingsKeys.userName.rawValue) ?? "Noname"
+        return defaults.string(forKey: SettingsKeys.userName.rawValue) ?? ""
     }
     
     func checkPassword(passoword: String) -> Bool {

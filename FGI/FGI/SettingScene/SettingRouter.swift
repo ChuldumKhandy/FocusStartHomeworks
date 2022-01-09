@@ -9,7 +9,7 @@ import UIKit
 
 protocol ISettingRouter {
     func setRootController(controller: UIViewController)
-    func next(controller: UIViewController)
+    func backVC()
 }
 
 final class SettingRouter {
@@ -20,7 +20,7 @@ extension SettingRouter: ISettingRouter {
     func setRootController(controller: UIViewController) {
         self.controller = controller
     }
-    func next(controller: UIViewController) {
-        self.controller?.navigationController?.pushViewController(controller, animated: true)
+    func backVC() {
+        self.controller?.navigationController?.popViewController(animated: true)
     }
 }

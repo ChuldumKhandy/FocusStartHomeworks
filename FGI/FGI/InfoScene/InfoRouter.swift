@@ -21,6 +21,6 @@ extension InfoRouter: IInfoRouter {
         self.controller = controller
     }
     func backVC() {
-        self.controller?.dismiss(animated: true, completion: nil)
+        self.controller?.navigationController?.popViewController(animated: true)
     }
 }

@@ -43,7 +43,6 @@
 		CE67063E27772DB900740E52 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67063D27772DB900740E52 /* DetailCell.swift */; };
 		CE6706482777577C00740E52 /* Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6706472777577C00740E52 /* Constraints.swift */; };
 		CE84A00927888AFE00C0E572 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84A00827888AFE00C0E572 /* SettingView.swift */; };
-		CE84A00C27888B0F00C0E572 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE84A00B27888B0F00C0E572 /* SettingVC.swift */; };
 		CE884251277E087100F134BD /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884250277E087100F134BD /* MenuPresenter.swift */; };
 		CE884254277E089100F134BD /* MenuSceneAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884253277E089100F134BD /* MenuSceneAssembly.swift */; };
 		CE884258277E08C000F134BD /* CurrencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884257277E08C000F134BD /* CurrencyModel.swift */; };
@@ -52,12 +51,18 @@
 		CE884261277E092500F134BD /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884260277E092500F134BD /* MenuView.swift */; };
 		CE884264277E09D700F134BD /* MenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884263277E09D700F134BD /* MenuRouter.swift */; };
 		CE884268277E0D7C00F134BD /* MenuNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE884267277E0D7C00F134BD /* MenuNavigation.swift */; };
-		CEEEA66F278984D200ADECD7 /* SettingNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEA66E278984D200ADECD7 /* SettingNavigation.swift */; };
+		CEA91621278B0BF500A2465C /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA91620278B0BF500A2465C /* SettingVC.swift */; };
+		CEA91624278B0BFB00A2465C /* SettingNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA91623278B0BFB00A2465C /* SettingNavigation.swift */; };
+		CEDE3788278B030800769B09 /* InfoNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE3787278B030800769B09 /* InfoNavigation.swift */; };
 		CEEEA672278985C400ADECD7 /* SettingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEA671278985C400ADECD7 /* SettingPresenter.swift */; };
 		CEEEA676278986D500ADECD7 /* SettingRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEA675278986D500ADECD7 /* SettingRouter.swift */; };
 		CEEEA6792789871800ADECD7 /* SettingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEA6782789871800ADECD7 /* SettingAssembly.swift */; };
 		CEEEA67D2789894600ADECD7 /* SettingUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEA67C2789894600ADECD7 /* SettingUser.swift */; };
 		CEEEA68327899AB700ADECD7 /* UserStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEA68227899AB700ADECD7 /* UserStorage.swift */; };
+		CEEEA6892789C6F000ADECD7 /* FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEA6882789C6F000ADECD7 /* FontSize.swift */; };
+		CEEEA68C2789C79300ADECD7 /* StandartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEA68B2789C79300ADECD7 /* StandartButton.swift */; };
+		CEEEA6902789C90700ADECD7 /* MainPallete.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEA68F2789C90700ADECD7 /* MainPallete.swift */; };
+		CEEEA6952789D13800ADECD7 /* StandartTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEEA6942789D13800ADECD7 /* StandartTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,7 +104,6 @@
 		CE67063D27772DB900740E52 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		CE6706472777577C00740E52 /* Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constraints.swift; sourceTree = "<group>"; };
 		CE84A00827888AFE00C0E572 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		CE84A00B27888B0F00C0E572 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		CE884250277E087100F134BD /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
 		CE884253277E089100F134BD /* MenuSceneAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSceneAssembly.swift; sourceTree = "<group>"; };
 		CE884257277E08C000F134BD /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
@@ -108,12 +112,18 @@
 		CE884260277E092500F134BD /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		CE884263277E09D700F134BD /* MenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRouter.swift; sourceTree = "<group>"; };
 		CE884267277E0D7C00F134BD /* MenuNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNavigation.swift; sourceTree = "<group>"; };
-		CEEEA66E278984D200ADECD7 /* SettingNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNavigation.swift; sourceTree = "<group>"; };
+		CEA91620278B0BF500A2465C /* SettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
+		CEA91623278B0BFB00A2465C /* SettingNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingNavigation.swift; sourceTree = "<group>"; };
+		CEDE3787278B030800769B09 /* InfoNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoNavigation.swift; sourceTree = "<group>"; };
 		CEEEA671278985C400ADECD7 /* SettingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPresenter.swift; sourceTree = "<group>"; };
 		CEEEA675278986D500ADECD7 /* SettingRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRouter.swift; sourceTree = "<group>"; };
 		CEEEA6782789871800ADECD7 /* SettingAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAssembly.swift; sourceTree = "<group>"; };
 		CEEEA67C2789894600ADECD7 /* SettingUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingUser.swift; sourceTree = "<group>"; };
 		CEEEA68227899AB700ADECD7 /* UserStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStorage.swift; sourceTree = "<group>"; };
+		CEEEA6882789C6F000ADECD7 /* FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSize.swift; sourceTree = "<group>"; };
+		CEEEA68B2789C79300ADECD7 /* StandartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandartButton.swift; sourceTree = "<group>"; };
+		CEEEA68F2789C90700ADECD7 /* MainPallete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPallete.swift; sourceTree = "<group>"; };
+		CEEEA6942789D13800ADECD7 /* StandartTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandartTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				CE4F1B0D27743F4B0083239A /* InfoVC.swift */,
+				CEDE3787278B030800769B09 /* InfoNavigation.swift */,
 				CE4F1B1E277445490083239A /* InfoView.swift */,
 				CE4F1B25277445EF0083239A /* InfoText.swift */,
 			);
@@ -263,6 +274,10 @@
 			isa = PBXGroup;
 			children = (
 				CE6706472777577C00740E52 /* Constraints.swift */,
+				CEEEA6882789C6F000ADECD7 /* FontSize.swift */,
+				CEEEA68F2789C90700ADECD7 /* MainPallete.swift */,
+				CEEEA68B2789C79300ADECD7 /* StandartButton.swift */,
+				CEEEA6942789D13800ADECD7 /* StandartTextField.swift */,
 			);
 			path = Appearance;
 			sourceTree = "<group>";
@@ -273,9 +288,7 @@
 				CEEEA6782789871800ADECD7 /* SettingAssembly.swift */,
 				CEEEA675278986D500ADECD7 /* SettingRouter.swift */,
 				CEEEA671278985C400ADECD7 /* SettingPresenter.swift */,
-				CE84A00B27888B0F00C0E572 /* SettingVC.swift */,
-				CEEEA66E278984D200ADECD7 /* SettingNavigation.swift */,
-				CE84A00827888AFE00C0E572 /* SettingView.swift */,
+				CEA91626278B0C1500A2465C /* View */,
 			);
 			path = SettingScene;
 			sourceTree = "<group>";
@@ -311,6 +324,16 @@
 				CE145A702779AD7A00C57A6A /* Ext TapGestureRecognizer.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		CEA91626278B0C1500A2465C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEA91620278B0BF500A2465C /* SettingVC.swift */,
+				CEA91623278B0BFB00A2465C /* SettingNavigation.swift */,
+				CE84A00827888AFE00C0E572 /* SettingView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		CEEEA68127899A9500ADECD7 /* Storage */ = {
@@ -392,16 +415,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE4F1B1F277445490083239A /* InfoView.swift in Sources */,
-				CE84A00C27888B0F00C0E572 /* SettingVC.swift in Sources */,
+				CEDE3788278B030800769B09 /* InfoNavigation.swift in Sources */,
 				CE88425B277E090200F134BD /* MenuNetworkService.swift in Sources */,
 				CE67060E277592A100740E52 /* FGIDto.swift in Sources */,
 				CE4F1B1527743F790083239A /* DiagramVC.swift in Sources */,
+				CEA91621278B0BF500A2465C /* SettingVC.swift in Sources */,
 				CE4F1B26277445EF0083239A /* InfoText.swift in Sources */,
 				CE31C41E2777860900C1AD5C /* GridView.swift in Sources */,
 				CE145A822779F82F00C57A6A /* LogInNavigation.swift in Sources */,
 				CE174DE527787A23001EF597 /* FGIMapper.swift in Sources */,
 				CE84A00927888AFE00C0E572 /* SettingView.swift in Sources */,
 				CE6706482777577C00740E52 /* Constraints.swift in Sources */,
+				CEEEA6892789C6F000ADECD7 /* FontSize.swift in Sources */,
 				CE670611277592AE00740E52 /* DiagramModel.swift in Sources */,
 				CE884258277E08C000F134BD /* CurrencyModel.swift in Sources */,
 				CE67063B27772D9D00740E52 /* DetailTableView.swift in Sources */,
@@ -411,12 +436,13 @@
 				CE145A682779A91E00C57A6A /* LogInRouter.swift in Sources */,
 				CE88425E277E091500F134BD /* MenuVC.swift in Sources */,
 				CE145A5F2779A8E100C57A6A /* LogInView.swift in Sources */,
+				CEEEA6902789C90700ADECD7 /* MainPallete.swift in Sources */,
 				CE1A647B2781EE4600F94D28 /* DiagramRouter.swift in Sources */,
 				CE67063E27772DB900740E52 /* DetailCell.swift in Sources */,
 				CE884251277E087100F134BD /* MenuPresenter.swift in Sources */,
+				CEEEA68C2789C79300ADECD7 /* StandartButton.swift in Sources */,
 				CEEEA672278985C400ADECD7 /* SettingPresenter.swift in Sources */,
 				CEEEA6792789871800ADECD7 /* SettingAssembly.swift in Sources */,
-				CEEEA66F278984D200ADECD7 /* SettingNavigation.swift in Sources */,
 				CE67060B2775928E00740E52 /* DiagramSceneAssembly.swift in Sources */,
 				CE6705FF27757BBF00740E52 /* GraphView.swift in Sources */,
 				CE145A6B2779A93000C57A6A /* LogInAssembly.swift in Sources */,
@@ -424,6 +450,7 @@
 				CE5CCC95277AD4CD00603C7F /* Ext HideKeyboard.swift in Sources */,
 				CE145A5427797C6B00C57A6A /* DiagramNavigation.swift in Sources */,
 				CE4F1B29277445FD0083239A /* InfoPresenter.swift in Sources */,
+				CEEEA6952789D13800ADECD7 /* StandartTextField.swift in Sources */,
 				CE670637277729F100740E52 /* CurrencyPikerView.swift in Sources */,
 				CE145A712779AD7A00C57A6A /* Ext TapGestureRecognizer.swift in Sources */,
 				CEEEA67D2789894600ADECD7 /* SettingUser.swift in Sources */,
@@ -431,6 +458,7 @@
 				CE6706082775927900740E52 /* DiagramNetworkService.swift in Sources */,
 				CE4F1B0E27743F4B0083239A /* InfoVC.swift in Sources */,
 				CE6706052775926800740E52 /* DiagramPresenter.swift in Sources */,
+				CEA91624278B0BFB00A2465C /* SettingNavigation.swift in Sources */,
 				CE6706022775925000740E52 /* DiagramView.swift in Sources */,
 				CE145A652779A90E00C57A6A /* LogInPresenter.swift in Sources */,
 				CE67063327771B8800740E52 /* FGI.swift in Sources */,
